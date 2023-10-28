@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2023 a las 04:33:27
+-- Tiempo de generación: 28-10-2023 a las 05:55:31
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -93,6 +93,7 @@ CREATE TABLE `siniestro` (
 --
 ALTER TABLE `bombero`
   ADD PRIMARY KEY (`idBombero`),
+  ADD UNIQUE KEY `dni` (`dni`),
   ADD KEY `codBrigada` (`idBrigada`);
 
 --
