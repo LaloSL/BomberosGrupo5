@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2023 a las 03:22:31
+-- Tiempo de generación: 28-10-2023 a las 03:49:26
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `bombero` (
-  `id_bombero` int(11) NOT NULL,
+  `idBombero` int(11) NOT NULL,
   `dni` int(8) NOT NULL,
   `nombre_apellido` varchar(50) NOT NULL,
   `fecha_nac` date NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `bombero` (
 --
 
 CREATE TABLE `brigada` (
-  `codBrigada` int(11) NOT NULL,
+  `idBrigada` int(11) NOT NULL,
   `nombre_brig` varchar(30) NOT NULL,
   `especialidad` varchar(30) NOT NULL,
   `libre` tinyint(1) NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE `brigada` (
 --
 
 CREATE TABLE `cuartel` (
-  `codCuartel` int(11) NOT NULL,
+  `idCuartel` int(11) NOT NULL,
   `nombre_cuartel` varchar(30) NOT NULL,
   `direccion` varchar(30) NOT NULL,
   `coord_X` int(11) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE `cuartel` (
 --
 
 CREATE TABLE `siniestro` (
-  `codigo` int(11) NOT NULL,
+  `idCodigo` int(11) NOT NULL,
   `tipo` varchar(30) NOT NULL,
   `fecha_siniestro` date NOT NULL,
   `coord x` int(11) NOT NULL,
@@ -92,27 +92,27 @@ CREATE TABLE `siniestro` (
 -- Indices de la tabla `bombero`
 --
 ALTER TABLE `bombero`
-  ADD PRIMARY KEY (`id_bombero`),
+  ADD PRIMARY KEY (`idBombero`),
   ADD KEY `codBrigada` (`codBrigada`);
 
 --
 -- Indices de la tabla `brigada`
 --
 ALTER TABLE `brigada`
-  ADD PRIMARY KEY (`codBrigada`),
+  ADD PRIMARY KEY (`idBrigada`),
   ADD KEY `nro_cuartel` (`nro_cuartel`);
 
 --
 -- Indices de la tabla `cuartel`
 --
 ALTER TABLE `cuartel`
-  ADD PRIMARY KEY (`codCuartel`);
+  ADD PRIMARY KEY (`idCuartel`);
 
 --
 -- Indices de la tabla `siniestro`
 --
 ALTER TABLE `siniestro`
-  ADD PRIMARY KEY (`codigo`),
+  ADD PRIMARY KEY (`idCodigo`),
   ADD KEY `codBrigada` (`codBrigada`);
 
 --
@@ -123,25 +123,25 @@ ALTER TABLE `siniestro`
 -- AUTO_INCREMENT de la tabla `bombero`
 --
 ALTER TABLE `bombero`
-  MODIFY `id_bombero` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idBombero` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `brigada`
 --
 ALTER TABLE `brigada`
-  MODIFY `codBrigada` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idBrigada` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `cuartel`
 --
 ALTER TABLE `cuartel`
-  MODIFY `codCuartel` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCuartel` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `siniestro`
 --
 ALTER TABLE `siniestro`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCodigo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -151,19 +151,19 @@ ALTER TABLE `siniestro`
 -- Filtros para la tabla `bombero`
 --
 ALTER TABLE `bombero`
-  ADD CONSTRAINT `bombero_ibfk_1` FOREIGN KEY (`codBrigada`) REFERENCES `brigada` (`codBrigada`);
+  ADD CONSTRAINT `bombero_ibfk_1` FOREIGN KEY (`codBrigada`) REFERENCES `brigada` (`idBrigada`);
 
 --
 -- Filtros para la tabla `brigada`
 --
 ALTER TABLE `brigada`
-  ADD CONSTRAINT `brigada_ibfk_1` FOREIGN KEY (`nro_cuartel`) REFERENCES `cuartel` (`codCuartel`);
+  ADD CONSTRAINT `brigada_ibfk_1` FOREIGN KEY (`nro_cuartel`) REFERENCES `cuartel` (`idCuartel`);
 
 --
 -- Filtros para la tabla `siniestro`
 --
 ALTER TABLE `siniestro`
-  ADD CONSTRAINT `siniestro_ibfk_1` FOREIGN KEY (`codBrigada`) REFERENCES `brigada` (`codBrigada`);
+  ADD CONSTRAINT `siniestro_ibfk_1` FOREIGN KEY (`codBrigada`) REFERENCES `brigada` (`idBrigada`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
