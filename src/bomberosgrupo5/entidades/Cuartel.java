@@ -2,19 +2,19 @@
 
 package bomberosgrupo5.entidades;
 
-/**
- * @author Asus
- */
+//** @author Asus
 public class Cuartel {
-  private int idCuartel;
-  private String nombreCuartel;
-  private String direccion;
-  private int coordX;
-  private int coordY;
-  private String telefono;
-  private String correo;
-  private boolean estadoC;
 
+    private int idCuartel;
+    private String nombreCuartel;
+    private String direccion;
+    private int coordX;
+    private int coordY;
+    private String telefono;
+    private String correo;
+    private boolean estadoC;
+
+    // Constructores:
     public Cuartel() {
     }
 
@@ -39,6 +39,7 @@ public class Cuartel {
         this.estadoC = estadoC;
     }
 
+    // Gettres & Setters:
     public int getIdCuartel() {
         return idCuartel;
     }
@@ -102,14 +103,11 @@ public class Cuartel {
     public void setEstadoC(boolean estadoC) {
         this.estadoC = estadoC;
     }
-    
-    
-    
-    
+
+    //--------------------------------------------------------------------------
     @Override
     public String toString() {
         return "Cuartel{" + "idCuartel=" + idCuartel + ", nombreCuartel=" + nombreCuartel + ", direccion=" + direccion + ", coordX=" + coordX + ", coordY=" + coordY + ", telefono=" + telefono + ", correo=" + correo + ", estadoC=" + estadoC + '}';
     }
-    
-    
+
 }

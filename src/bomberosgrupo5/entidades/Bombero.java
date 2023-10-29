@@ -4,40 +4,41 @@ package bomberosgrupo5.entidades;
 
 import java.time.LocalDate;
 
-/**
- * @author Asus
- */
+//** @author Asus
 public class Bombero {
-  private int idBombero;
-  private int dni;
-  private String nombreApellido;
-  private LocalDate fechaNac;
-  private String celular;
-  private int idBrigada;
-  private boolean estadoB;
 
+    private int idBombero;
+    private int dni;
+    private String nombreApellido;
+    private LocalDate fechaNac;
+    private String celular;
+    private int CodBrigada;
+    private boolean estadoB;
+
+// Constructores:
     public Bombero() {
     }
 
-    public Bombero(int idBombero, int dni, String nombreApellido, LocalDate fechaNac, String celular, int idBrigada, boolean estadoB) {
+    public Bombero(int idBombero, int dni, String nombreApellido, LocalDate fechaNac, String celular, int CodBrigada, boolean estadoB) {
         this.idBombero = idBombero;
         this.dni = dni;
         this.nombreApellido = nombreApellido;
         this.fechaNac = fechaNac;
         this.celular = celular;
-        this.idBrigada = idBrigada;
+        this.CodBrigada = CodBrigada;
         this.estadoB = estadoB;
     }
 
-    public Bombero(int dni, String nombreApellido, LocalDate fechaNac, String celular, int idBrigada, boolean estadoB) {
+    public Bombero(int dni, String nombreApellido, LocalDate fechaNac, String celular, int CodBrigada, boolean estadoB) {
         this.dni = dni;
         this.nombreApellido = nombreApellido;
         this.fechaNac = fechaNac;
         this.celular = celular;
-        this.idBrigada = idBrigada;
+        this.CodBrigada = CodBrigada;
         this.estadoB = estadoB;
     }
 
+    // Gettres & Setters:
     public int getIdBombero() {
         return idBombero;
     }
@@ -78,12 +79,12 @@ public class Bombero {
         this.celular = celular;
     }
 
-    public int getIdBrigada() {
-        return idBrigada;
+    public int getCodBrigada() {
+        return CodBrigada;
     }
 
-    public void setIdBrigada(int idBrigada) {
-        this.idBrigada = idBrigada;
+    public void setCodBrigada(int CodBrigada) {
+        this.CodBrigada = CodBrigada;
     }
 
     public boolean isEstadoB() {
@@ -94,12 +95,10 @@ public class Bombero {
         this.estadoB = estadoB;
     }
 
-   
+    //--------------------------------------------------------------------------
     @Override
     public String toString() {
-        return "Bombero{" + "idBombero=" + idBombero + ", dni=" + dni + ", nombreApellido=" + nombreApellido + ", fechaNac=" + fechaNac + ", celular=" + celular + ", idBrigada=" + idBrigada + ", estadoB=" + estadoB + '}';
+        return "Bombero{" + "idBombero=" + idBombero + ", dni=" + dni + ", nombreApellido=" + nombreApellido + ", fechaNac=" + fechaNac + ", celular=" + celular + ", CodBrigada=" + CodBrigada + ", estadoB=" + estadoB + '}';
     }
 
-    
-  
 }

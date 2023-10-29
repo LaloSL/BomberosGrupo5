@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Main para realizar la pruebas de clases Data
+
 package bomberosgrupo5;
 
 import java.sql.Connection;
@@ -13,23 +10,24 @@ import bomberosgrupo5.entidades.Bombero;
 
 
 
-/**
- *
- * @author Asus
- */
+//** @author Asus
+
 public class BomberosGrupo5 {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
         
-         //Guardar Bombero
+         // creo el objeto BomberoData que me permitirá guardar en BD:
+         Bombero bom1 = new Bombero(1222222, "José Pekermán",LocalDate.of(1975, 1, 1),"11112222", 1, true);
+         BomberoData bom = new BomberoData();
+         bom.guardarBombero(bom1);
+         
+         
        // en este creo que no hace falta el idAlumno
-       Bombero joaquin= new Bombero(1234567890, "Joaquin Ortega",LocalDate.of(1990, 5, 5), "1234567890", 1, true);
+       //(FY)Bombero joaquin= new Bombero(1234567890, "Joaquin Ortega",LocalDate.of(1990, 5, 5), "1234567890", 1, true);
        //creo un objeto Alumno data que me permite guardar en la BD
-        BomberoData bom= new BomberoData();
-        bom.guardarBombero(joaquin);
+       //(FY) BomberoData bom= new BomberoData();
+        //(FY)bom.guardarBombero(joaquin);
         
         //para insertar un bombero primero se debe de tener los datos de la brigada a la cual pertenece
     }

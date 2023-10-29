@@ -3,33 +3,36 @@
 package bomberosgrupo5.entidades;
 
 public class Brigada {
+
     private int idBrigada;
     private String nombreBrig;
     private String especialidad;
     private boolean libre;
-    private int idCuartel;
+    private int CodCuartel;
     private boolean estadoBr;
 
+    // Constructores:
     public Brigada() {
     }
 
-    public Brigada(int idBrigada, String nombreBrig, String especialidad, boolean libre, int idCuartel, boolean estadoBr) {
+    public Brigada(int idBrigada, String nombreBrig, String especialidad, boolean libre, int CodCuartel, boolean estadoBr) {
         this.idBrigada = idBrigada;
         this.nombreBrig = nombreBrig;
         this.especialidad = especialidad;
         this.libre = libre;
-        this.idCuartel = idCuartel;
+        this.CodCuartel = CodCuartel;
         this.estadoBr = estadoBr;
     }
 
-    public Brigada(String nombreBrig, String especialidad, boolean libre, int idCuartel, boolean estadoBr) {
+    public Brigada(String nombreBrig, String especialidad, boolean libre, int CodCuartel, boolean estadoBr) {
         this.nombreBrig = nombreBrig;
         this.especialidad = especialidad;
         this.libre = libre;
-        this.idCuartel = idCuartel;
+        this.CodCuartel = CodCuartel;
         this.estadoBr = estadoBr;
     }
 
+    // Gettres & Setters:
     public int getIdBrigada() {
         return idBrigada;
     }
@@ -62,12 +65,12 @@ public class Brigada {
         this.libre = libre;
     }
 
-    public int getIdCuartel() {
-        return idCuartel;
+    public int getCodCuartel() {
+        return CodCuartel;
     }
 
-    public void setIdCuartel(int idCuartel) {
-        this.idCuartel = idCuartel;
+    public void setCodCuartel(int CodCuartel) {
+        this.CodCuartel = CodCuartel;
     }
 
     public boolean isEstadoBr() {
@@ -78,15 +81,10 @@ public class Brigada {
         this.estadoBr = estadoBr;
     }
 
+    //--------------------------------------------------------------------------
     @Override
     public String toString() {
-        return "Brigada{" + "idBrigada=" + idBrigada + ", nombreBrig=" + nombreBrig + ", especialidad=" + especialidad + ", libre=" + libre + ", idCuartel=" + idCuartel + ", estadoBr=" + estadoBr + '}';
+        return "Brigada{" + "idBrigada=" + idBrigada + ", nombreBrig=" + nombreBrig + ", especialidad=" + especialidad + ", libre=" + libre + ", CodCuartel=" + CodCuartel + ", estadoBr=" + estadoBr + '}';
     }
 
-    public void setActiva(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-        
-  
 }

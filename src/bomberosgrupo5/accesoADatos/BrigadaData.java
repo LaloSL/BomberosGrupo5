@@ -1,4 +1,4 @@
-// Clase Brigada Data (Proyecto BomberosGrupo5)
+// Clase BrigadaData (Proyecto BomberosGrupo5)
 
 package bomberosgrupo5.accesoADatos;
 
@@ -19,7 +19,7 @@ private Connection con = null;
 public void guardarBrigada(Brigada brigada){
 
     if(brigada.getIdBrigada()== 0){
-        String sql="INSERT INTO brigada (nombreBrig, especialidad, libre, idCuartel, estadoBr)"
+        String sql="INSERT INTO brigada (nombreBrig, especialidad, libre, CodCuartel, estadoBr)"
                     + "VALUE(? ,? ,? ,?,?)";
         
         try {            
@@ -27,7 +27,7 @@ public void guardarBrigada(Brigada brigada){
             ps.setString(1, brigada.getNombreBrig());
             ps.setString(2, brigada.getEspecialidad());
             ps.setBoolean(3, brigada.isLibre());
-            ps.setInt(4, brigada.getIdCuartel());
+            ps.setInt(4, brigada.getCodCuartel());
             ps.setBoolean(5, brigada.isEstadoBr());
             ps.executeUpdate();
              
@@ -49,34 +49,34 @@ public void guardarBrigada(Brigada brigada){
             ps.setInt(2, brigada.getIdBrigada());
             int filasActualizadas = ps.executeUpdate();
             if (filasActualizadas > 0) {
-                JOptionPane.showMessageDialog(null, "Brigada actualizada correctamente");
+                JOptionPane.showMessageDialog(null, "Brigada actualizada correctamente ");
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al actualizar la Brigada");
+            JOptionPane.showMessageDialog(null, "Error al actualizar la Brigada ");
         }
         }
  }
         
     public void modificarBrigada(Brigada brigada){
         
-        String sql = "UPDATE brigada SET nombreBrig=?, especialidad=?, libre=?, idCuartel=? WHERE idBrigada= ?";
+        String sql = "UPDATE brigada SET nombreBrig=?, especialidad=?, libre=?, CodCuartel=? WHERE idBrigada= ?";
                 
         try {
             PreparedStatement ps= con.prepareStatement(sql);
            ps.setString(1, brigada.getNombreBrig());
             ps.setString(2, brigada.getEspecialidad());
             ps.setBoolean(3, brigada.isLibre());
-            ps.setInt(4, brigada.getIdCuartel());
+            ps.setInt(4, brigada.getCodCuartel());
             int ok = ps.executeUpdate();
             if( ok == 1){
                 
-                JOptionPane.showMessageDialog(null, "Brigada Modificada");
+                JOptionPane.showMessageDialog(null, "Brigada Modificada ");
             }       
                    
         
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada ");
         }
     }
     
@@ -115,11 +115,11 @@ public void guardarBrigada(Brigada brigada){
                 brigada.setNombreBrig(rs.getString("nombreBrigada"));
                 brigada.setEspecialidad(rs.getString("especialidad"));  
                 brigada.isLibre();
-                brigada.setIdCuartel(rs.getInt("idCuartel"));
+                brigada.setCodCuartel(rs.getInt("CodCuartel"));
                 brigada.isEstadoBr();
                                 
                 int estado = rs.getInt("estadoBr");//muestra el estado en el radio button
-                brigada.setActiva(estado == 1);                
+                brigada.setEstadoBr(estado == 1);                
                 
                 //JOptionPane.showMessageDialog(null, "Alumno borrado");
             }else{
@@ -149,7 +149,7 @@ public void guardarBrigada(Brigada brigada){
                 brigada.setNombreBrig(rs.getString("nombreBrigada"));
                 brigada.setEspecialidad(rs.getString("especialidad"));  
                 brigada.isLibre();
-                brigada.setIdCuartel(rs.getInt("idCuartel"));
+                brigada.setCodCuartel(rs.getInt("CodCuartel"));
                 brigada.isEstadoBr();
                 brigadas.add(brigada);
                 
