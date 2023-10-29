@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-10-2023 a las 03:53:19
+-- Tiempo de generación: 29-10-2023 a las 22:35:03
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `cuartel de bomberos`
+-- Base de datos: `cuartel_de_bomberos`
 --
 
 -- --------------------------------------------------------
@@ -33,7 +33,7 @@ CREATE TABLE `bombero` (
   `nombreApellido` varchar(50) NOT NULL,
   `fechaNac` date NOT NULL,
   `celular` varchar(30) NOT NULL,
-  `idBrigada` int(11) NOT NULL,
+  `codBrigada` int(11) NOT NULL,
   `estadoB` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -48,7 +48,7 @@ CREATE TABLE `brigada` (
   `nombreBrig` varchar(30) NOT NULL,
   `especialidad` varchar(30) NOT NULL,
   `libre` tinyint(1) NOT NULL,
-  `idCuartel` int(11) NOT NULL,
+  `codCuartel` int(11) NOT NULL,
   `estadoBr` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -76,7 +76,7 @@ CREATE TABLE `cuartel` (
 --
 
 CREATE TABLE `siniestro` (
-  `idCodigo` int(11) NOT NULL,
+  `idSiniestro` int(11) NOT NULL,
   `tipo` varchar(30) NOT NULL,
   `fechaSiniestro` date NOT NULL,
   `coordx` int(11) NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE `siniestro` (
   `detalles` text NOT NULL,
   `fechaResol` date NOT NULL,
   `puntuacion` int(11) NOT NULL,
-  `idBrigada` int(11) NOT NULL
+  `codBrigada` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -97,14 +97,14 @@ CREATE TABLE `siniestro` (
 ALTER TABLE `bombero`
   ADD PRIMARY KEY (`idBombero`),
   ADD UNIQUE KEY `dni` (`dni`),
-  ADD KEY `codBrigada` (`idBrigada`);
+  ADD KEY `codBrigada` (`codBrigada`);
 
 --
 -- Indices de la tabla `brigada`
 --
 ALTER TABLE `brigada`
   ADD PRIMARY KEY (`idBrigada`),
-  ADD UNIQUE KEY `idCuartel` (`idCuartel`);
+  ADD UNIQUE KEY `idCuartel` (`codCuartel`);
 
 --
 -- Indices de la tabla `cuartel`
@@ -116,8 +116,8 @@ ALTER TABLE `cuartel`
 -- Indices de la tabla `siniestro`
 --
 ALTER TABLE `siniestro`
-  ADD PRIMARY KEY (`idCodigo`),
-  ADD KEY `codBrigada` (`idBrigada`);
+  ADD PRIMARY KEY (`idSiniestro`),
+  ADD KEY `codBrigada` (`codBrigada`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -145,7 +145,7 @@ ALTER TABLE `cuartel`
 -- AUTO_INCREMENT de la tabla `siniestro`
 --
 ALTER TABLE `siniestro`
-  MODIFY `idCodigo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idSiniestro` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -155,19 +155,19 @@ ALTER TABLE `siniestro`
 -- Filtros para la tabla `bombero`
 --
 ALTER TABLE `bombero`
-  ADD CONSTRAINT `bombero_ibfk_1` FOREIGN KEY (`idBrigada`) REFERENCES `brigada` (`idBrigada`);
+  ADD CONSTRAINT `bombero_ibfk_1` FOREIGN KEY (`codBrigada`) REFERENCES `brigada` (`idBrigada`);
 
 --
 -- Filtros para la tabla `brigada`
 --
 ALTER TABLE `brigada`
-  ADD CONSTRAINT `brigada_ibfk_1` FOREIGN KEY (`idCuartel`) REFERENCES `cuartel` (`idCuartel`);
+  ADD CONSTRAINT `brigada_ibfk_1` FOREIGN KEY (`codCuartel`) REFERENCES `cuartel` (`idCuartel`);
 
 --
 -- Filtros para la tabla `siniestro`
 --
 ALTER TABLE `siniestro`
-  ADD CONSTRAINT `siniestro_ibfk_1` FOREIGN KEY (`idBrigada`) REFERENCES `brigada` (`idBrigada`);
+  ADD CONSTRAINT `siniestro_ibfk_1` FOREIGN KEY (`codBrigada`) REFERENCES `brigada` (`idBrigada`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
