@@ -25,7 +25,7 @@ public void guardarBrigada(Brigada brigada){
             ps.setString(1, brigada.getNombreBrig());
             ps.setString(2, brigada.getEspecialidad());
             ps.setBoolean(3, brigada.isLibre());
-            ps.setInt(4, brigada.getNroCuartel());
+            ps.setInt(4, brigada.getIdCuartel());
             ps.executeUpdate();
              
             ResultSet rs= ps.getGeneratedKeys();

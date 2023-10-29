@@ -13,11 +13,12 @@ public class Cuartel {
   private int coordY;
   private String telefono;
   private String correo;
+  private boolean estadoC;
 
     public Cuartel() {
     }
 
-    public Cuartel(int idCuartel, String nombreCuartel, String direccion, int coordX, int coordY, String telefono, String correo) {
+    public Cuartel(int idCuartel, String nombreCuartel, String direccion, int coordX, int coordY, String telefono, String correo, boolean estadoC) {
         this.idCuartel = idCuartel;
         this.nombreCuartel = nombreCuartel;
         this.direccion = direccion;
@@ -25,15 +26,17 @@ public class Cuartel {
         this.coordY = coordY;
         this.telefono = telefono;
         this.correo = correo;
+        this.estadoC = estadoC;
     }
 
-    public Cuartel(String nombreCuartel, String direccion, int coordX, int coordY, String telefono, String correo) {
+    public Cuartel(String nombreCuartel, String direccion, int coordX, int coordY, String telefono, String correo, boolean estadoC) {
         this.nombreCuartel = nombreCuartel;
         this.direccion = direccion;
         this.coordX = coordX;
         this.coordY = coordY;
         this.telefono = telefono;
         this.correo = correo;
+        this.estadoC = estadoC;
     }
 
     public int getIdCuartel() {
@@ -92,11 +95,21 @@ public class Cuartel {
         this.correo = correo;
     }
 
+    public boolean isEstadoC() {
+        return estadoC;
+    }
+
+    public void setEstadoC(boolean estadoC) {
+        this.estadoC = estadoC;
+    }
+    
+    
+    
+    
     @Override
     public String toString() {
-        return "Cuartel{" + "idCuartel=" + idCuartel + ", nombreCuartel=" + nombreCuartel + ", direccion=" + direccion + ", coordX=" + coordX + ", coordY=" + coordY + ", telefono=" + telefono + ", correo=" + correo + '}';
+        return "Cuartel{" + "idCuartel=" + idCuartel + ", nombreCuartel=" + nombreCuartel + ", direccion=" + direccion + ", coordX=" + coordX + ", coordY=" + coordY + ", telefono=" + telefono + ", correo=" + correo + ", estadoC=" + estadoC + '}';
     }
-  
     
-  
+    
 }

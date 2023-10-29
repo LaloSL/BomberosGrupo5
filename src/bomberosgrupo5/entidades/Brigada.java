@@ -8,23 +8,26 @@ public class Brigada {
     private String especialidad;
     private boolean libre;
     private int idCuartel;
+    private boolean estadoBr;
 
     public Brigada() {
     }
 
-    public Brigada(int idBrigada, String nombreBrig, String especialidad, boolean libre, int nroCuartel) {
+    public Brigada(int idBrigada, String nombreBrig, String especialidad, boolean libre, int idCuartel, boolean estadoBr) {
         this.idBrigada = idBrigada;
         this.nombreBrig = nombreBrig;
         this.especialidad = especialidad;
         this.libre = libre;
-        this.idCuartel = nroCuartel;
+        this.idCuartel = idCuartel;
+        this.estadoBr = estadoBr;
     }
 
-    public Brigada(String nombreBrig, String especialidad, boolean libre, int nroCuartel) {
+    public Brigada(String nombreBrig, String especialidad, boolean libre, int idCuartel, boolean estadoBr) {
         this.nombreBrig = nombreBrig;
         this.especialidad = especialidad;
         this.libre = libre;
-        this.idCuartel = nroCuartel;
+        this.idCuartel = idCuartel;
+        this.estadoBr = estadoBr;
     }
 
     public int getIdBrigada() {
@@ -59,20 +62,27 @@ public class Brigada {
         this.libre = libre;
     }
 
-    public int getNroCuartel() {
+    public int getIdCuartel() {
         return idCuartel;
     }
 
-    public void setNroCuartel(int nroCuartel) {
-        this.idCuartel = nroCuartel;
+    public void setIdCuartel(int idCuartel) {
+        this.idCuartel = idCuartel;
+    }
+
+    public boolean isEstadoBr() {
+        return estadoBr;
+    }
+
+    public void setEstadoBr(boolean estadoBr) {
+        this.estadoBr = estadoBr;
     }
 
     @Override
     public String toString() {
-        return "Brigada{" + "idBrigada=" + idBrigada + ", nombreBrig=" + nombreBrig + ", especialidad=" + especialidad + ", libre=" + libre + ", nroCuartel=" + idCuartel + '}';
+        return "Brigada{" + "idBrigada=" + idBrigada + ", nombreBrig=" + nombreBrig + ", especialidad=" + especialidad + ", libre=" + libre + ", idCuartel=" + idCuartel + ", estadoBr=" + estadoBr + '}';
     }
-    
-    
-    
+
+        
   
 }

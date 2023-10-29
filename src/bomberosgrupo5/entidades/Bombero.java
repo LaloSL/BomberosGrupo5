@@ -14,25 +14,28 @@ public class Bombero {
   private LocalDate fechaNac;
   private String celular;
   private int idBrigada;
+  private boolean estadoB;
 
     public Bombero() {
     }
 
-    public Bombero(int idBombero, int dni, String nombreApellido, LocalDate fechaNac, String celular, int idBrigada) {
+    public Bombero(int idBombero, int dni, String nombreApellido, LocalDate fechaNac, String celular, int idBrigada, boolean estadoB) {
         this.idBombero = idBombero;
         this.dni = dni;
         this.nombreApellido = nombreApellido;
         this.fechaNac = fechaNac;
         this.celular = celular;
         this.idBrigada = idBrigada;
+        this.estadoB = estadoB;
     }
 
-    public Bombero(int dni, String nombreApellido, LocalDate fechaNac, String celular, int idBrigada) {
+    public Bombero(int dni, String nombreApellido, LocalDate fechaNac, String celular, int idBrigada, boolean estadoB) {
         this.dni = dni;
         this.nombreApellido = nombreApellido;
         this.fechaNac = fechaNac;
         this.celular = celular;
         this.idBrigada = idBrigada;
+        this.estadoB = estadoB;
     }
 
     public int getIdBombero() {
@@ -83,13 +86,20 @@ public class Bombero {
         this.idBrigada = idBrigada;
     }
 
+    public boolean isEstadoB() {
+        return estadoB;
+    }
+
+    public void setEstadoB(boolean estadoB) {
+        this.estadoB = estadoB;
+    }
+
+   
     @Override
     public String toString() {
-        return "Bombero{" + "idBombero=" + idBombero + ", dni=" + dni + ", nombreApellido=" + nombreApellido + ", fechaNac=" + fechaNac + ", celular=" + celular + ", idBrigada=" + idBrigada + '}';
+        return "Bombero{" + "idBombero=" + idBombero + ", dni=" + dni + ", nombreApellido=" + nombreApellido + ", fechaNac=" + fechaNac + ", celular=" + celular + ", idBrigada=" + idBrigada + ", estadoB=" + estadoB + '}';
     }
+
     
-    
-  
-  
   
 }
