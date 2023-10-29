@@ -7,7 +7,7 @@ import java.time.LocalDate;
 //** @author Asus
 public class Siniestro {
 
-    private int idCodigo;
+    private int idSiniestro;
     private String tipo;
     private LocalDate fechaSiniestro;
     private int coordX;
@@ -15,14 +15,13 @@ public class Siniestro {
     private String detalles;
     private LocalDate fechaResol;
     private int puntuacion;
-    private int CodBrigada;
+    private int codBrigada;
 
     // Constructores:
     public Siniestro() {
     }
 
-    public Siniestro(int idCodigo, String tipo, LocalDate fechaSiniestro, int coordX, int coordY, String detalles, LocalDate fechaResol, int puntuacion, int CodBrigada) {
-        this.idCodigo = idCodigo;
+    public Siniestro(String tipo, LocalDate fechaSiniestro, int coordX, int coordY, String detalles, LocalDate fechaResol, int puntuacion, int codBrigada) {
         this.tipo = tipo;
         this.fechaSiniestro = fechaSiniestro;
         this.coordX = coordX;
@@ -30,10 +29,11 @@ public class Siniestro {
         this.detalles = detalles;
         this.fechaResol = fechaResol;
         this.puntuacion = puntuacion;
-        this.CodBrigada = CodBrigada;
+        this.codBrigada = codBrigada;
     }
 
-    public Siniestro(String tipo, LocalDate fechaSiniestro, int coordX, int coordY, String detalles, LocalDate fechaResol, int puntuacion, int CodBrigada) {
+    public Siniestro(int idSiniestro, String tipo, LocalDate fechaSiniestro, int coordX, int coordY, String detalles, LocalDate fechaResol, int puntuacion, int codBrigada) {
+        this.idSiniestro = idSiniestro;
         this.tipo = tipo;
         this.fechaSiniestro = fechaSiniestro;
         this.coordX = coordX;
@@ -41,16 +41,16 @@ public class Siniestro {
         this.detalles = detalles;
         this.fechaResol = fechaResol;
         this.puntuacion = puntuacion;
-        this.CodBrigada = CodBrigada;
+        this.codBrigada = codBrigada;
+    }
+    
+    // Geters & Setters:
+    public int getIdSiniestro() {
+        return idSiniestro;
     }
 
-    // Gettres & Setters:
-    public int getIdCodigo() {
-        return idCodigo;
-    }
-
-    public void setIdCodigo(int idCodigo) {
-        this.idCodigo = idCodigo;
+    public void setIdSiniestro(int idSiniestro) {
+        this.idSiniestro = idSiniestro;
     }
 
     public String getTipo() {
@@ -110,17 +110,18 @@ public class Siniestro {
     }
 
     public int getCodBrigada() {
-        return CodBrigada;
+        return codBrigada;
     }
 
-    public void setCodBrigada(int CodBrigada) {
-        this.CodBrigada = CodBrigada;
+    // Gettres & Setters:
+    public void setCodBrigada(int codBrigada) {
+        this.codBrigada = codBrigada;
     }
     //--------------------------------------------------------------------------
 
     @Override
     public String toString() {
-        return "Siniestro{" + "idCodigo=" + idCodigo + ", tipo=" + tipo + ", fechaSiniestro=" + fechaSiniestro + ", coordX=" + coordX + ", coordY=" + coordY + ", detalles=" + detalles + ", fechaResol=" + fechaResol + ", puntuacion=" + puntuacion + ", CodBrigada=" + CodBrigada + '}';
+        return "Siniestro{" + "idSiniestro=" + idSiniestro + ", tipo=" + tipo + ", fechaSiniestro=" + fechaSiniestro + ", coordX=" + coordX + ", coordY=" + coordY + ", detalles=" + detalles + ", fechaResol=" + fechaResol + ", puntuacion=" + puntuacion + ", codBrigada=" + codBrigada + '}';
     }
 
 }

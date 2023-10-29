@@ -3,12 +3,7 @@
 package bomberosgrupo5.accesoADatos;
 
 import bomberosgrupo5.entidades.Bombero;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*; //FY
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -16,22 +11,22 @@ import javax.swing.JOptionPane;
 //** @author Asus
 
 public class BomberoData {
-    
     private Connection con=null;
     
-    public BomberoData(){
-        con=Conexion.getCotexion();
+    public BomberoData(){ // FY
+        con = Conexion.getConectar();
     }
     
     // método guardar bombero:
     public void guardarBombero(Bombero bombero){
         
-        String sql="INSERT INTO bombero (dni, nombreApellido, fechaNac, celular, CodBrigada, estadoB)"
+        String sql="INSERT INTO bombero (dni,nombreApellido,fechaNac,celular,codBrigada,estadoB)"
                 + "VALUE(? ,? ,? ,? ,? ,?)";
         
         try {       
             
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
             ps.setInt(1, bombero.getDni());
             ps.setString(2, bombero.getNombreApellido());
             ps.setDate(3, Date.valueOf(bombero.getFechaNac()));
@@ -50,7 +45,7 @@ public class BomberoData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla bombero ");
         }
         
     }
@@ -182,5 +177,5 @@ public class BomberoData {
         }
         return   bomberos;            
       }
-   
-}
+}  
+

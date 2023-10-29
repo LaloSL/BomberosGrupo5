@@ -8,31 +8,32 @@ public class Brigada {
     private String nombreBrig;
     private String especialidad;
     private boolean libre;
-    private int CodCuartel;
+    private int codCuartel;
     private boolean estadoBr;
 
     // Constructores:
     public Brigada() {
     }
+    
+    public Brigada(String nombreBrig, String especialidad, boolean libre, int codCuartel, boolean estadoBr) {
+        this.nombreBrig = nombreBrig;
+        this.especialidad = especialidad;
+        this.libre = libre;
+        this.codCuartel = codCuartel;
+        this.estadoBr = estadoBr;
+    }
 
-    public Brigada(int idBrigada, String nombreBrig, String especialidad, boolean libre, int CodCuartel, boolean estadoBr) {
+    public Brigada(int idBrigada, String nombreBrig, String especialidad, boolean libre, int codCuartel, boolean estadoBr) {
         this.idBrigada = idBrigada;
         this.nombreBrig = nombreBrig;
         this.especialidad = especialidad;
         this.libre = libre;
-        this.CodCuartel = CodCuartel;
+        this.codCuartel = codCuartel;
         this.estadoBr = estadoBr;
     }
 
-    public Brigada(String nombreBrig, String especialidad, boolean libre, int CodCuartel, boolean estadoBr) {
-        this.nombreBrig = nombreBrig;
-        this.especialidad = especialidad;
-        this.libre = libre;
-        this.CodCuartel = CodCuartel;
-        this.estadoBr = estadoBr;
-    }
+    //Getters & Setters:
 
-    // Gettres & Setters:
     public int getIdBrigada() {
         return idBrigada;
     }
@@ -66,11 +67,11 @@ public class Brigada {
     }
 
     public int getCodCuartel() {
-        return CodCuartel;
+        return codCuartel;
     }
 
-    public void setCodCuartel(int CodCuartel) {
-        this.CodCuartel = CodCuartel;
+    public void setCodCuartel(int codCuartel) {
+        this.codCuartel = codCuartel;
     }
 
     public boolean isEstadoBr() {
@@ -80,11 +81,12 @@ public class Brigada {
     public void setEstadoBr(boolean estadoBr) {
         this.estadoBr = estadoBr;
     }
-
     //--------------------------------------------------------------------------
+
     @Override
     public String toString() {
-        return "Brigada{" + "idBrigada=" + idBrigada + ", nombreBrig=" + nombreBrig + ", especialidad=" + especialidad + ", libre=" + libre + ", CodCuartel=" + CodCuartel + ", estadoBr=" + estadoBr + '}';
+        return "Brigada{" + "idBrigada=" + idBrigada + ", nombreBrig=" + nombreBrig + ", especialidad=" + especialidad + ", libre=" + libre + ", codCuartel=" + codCuartel + ", estadoBr=" + estadoBr + '}';
     }
+    
 
 }

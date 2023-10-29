@@ -12,7 +12,7 @@ public class Bombero {
     private String nombreApellido;
     private LocalDate fechaNac;
     private String celular;
-    private int CodBrigada;
+    private int codBrigada;
     private boolean estadoB;
 
 // Constructores:
@@ -25,7 +25,7 @@ public class Bombero {
         this.nombreApellido = nombreApellido;
         this.fechaNac = fechaNac;
         this.celular = celular;
-        this.CodBrigada = CodBrigada;
+        this.codBrigada = CodBrigada;
         this.estadoB = estadoB;
     }
 
@@ -34,7 +34,7 @@ public class Bombero {
         this.nombreApellido = nombreApellido;
         this.fechaNac = fechaNac;
         this.celular = celular;
-        this.CodBrigada = CodBrigada;
+        this.codBrigada = CodBrigada;
         this.estadoB = estadoB;
     }
 
@@ -80,11 +80,11 @@ public class Bombero {
     }
 
     public int getCodBrigada() {
-        return CodBrigada;
+        return codBrigada;
     }
 
     public void setCodBrigada(int CodBrigada) {
-        this.CodBrigada = CodBrigada;
+        this.codBrigada = CodBrigada;
     }
 
     public boolean isEstadoB() {
@@ -98,7 +98,7 @@ public class Bombero {
     //--------------------------------------------------------------------------
     @Override
     public String toString() {
-        return "Bombero{" + "idBombero=" + idBombero + ", dni=" + dni + ", nombreApellido=" + nombreApellido + ", fechaNac=" + fechaNac + ", celular=" + celular + ", CodBrigada=" + CodBrigada + ", estadoB=" + estadoB + '}';
+        return "Bombero{" + "idBombero=" + idBombero + ", dni=" + dni + ", nombreApellido=" + nombreApellido + ", fechaNac=" + fechaNac + ", celular=" + celular + ", CodBrigada=" + codBrigada + ", estadoB=" + estadoB + '}';
     }
 
 }

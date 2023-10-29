@@ -2,10 +2,11 @@
 
 package bomberosgrupo5;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.Month;
 import bomberosgrupo5.accesoADatos.BomberoData;
+import bomberosgrupo5.accesoADatos.Conexion;
 import bomberosgrupo5.entidades.Bombero;
 
 
@@ -17,10 +18,13 @@ public class BomberosGrupo5 {
     
     public static void main(String[] args) {
         
+        //prueba de conexión:
+        //Conexion.getConectar(); //FY
+        
          // creo el objeto BomberoData que me permitirá guardar en BD:
-         Bombero bom1 = new Bombero(1222222, "José Pekermán",LocalDate.of(1975, 1, 1),"11112222", 1, true);
+         Bombero bomber1 = new Bombero(1222222,"José Pekermán",LocalDate.of(1975, 4, 20),"1112221",1,true);
          BomberoData bom = new BomberoData();
-         bom.guardarBombero(bom1);
+         bom.guardarBombero(bomber1);
          
          
        // en este creo que no hace falta el idAlumno

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-10-2023 a las 22:35:03
+-- Tiempo de generación: 29-10-2023 a las 23:34:02
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bombero` (
   `idBombero` int(11) NOT NULL,
-  `dni` int(8) NOT NULL,
+  `dni` int(11) NOT NULL,
   `nombreApellido` varchar(50) NOT NULL,
   `fechaNac` date NOT NULL,
   `celular` varchar(30) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE `brigada` (
   `especialidad` varchar(30) NOT NULL,
   `libre` tinyint(1) NOT NULL,
   `codCuartel` int(11) NOT NULL,
-  `estadoBr` tinyint(4) NOT NULL
+  `estadoBr` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -66,7 +66,7 @@ CREATE TABLE `cuartel` (
   `coordY` int(11) NOT NULL,
   `telefono` varchar(30) NOT NULL,
   `correo` varchar(30) NOT NULL,
-  `estadoC` tinyint(4) NOT NULL
+  `estadoC` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -127,7 +127,7 @@ ALTER TABLE `siniestro`
 -- AUTO_INCREMENT de la tabla `bombero`
 --
 ALTER TABLE `bombero`
-  MODIFY `idBombero` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idBombero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `brigada`
