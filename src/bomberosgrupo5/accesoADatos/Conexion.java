@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 public class Conexion {
 
     private static final String URL = "jdbc:mariadb://localhost/";
-    private static final String DB = "cuartel_de_bomberos";
+    private static final String DB = "cuartel de bomberos";
     private static final String USUARIO = "root";
     private static final String PASWORD = "";
     private static Connection connection;
@@ -32,7 +32,7 @@ public class Conexion {
                 JOptionPane.showMessageDialog(null, "Error al cargar los Driver ");
 
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error de conexion con la BD ");
+                JOptionPane.showMessageDialog(null, "Error de conexion con la BD");
             }
         }
         return connection;

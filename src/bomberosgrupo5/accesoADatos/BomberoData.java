@@ -42,8 +42,9 @@ public class BomberoData {
             ps.setInt(5, bombero.getIdBrigada());
             ps.setBoolean(6, bombero.isEstadoB());
             ps.executeUpdate();
-            
+            System.out.println(" aca");
             ResultSet rs= ps.getGeneratedKeys();
+            System.out.println(" aca1");
             if(rs.next()){
                 bombero.setIdBombero(rs.getInt(1));
                 JOptionPane.showMessageDialog(null,"Bombero Agredado Exitosamente");
