@@ -28,7 +28,7 @@ public class Conexion {
                 JOptionPane.showMessageDialog(null, "Error al cargar Driver de conexión ");
 
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error de conexion con la Base de Datos ");
+                JOptionPane.showMessageDialog(null, "Error de conexión con la Base de Datos ");
             }
         }
         return connection;
