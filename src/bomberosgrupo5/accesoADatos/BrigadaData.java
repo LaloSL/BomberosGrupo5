@@ -13,48 +13,38 @@ public class BrigadaData {
 
 //método guardar Brigada:----------------------------------------------------
     public void guardarBrigada(Brigada brigada) {
-        if (brigada.getIdBrigada() == 0) {
-            String sql = "INSERT INTO brigada (nombreBrig,especialidad,libre,codCuartel,estadoBr)"
+        
+//        String sql = "INSERT INTO cuartel (nombreCuartel,direccion,coordX,coordY,telefono,correo,estadoC)"
+//                    + "VALUE(?, ? ,? ,? ,? ,? ,?)";
+            String sql = "INSERT INTO brigada (nombreBrig,especialidad,libre,estadoBr)"
                     + "VALUE(? ,? ,? ,?,?)";
 
             try {
                 PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
                 ps.setString(1, brigada.getNombreBrig());
                 ps.setString(2, brigada.getEspecialidad());
                 ps.setBoolean(3, brigada.isLibre());
                 ps.setInt(4, brigada.getCodCuartel());
-                ps.setBoolean(5, brigada.isEstadoBr());
+                ps.setBoolean(4, brigada.isEstadoBr());
+
                 ps.executeUpdate();
 
-                ResultSet rs = ps.getGeneratedKeys();
+                ResultSet rs=ps.getGeneratedKeys();
 
                 if (rs.next()) {
                     brigada.setIdBrigada(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Brigada agregada correctamente ");
+                    JOptionPane.showMessageDialog(null, "Cuartel Agregado Exitosamente ");
                 }
                 ps.close();
-
+                
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada ");
+                JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla cuartel ");
             }
-        } else {
-            String sql = "UPDATE brigada SET estadoBr = ? WHERE idBrigada = ?";
-            try {
-                PreparedStatement ps = con.prepareStatement(sql);
-                ps.setBoolean(1, brigada.isEstadoBr());
-                ps.setInt(2, brigada.getIdBrigada());
-                int filasActualizadas = ps.executeUpdate();
-
-                if (filasActualizadas > 0) {
-                    JOptionPane.showMessageDialog(null, "Brigada actualizada correctamente ");
-                }
-                ps.close();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error al actualizar la Brigada ");
-            }
+       
         }
-    }
-
+    
+    
     // método modificar Brigada:----------------------------------------------
 //    public void modificarBrigada(Brigada brigada){
 //        
@@ -159,4 +149,6 @@ public class BrigadaData {
 //        }
 //        return   brigadas;            
 //      }
+
+
 }

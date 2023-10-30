@@ -3,7 +3,8 @@
 package bomberosgrupo5.accesoADatos;
 
 import bomberosgrupo5.entidades.Bombero;
-import java.sql.*; //FY
+import bomberosgrupo5.entidades.Cuartel;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -13,15 +14,49 @@ import javax.swing.JOptionPane;
 public class BomberoData {
     private Connection con=null;
     
-    public BomberoData(){ // FY
+    public BomberoData(){ 
         con = Conexion.getConectar();
     }
+
+
+public void guardarBombero(Bombero bombero) {
+       
+    String sql = "INSERT INTO bombero (dni,nombreApellido,fechaNac,celular,codBrigada,estadoB)"
+                 + "VALUE(?, ?, ?, ?, ?, ?)";        
+
+            try {
+                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+                ps.setInt(1, bombero.getDni());
+                ps.setString(2, bombero.getNombreApellido());
+                ps.setDate(3, Date.valueOf(bombero.getFechaNac()));
+                ps.setString(4, bombero.getCelular());
+                ps.setInt(5, bombero.getCodBrigada());
+                ps.setBoolean(6, bombero.isEstadoB());
     
-    // método guardar bombero:
+                ps.executeUpdate();
+
+                ResultSet rs=ps.getGeneratedKeys();
+
+                if (rs.next()) {
+                    bombero.setIdBombero(rs.getInt(1));
+                    JOptionPane.showMessageDialog(null, "Bombero Agregado Exitosamente ");
+                }
+                ps.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla cuartel ");
+            }
+       
+        }
+
+
+
+
+    
+// método guardar bombero:------------------------------------------------------
 //    public void guardarBombero(Bombero bombero){
 //        
-//        String sql="INSERT INTO bombero (dni,nombreApellido,fechaNac,celular,codBrigada,estadoB)"
-//                + "VALUE(? ,? ,? ,? ,? ,?)";
+//        
 //        
 //        try {       
 //            
