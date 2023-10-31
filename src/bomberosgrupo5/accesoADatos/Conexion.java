@@ -1,4 +1,5 @@
 // Clase Conexion (Proyecto BomberosGrupo5)
+
 package bomberosgrupo5.accesoADatos;
 
 import java.sql.*;
@@ -7,11 +8,11 @@ import javax.swing.JOptionPane;
 //** @author Asus
 public class Conexion {
 
-    private static final String URL="jdbc:mariadb://localhost/";//FY
-    private static final String DB="cuartel_de_bomberos"; //FY
-    private static final String USUARIO="root"; //FY
-    private static final String PASSWORD=""; //FY
-    private static Connection connection; //FY
+    private static final String URL="jdbc:mariadb://localhost/";
+    private static final String DB="cuartel_de_bomberos"; 
+    private static final String USUARIO="root"; 
+    private static final String PASSWORD=""; 
+    private static Connection connection; 
 
     private Conexion() { //no se puede instanciar objetos de esta clase
     }

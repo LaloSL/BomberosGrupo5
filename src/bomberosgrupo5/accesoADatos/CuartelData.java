@@ -1,4 +1,5 @@
 // Clase CuartelData (proyecto BomberosGrupo5)
+
 package bomberosgrupo5.accesoADatos;
 
 import bomberosgrupo5.entidades.Cuartel;
@@ -9,18 +10,18 @@ public class CuartelData {
 
     private Connection con = null;
 
-    public CuartelData() { // FY
+    public CuartelData() { 
         con = Conexion.getConectar();
     }
 //------------------------------------------------------------------------------
-    // método guardar bombero:
+    // método guardar cuartel:
     public void guardarCuartel(Cuartel cuartel) {
        
             String sql = "INSERT INTO cuartel (nombreCuartel,direccion,coordX,coordY,telefono,correo,estadoC)"
                     + "VALUE(?, ? ,? ,? ,? ,? ,?)";
 
             try {
-                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
                 ps.setString(1, cuartel.getNombreCuartel());
                 ps.setString(2, cuartel.getDireccion());

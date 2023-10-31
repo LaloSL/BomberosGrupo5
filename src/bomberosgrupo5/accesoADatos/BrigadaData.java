@@ -8,16 +8,18 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class BrigadaData {
-
+    
     private Connection con = null;
-
-//método guardar Brigada:----------------------------------------------------
+    
+    public BrigadaData(){
+        con = Conexion.getConectar();
+    }
+//------------------------------------------------------------------------------
+//método guardar Brigada:
     public void guardarBrigada(Brigada brigada) {
         
-//        String sql = "INSERT INTO cuartel (nombreCuartel,direccion,coordX,coordY,telefono,correo,estadoC)"
-//                    + "VALUE(?, ? ,? ,? ,? ,? ,?)";
-            String sql = "INSERT INTO brigada (nombreBrig,especialidad,libre,estadoBr)"
-                    + "VALUE(? ,? ,? ,?,?)";
+            String sql = "INSERT INTO brigada (nombreBrig, especialidad, libre, codCuartel, estadoBr)"
+                    + "VALUE(? ,? ,? ,? ,?)";
 
             try {
                 PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -34,12 +36,12 @@ public class BrigadaData {
 
                 if (rs.next()) {
                     brigada.setIdBrigada(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Cuartel Agregado Exitosamente ");
+                    JOptionPane.showMessageDialog(null, "Brigada Agregada Exitosamente ");
                 }
                 ps.close();
                 
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla cuartel ");
+                JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla brigada ");
             }
        
         }

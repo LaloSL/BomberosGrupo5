@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2023 a las 04:21:01
+-- Tiempo de generación: 31-10-2023 a las 03:28:54
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -31,9 +31,10 @@ CREATE TABLE `bombero` (
   `idBombero` int(11) NOT NULL,
   `dni` int(11) NOT NULL,
   `nombreApellido` varchar(50) NOT NULL,
+  `grupoSanguineo` varchar(11) NOT NULL,
   `fechaNac` date NOT NULL,
   `celular` varchar(30) NOT NULL,
-  `codBrigada` int(11) NOT NULL,
+  `codBrigada` int(30) NOT NULL,
   `estadoB` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -110,15 +111,13 @@ CREATE TABLE `siniestro` (
 --
 ALTER TABLE `bombero`
   ADD PRIMARY KEY (`idBombero`),
-  ADD UNIQUE KEY `dni` (`dni`),
-  ADD KEY `codBrigada` (`codBrigada`);
+  ADD UNIQUE KEY `dni` (`dni`);
 
 --
 -- Indices de la tabla `brigada`
 --
 ALTER TABLE `brigada`
-  ADD PRIMARY KEY (`idBrigada`),
-  ADD UNIQUE KEY `idCuartel` (`codCuartel`);
+  ADD PRIMARY KEY (`idBrigada`);
 
 --
 -- Indices de la tabla `cuartel`

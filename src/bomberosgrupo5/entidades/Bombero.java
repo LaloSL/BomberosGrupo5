@@ -10,6 +10,7 @@ public class Bombero {
     private int idBombero;
     private int dni;
     private String nombreApellido;
+    private String grupoSanguineo;
     private LocalDate fechaNac;
     private String celular;
     private int codBrigada;
@@ -19,26 +20,28 @@ public class Bombero {
     public Bombero() {
     }
 
-    public Bombero(int idBombero, int dni, String nombreApellido, LocalDate fechaNac, String celular, int CodBrigada, boolean estadoB) {
+    public Bombero(int dni, String nombreApellido, String grupoSanguineo, LocalDate fechaNac, String celular, int codBrigada, boolean estadoB) {
+        this.dni = dni;
+        this.nombreApellido = nombreApellido;
+        this.grupoSanguineo = grupoSanguineo;
+        this.fechaNac = fechaNac;
+        this.celular = celular;
+        this.codBrigada = codBrigada;
+        this.estadoB = estadoB;
+    }
+
+    public Bombero(int idBombero, int dni, String nombreApellido, String grupoSanguineo, LocalDate fechaNac, String celular, int codBrigada, boolean estadoB) {
         this.idBombero = idBombero;
         this.dni = dni;
         this.nombreApellido = nombreApellido;
+        this.grupoSanguineo = grupoSanguineo;
         this.fechaNac = fechaNac;
         this.celular = celular;
-        this.codBrigada = CodBrigada;
+        this.codBrigada = codBrigada;
         this.estadoB = estadoB;
     }
-
-    public Bombero(int dni, String nombreApellido, LocalDate fechaNac, String celular, int CodBrigada, boolean estadoB) {
-        this.dni = dni;
-        this.nombreApellido = nombreApellido;
-        this.fechaNac = fechaNac;
-        this.celular = celular;
-        this.codBrigada = CodBrigada;
-        this.estadoB = estadoB;
-    }
-
-    // Gettres & Setters:
+    
+    // Getters & Setters:
     public int getIdBombero() {
         return idBombero;
     }
@@ -63,6 +66,14 @@ public class Bombero {
         this.nombreApellido = nombreApellido;
     }
 
+    public String getGrupoSanguineo() {
+        return grupoSanguineo;
+    }
+
+    public void setGrupoSanguineo(String grupoSanguineo) {
+        this.grupoSanguineo = grupoSanguineo;
+    }
+
     public LocalDate getFechaNac() {
         return fechaNac;
     }
@@ -83,8 +94,8 @@ public class Bombero {
         return codBrigada;
     }
 
-    public void setCodBrigada(int CodBrigada) {
-        this.codBrigada = CodBrigada;
+    public void setCodBrigada(int codBrigada) {
+        this.codBrigada = codBrigada;
     }
 
     public boolean isEstadoB() {
@@ -94,11 +105,12 @@ public class Bombero {
     public void setEstadoB(boolean estadoB) {
         this.estadoB = estadoB;
     }
-
-    //--------------------------------------------------------------------------
+//------------------------------------------------------------------------------
     @Override
     public String toString() {
-        return "Bombero{" + "idBombero=" + idBombero + ", dni=" + dni + ", nombreApellido=" + nombreApellido + ", fechaNac=" + fechaNac + ", celular=" + celular + ", CodBrigada=" + codBrigada + ", estadoB=" + estadoB + '}';
+        return "Bombero{" + "idBombero=" + idBombero + ", dni=" + dni + ", nombreApellido=" + nombreApellido + ", grupoSanguineo=" + grupoSanguineo + ", fechaNac=" + fechaNac + ", celular=" + celular + ", codBrigada=" + codBrigada + ", estadoB=" + estadoB + '}';
     }
 
+    
+    
 }

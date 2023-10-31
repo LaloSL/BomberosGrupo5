@@ -12,27 +12,28 @@ import javax.swing.JOptionPane;
 //** @author Asus
 
 public class BomberoData {
-    private Connection con=null;
+    
+    private Connection con = null;
     
     public BomberoData(){ 
         con = Conexion.getConectar();
     }
-
-
+//------------------------------------------------------------------------------
 public void guardarBombero(Bombero bombero) {
        
-    String sql = "INSERT INTO bombero (dni,nombreApellido,fechaNac,celular,codBrigada,estadoB)"
-                 + "VALUE(?, ?, ?, ?, ?, ?)";        
+    String sql = "INSERT INTO bombero (dni, nombreApellido, fechaNac, grupoSanguineo, celular, codBrigada, estadoB)"
+                 + "VALUE(?, ?, ?, ?, ?, ?, ?)";        
 
             try {
                 PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
                 ps.setInt(1, bombero.getDni());
                 ps.setString(2, bombero.getNombreApellido());
-                ps.setDate(3, Date.valueOf(bombero.getFechaNac()));
-                ps.setString(4, bombero.getCelular());
-                ps.setInt(5, bombero.getCodBrigada());
-                ps.setBoolean(6, bombero.isEstadoB());
+                ps.setString(3, bombero.getGrupoSanguineo());
+                ps.setDate(4, Date.valueOf(bombero.getFechaNac()));
+                ps.setString(5, bombero.getCelular());
+                ps.setInt(6, bombero.getCodBrigada());
+                ps.setBoolean(7, bombero.isEstadoB());
     
                 ps.executeUpdate();
 
@@ -44,46 +45,13 @@ public void guardarBombero(Bombero bombero) {
                 }
                 ps.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla cuartel ");
+                JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla bombero ");
             }
        
         }
 
-
-
-
     
-// método guardar bombero:------------------------------------------------------
-//    public void guardarBombero(Bombero bombero){
-//        
-//        
-//        
-//        try {       
-//            
-//            PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//            
-//            ps.setInt(1, bombero.getDni());
-//            ps.setString(2, bombero.getNombreApellido());
-//            ps.setDate(3, Date.valueOf(bombero.getFechaNac()));
-//            ps.setString(4, bombero.getCelular());
-//            ps.setInt(5, bombero.getCodBrigada());
-//            ps.setBoolean(6, bombero.isEstadoB());
-//            ps.executeUpdate();
-//            
-//            //System.out.println(" aca");
-//            ResultSet rs= ps.getGeneratedKeys();
-//            //System.out.println(" aca1");
-//            if(rs.next()){
-//                bombero.setIdBombero(rs.getInt(1));
-//                JOptionPane.showMessageDialog(null,"Bombero Agredado Exitosamente");
-//            }
-//            ps.close();
-//            
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla bombero ");
-//        }
-//        
-//    }
+
     
     
 //    public void modificarBombero (Bombero bombero){
@@ -212,5 +180,8 @@ public void guardarBombero(Bombero bombero) {
 //        }
 //        return   bomberos;            
 //      }
+
+
+
 }  
 
