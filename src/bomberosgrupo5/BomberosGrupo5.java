@@ -6,8 +6,10 @@ import java.sql.*;
 import bomberosgrupo5.accesoADatos.BomberoData;
 import bomberosgrupo5.accesoADatos.BrigadaData;
 import bomberosgrupo5.accesoADatos.Conexion;
+import bomberosgrupo5.accesoADatos.CuartelData;
 import bomberosgrupo5.entidades.Bombero;
 import bomberosgrupo5.entidades.Brigada;
+import bomberosgrupo5.entidades.Cuartel;
 import java.time.LocalDate;
 
 //** @author Asus
@@ -20,10 +22,10 @@ public class BomberosGrupo5 {
         //prueba de conexión: 
         Conexion.getConectar(); //prueba ok
         
-        // Prueba del método guardar Cuartel [ok]
-        //Cuartel cuar=new Cuartel("Cuartel 8", "Falucho 800",2080, 2080,"266888888", "Cuartel.8@sl.com.ar",true); //dato en memoria
-        //CuartelData cua=new CuartelData(); 
-        //cua.guardarCuartel(cuar);  
+        // Prueba del método guardar Cuartel [ok] Cargado!!!!
+//        Cuartel cuar=new Cuartel("Cuartel 8", "Falucho 800",2080, 2080,"266888888", "Cuartel.8@sl.com.ar",true); //dato en memoria
+//        CuartelData cua=new CuartelData(); 
+//        cua.guardarCuartel(cuar);  
 
         //prueba de método modificarCuartel(): [verificar, no funciono]
         //Cuartel cuar=new Cuartel(12,"Cuartel 4", "Falucho 800",1085, 1085,"266888888", "Cuartel.4@sl.com.ar",true);
@@ -35,10 +37,10 @@ public class BomberosGrupo5 {
         //CuartelData cua=new CuartelData();
         //cua.eliminarCuartel(12);
 //------------------------------------------------------------------------------        
-        // Prueba de método guardarBrigada():  [verificar, no funciona]
-        //Brigada briga = new Brigada("alfa","salvamento en derrumbes", true, 6, true);
-        //BrigadaData brig = new BrigadaData();
-        //brig.guardarBrigada(briga);
+        // Prueba de método guardarBrigada():  [cargada!!!]
+//        Brigada briga = new Brigada("alfa","salvamento en derrumbes", true, 1, true);
+//        BrigadaData brig = new BrigadaData();
+//        brig.guardarBrigada(briga);
           
 //         // creo el objeto BomberoData que me permitirá guardar en BD:
 //         Bombero bomber1 = new Bombero(1222222,"José Pekermán",LocalDate.of(1975, 1, 20),"266111111",1,true);  //dato en memoria
@@ -48,7 +50,7 @@ public class BomberosGrupo5 {
 //------------------------------------------------------------------------------        
         
     // Prueba de método guardar bombero():  // error al acceder a la tabla bombero
-    Bombero bom1 = new Bombero(12222222, "Juan Perez", "0+", LocalDate.of(1975, 5, 25), "2661111111", 10, true);
+    Bombero bom1 = new Bombero(12222222, "Juan Perez", "0+", LocalDate.of(1975, 5, 25), "2661111111", 7, true);
     BomberoData bom = new BomberoData();
     bom.guardarBombero(bom1);
 

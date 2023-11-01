@@ -4,7 +4,7 @@ package bomberosgrupo5.entidades;
 
 public class Brigada {
 
-    private int idBrigada;
+    private int codBrigada;
     private String nombreBrig;
     private String especialidad;
     private boolean libre;
@@ -23,8 +23,8 @@ public class Brigada {
         this.estadoBr = estadoBr;
     }
 
-    public Brigada(int idBrigada, String nombreBrig, String especialidad, boolean libre, int codCuartel, boolean estadoBr) {
-        this.idBrigada = idBrigada;
+    public Brigada(int codBrigada, String nombreBrig, String especialidad, boolean libre, int codCuartel, boolean estadoBr) {
+        this.codBrigada = codBrigada;
         this.nombreBrig = nombreBrig;
         this.especialidad = especialidad;
         this.libre = libre;
@@ -35,11 +35,11 @@ public class Brigada {
     //Getters & Setters:
 
     public int getIdBrigada() {
-        return idBrigada;
+        return codBrigada;
     }
 
     public void setIdBrigada(int idBrigada) {
-        this.idBrigada = idBrigada;
+        this.codBrigada = idBrigada;
     }
 
     public String getNombreBrig() {
@@ -85,7 +85,7 @@ public class Brigada {
 
     @Override
     public String toString() {
-        return "Brigada{" + "idBrigada=" + idBrigada + ", nombreBrig=" + nombreBrig + ", especialidad=" + especialidad + ", libre=" + libre + ", codCuartel=" + codCuartel + ", estadoBr=" + estadoBr + '}';
+        return "Brigada{" + "idBrigada=" + codBrigada + ", nombreBrig=" + nombreBrig + ", especialidad=" + especialidad + ", libre=" + libre + ", codCuartel=" + codCuartel + ", estadoBr=" + estadoBr + '}';
     }
     
 
