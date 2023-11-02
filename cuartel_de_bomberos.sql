@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2023 a las 19:10:17
+-- Tiempo de generación: 03-11-2023 a las 00:53:08
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -34,7 +34,7 @@ CREATE TABLE `bombero` (
   `grupoSanguineo` varchar(30) NOT NULL,
   `fechaNac` date NOT NULL,
   `celular` varchar(30) NOT NULL,
-  `codBrigada` int(11) NOT NULL,
+  `idBrigada` int(11) NOT NULL,
   `estadoB` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -42,7 +42,7 @@ CREATE TABLE `bombero` (
 -- Volcado de datos para la tabla `bombero`
 --
 
-INSERT INTO `bombero` (`idBombero`, `dni`, `nombreApellido`, `grupoSanguineo`, `fechaNac`, `celular`, `codBrigada`, `estadoB`) VALUES
+INSERT INTO `bombero` (`idBombero`, `dni`, `nombreApellido`, `grupoSanguineo`, `fechaNac`, `celular`, `idBrigada`, `estadoB`) VALUES
 (3, 12222222, 'Juan Perez', '1975-05-25', '0000-00-00', '2661111111', 7, 1);
 
 -- --------------------------------------------------------
@@ -56,7 +56,7 @@ CREATE TABLE `brigada` (
   `nombreBrig` varchar(30) NOT NULL,
   `especialidad` varchar(30) NOT NULL,
   `libre` tinyint(1) NOT NULL,
-  `codCuartel` int(11) NOT NULL,
+  `idCuartel` int(11) NOT NULL,
   `estadoBr` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -64,8 +64,9 @@ CREATE TABLE `brigada` (
 -- Volcado de datos para la tabla `brigada`
 --
 
-INSERT INTO `brigada` (`idBrigada`, `nombreBrig`, `especialidad`, `libre`, `codCuartel`, `estadoBr`) VALUES
-(7, 'alfa', 'salvamento en derrumbes', 1, 1, 1);
+INSERT INTO `brigada` (`idBrigada`, `nombreBrig`, `especialidad`, `libre`, `idCuartel`, `estadoBr`) VALUES
+(7, 'alfa', 'salvamento en derrumbes', 1, 1, 1),
+(13, 'Omega', 'Explosivos', 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -74,7 +75,7 @@ INSERT INTO `brigada` (`idBrigada`, `nombreBrig`, `especialidad`, `libre`, `codC
 --
 
 CREATE TABLE `cuartel` (
-  `codCuartel` int(11) NOT NULL,
+  `idCuartel` int(11) NOT NULL,
   `nombreCuartel` varchar(30) NOT NULL,
   `direccion` varchar(30) NOT NULL,
   `coordX` int(11) NOT NULL,
@@ -88,8 +89,9 @@ CREATE TABLE `cuartel` (
 -- Volcado de datos para la tabla `cuartel`
 --
 
-INSERT INTO `cuartel` (`codCuartel`, `nombreCuartel`, `direccion`, `coordX`, `coordY`, `telefono`, `correo`, `estadoC`) VALUES
-(1, 'Cuartel 8', 'Falucho 800', 2080, 2080, '266888888', 'Cuartel.8@sl.com.ar', 1);
+INSERT INTO `cuartel` (`idCuartel`, `nombreCuartel`, `direccion`, `coordX`, `coordY`, `telefono`, `correo`, `estadoC`) VALUES
+(1, 'Cuartel 8', 'Falucho 800', 2080, 2080, '266888888', 'Cuartel.8@sl.com.ar', 1),
+(2, 'Cuartel 9', 'Falucho 850', 2085, 2085, '266888999', 'Cuartel.9@sl.com.ar', 1);
 
 -- --------------------------------------------------------
 
@@ -119,20 +121,20 @@ CREATE TABLE `siniestro` (
 ALTER TABLE `bombero`
   ADD PRIMARY KEY (`idBombero`),
   ADD UNIQUE KEY `dni` (`dni`),
-  ADD KEY `codBrigada` (`codBrigada`);
+  ADD KEY `idBrigada` (`idBrigada`);
 
 --
 -- Indices de la tabla `brigada`
 --
 ALTER TABLE `brigada`
   ADD PRIMARY KEY (`idBrigada`),
-  ADD KEY `codCuartel` (`codCuartel`);
+  ADD UNIQUE KEY `idCuartel` (`idCuartel`) USING BTREE;
 
 --
 -- Indices de la tabla `cuartel`
 --
 ALTER TABLE `cuartel`
-  ADD PRIMARY KEY (`codCuartel`);
+  ADD PRIMARY KEY (`idCuartel`) USING BTREE;
 
 --
 -- Indices de la tabla `siniestro`
@@ -149,19 +151,19 @@ ALTER TABLE `siniestro`
 -- AUTO_INCREMENT de la tabla `bombero`
 --
 ALTER TABLE `bombero`
-  MODIFY `idBombero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idBombero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `brigada`
 --
 ALTER TABLE `brigada`
-  MODIFY `idBrigada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idBrigada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `cuartel`
 --
 ALTER TABLE `cuartel`
-  MODIFY `codCuartel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idCuartel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `siniestro`
@@ -177,13 +179,13 @@ ALTER TABLE `siniestro`
 -- Filtros para la tabla `bombero`
 --
 ALTER TABLE `bombero`
-  ADD CONSTRAINT `bombero_ibfk_1` FOREIGN KEY (`codBrigada`) REFERENCES `brigada` (`idBrigada`);
+  ADD CONSTRAINT `bombero_ibfk_1` FOREIGN KEY (`idBrigada`) REFERENCES `brigada` (`idBrigada`);
 
 --
 -- Filtros para la tabla `brigada`
 --
 ALTER TABLE `brigada`
-  ADD CONSTRAINT `brigada_ibfk_1` FOREIGN KEY (`codCuartel`) REFERENCES `cuartel` (`codCuartel`);
+  ADD CONSTRAINT `brigada_ibfk_1` FOREIGN KEY (`idCuartel`) REFERENCES `cuartel` (`idCuartel`);
 
 --
 -- Filtros para la tabla `siniestro`
