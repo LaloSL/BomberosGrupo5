@@ -21,7 +21,7 @@ public class BomberoData {
 //------------------------------------------------------------------------------
 public void guardarBombero(Bombero bombero) {
        
-    String sql = "INSERT INTO bombero (dni, nombreApellido, fechaNac, grupoSanguineo, celular, codBrigada, estadoB)"
+    String sql = "INSERT INTO bombero (dni, nombreApellido, grupoSanguineo, fechaNac, celular, idBrigada, estadoB)"
                  + "VALUE(?, ?, ?, ?, ?, ?, ?)";        
 
             try {

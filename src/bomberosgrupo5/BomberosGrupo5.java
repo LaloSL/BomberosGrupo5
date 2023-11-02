@@ -23,7 +23,7 @@ public class BomberosGrupo5 {
         Conexion.getConectar(); //prueba ok
         
         // Prueba del método guardar Cuartel [ok] Cargado!!!!
-//        Cuartel cuar=new Cuartel("Cuartel 8", "Falucho 800",2080, 2080,"266888888", "Cuartel.8@sl.com.ar",true); //dato en memoria
+//        Cuartel cuar=new Cuartel("Cuartel 9", "Falucho 850",2085, 2085,"266888999", "Cuartel.9@sl.com.ar",true); //dato en memoria
 //        CuartelData cua=new CuartelData(); 
 //        cua.guardarCuartel(cuar);  
 
@@ -49,10 +49,14 @@ public class BomberosGrupo5 {
         
 //------------------------------------------------------------------------------        
         
-    // Prueba de método guardar bombero():  // error al acceder a la tabla bombero
-    Bombero bom1 = new Bombero(12222222, "Juan Perez", "0+", LocalDate.of(1975, 5, 25), "2661111111", 7, true);
-    BomberoData bom = new BomberoData();
-    bom.guardarBombero(bom1);
+//    // Prueba de método guardar bombero():  // error al acceder a la tabla bombero
+//    Bombero bom1 = new Bombero(12222223, "Juan Perez", "0+", LocalDate.of(1975, 5, 25), "2661111111", 7, true);
+//    BomberoData bom = new BomberoData();
+//    bom.guardarBombero(bom1);
+
+        Brigada briga = new Brigada("Cola","Rescate de Macotas", true, 3, true);
+        BrigadaData brig = new BrigadaData();
+        brig.guardarBrigada(briga);
 
     }
     

@@ -18,7 +18,7 @@ public class BrigadaData {
 //método guardar Brigada:
     public void guardarBrigada(Brigada brigada) {
         
-            String sql = "INSERT INTO brigada (nombreBrig, especialidad, libre, codCuartel, estadoBr)"
+            String sql = "INSERT INTO brigada (nombreBrig, especialidad, libre, idCuartel, estadoBr)"
                     + "VALUE(? ,? ,? ,? ,?)";
 
             try {
@@ -27,7 +27,7 @@ public class BrigadaData {
                 ps.setString(1, brigada.getNombreBrig());
                 ps.setString(2, brigada.getEspecialidad());
                 ps.setBoolean(3, brigada.isLibre());
-                ps.setInt(4, brigada.getCodCuartel());
+                ps.setInt(4, brigada.getCuartel());
                 ps.setBoolean(5, brigada.isEstadoBr());
 
                 ps.executeUpdate();

@@ -5,6 +5,7 @@
  */
 package bomberosgrupo5.vistas;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -43,7 +44,7 @@ public class MenuView extends javax.swing.JFrame {
         };
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuFormBombero = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -65,8 +66,13 @@ public class MenuView extends javax.swing.JFrame {
 
         jMenu1.setText("Bombero");
 
-        jMenuItem1.setText("Formulario Bombero");
-        jMenu1.add(jMenuItem1);
+        jMenuFormBombero.setText("Formulario Bombero");
+        jMenuFormBombero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFormBomberoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuFormBombero);
 
         jMenuBar1.add(jMenu1);
 
@@ -102,6 +108,18 @@ public class MenuView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuFormBomberoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFormBomberoActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        FormularioBomberoView bombero = new FormularioBomberoView();
+        bombero.setVisible(true);
+        //cambia color de fondo
+        bombero.getContentPane().setBackground(new Color(68, 167, 132));
+        escritorio.add(bombero);
+        
+    }//GEN-LAST:event_jMenuFormBomberoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,7 +163,7 @@ public class MenuView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuFormBombero;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables

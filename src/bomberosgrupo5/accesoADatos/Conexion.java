@@ -23,7 +23,7 @@ public class Conexion {
             try {
                 Class.forName("org.mariadb.jdbc.Driver"); //cargamos el driver
                 connection = DriverManager.getConnection(URL + DB, USUARIO, PASSWORD); //conectamos el driver
-                JOptionPane.showMessageDialog(null, "Conectado exitosamente ");
+                //JOptionPane.showMessageDialog(null, "Conectado exitosamente ");
 
             } catch (ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "Error al cargar Driver de conexión ");

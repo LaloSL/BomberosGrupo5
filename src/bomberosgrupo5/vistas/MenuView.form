@@ -9,10 +9,13 @@
             <Property name="text" type="java.lang.String" value="Bombero"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuFormBombero">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Formulario Bombero"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuFormBomberoActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
