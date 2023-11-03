@@ -83,7 +83,7 @@ public void guardarBombero(Bombero bombero) {
                 ps.setString(3, bombero.getGrupoSanguineo());
                 ps.setDate(4, Date.valueOf(bombero.getFechaNac()));
                 ps.setString(5, bombero.getCelular());
-                ps.setInt(6, bombero.getBrigada().getBrigada());
+                ps.setInt(6, bombero.getBrigada().getIdBrigada());
                 ps.setBoolean(7, bombero.isEstadoB());
     
                 ps.executeUpdate();

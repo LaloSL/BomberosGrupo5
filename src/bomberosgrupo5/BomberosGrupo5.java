@@ -79,22 +79,22 @@ public class BomberosGrupo5 {
 
 
 // Crear una instancia válida de Cuartel
-Cuartel cuar1 = new Cuartel("Cuartel VM", "Av Origone 1200", 2085, 2085, "266888999", "Cuartel.VM@sl.com.ar", true);
+Cuartel cuar2 = new Cuartel("Cuartel Tilisarao", "Av Roca 34500", 2085, 2085, "266888999", "Cuartel.TILI@sl.com.ar", true);
 //CuartelData cua1 = new CuartelData(con);
 
 // Guardar el Cuartel en la base de datos
-cua1.guardarCuartel(cuar1);
-//-------------------------------------------------------------
-// Crear una nueva Brigada utilizando el Cuartel previamente creado
-Brigada briga = new Brigada("Toxico", "Drogas Peligrosas", true, cuar1, true);
-//BrigadaData brig = new BrigadaData(con);
-
-// Guardar la Brigada en la base de datos
-brig.guardarBrigada(briga);
-//-------------------------------------------------------------
-    Bombero bom1 = new Bombero(987, "Pablo Perez", "A+", LocalDate.of(1981, 5, 25), "2664567698",briga, true);
-   
-    bom.guardarBombero(bom1);        
+cua1.guardarCuartel(cuar2);
+////-------------------------------------------------------------
+//// Crear una nueva Brigada utilizando el Cuartel previamente creado
+//Brigada briga = new Brigada("Atura", "Rescate en altura", true, cuar2, true);
+////BrigadaData brig = new BrigadaData(con);
+//
+//// Guardar la Brigada en la base de datos
+//brig.guardarBrigada(briga);
+////-------------------------------------------------------------
+//    Bombero bom1 = new Bombero(677, "Carlos Gomez", "A-", LocalDate.of(1979, 5, 25), "2664567698",briga, true);
+//   
+//    bom.guardarBombero(bom1);        
 
     }
     

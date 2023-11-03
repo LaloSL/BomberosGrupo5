@@ -9,22 +9,16 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class BrigadaData {
-    private Connection con;
-    //private Connection con = null;
+private Connection con;
  public BrigadaData(Connection con) {
     this.con = con;
 }
    
-//    public BrigadaData(){
-//        this.con = con;
-////        con = Conexion.getConectar();
-//    }
+
 //------------------------------------------------------------------------------
 //método guardar Brigada:
     public void guardarBrigada(Brigada brigada) {
         
-//            String sql = "INSERT INTO brigada (nombreBrig, especialidad, libre, idCuartel, estadoBr)"
-//                    + "VALUE(? ,? ,? ,? ,?)";
             
             String sql = "INSERT INTO brigada (nombreBrig, especialidad, libre, Cuartel, estadoBr)"
                     + " VALUES (?, ?, ?, ?, ?)";
@@ -43,7 +37,7 @@ public class BrigadaData {
                 ResultSet rs=ps.getGeneratedKeys();
 
                 if (rs.next()) {
-                    brigada.setBrigada(rs.getInt(1));
+                    brigada.setIdBrigada(rs.getInt(1));
                     JOptionPane.showMessageDialog(null, "Brigada Agregada Exitosamente ");
                 }
                 ps.close();
