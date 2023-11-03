@@ -23,6 +23,7 @@ public class BomberosGrupo5 {
 
         BrigadaData brig = new BrigadaData(connection);
         CuartelData cua1 = new CuartelData(connection);
+        BomberoData bom = new BomberoData(connection);
         //prueba de conexión: 
         //Conexion.getConectar(); //prueba ok
 //        Conexion con = new Conexion();
@@ -83,15 +84,17 @@ Cuartel cuar1 = new Cuartel("Cuartel VM", "Av Origone 1200", 2085, 2085, "266888
 
 // Guardar el Cuartel en la base de datos
 cua1.guardarCuartel(cuar1);
-
+//-------------------------------------------------------------
 // Crear una nueva Brigada utilizando el Cuartel previamente creado
 Brigada briga = new Brigada("Toxico", "Drogas Peligrosas", true, cuar1, true);
 //BrigadaData brig = new BrigadaData(con);
 
 // Guardar la Brigada en la base de datos
 brig.guardarBrigada(briga);
-
-            
+//-------------------------------------------------------------
+    Bombero bom1 = new Bombero(987, "Pablo Perez", "A+", LocalDate.of(1981, 5, 25), "2664567698",briga, true);
+   
+    bom.guardarBombero(bom1);        
 
     }
     

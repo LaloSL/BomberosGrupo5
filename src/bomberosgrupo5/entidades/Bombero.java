@@ -18,6 +18,7 @@ public class Bombero {
     
 
 // Constructores:
+
     public Bombero() {
     }
 
@@ -111,7 +112,6 @@ public class Bombero {
         return "Bombero{" + "idBombero=" + idBombero + ", dni=" + dni + ", nombreApellido=" + nombreApellido + ", grupoSanguineo=" + grupoSanguineo + ", fechaNac=" + fechaNac + ", celular=" + celular + ", brigada=" + brigada + ", estadoB=" + estadoB + '}';
     }
     
- 
 }
 
 
