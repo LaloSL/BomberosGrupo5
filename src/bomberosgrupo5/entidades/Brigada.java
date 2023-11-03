@@ -8,7 +8,7 @@ public class Brigada {
     private String nombreBrig;
     private String especialidad;
     private boolean libre;
-    private int Cuartel;
+    private Cuartel cuartel;
     private boolean estadoBr;
 
     // Constructores:
@@ -16,29 +16,29 @@ public class Brigada {
     public Brigada() {
     }
 
-    public Brigada(int idBrigada, String nombreBrig, String especialidad, boolean libre, int Cuartel, boolean estadoBr) {
-        this.Brigada = idBrigada;
+    public Brigada(int Brigada, String nombreBrig, String especialidad, boolean libre, Cuartel cuartel, boolean estadoBr) {
+        this.Brigada = Brigada;
         this.nombreBrig = nombreBrig;
         this.especialidad = especialidad;
         this.libre = libre;
-        this.Cuartel = Cuartel;
+        this.cuartel = cuartel;
         this.estadoBr = estadoBr;
     }
 
-    public Brigada(String nombreBrig, String especialidad, boolean libre, int Cuartel, boolean estadoBr) {
+    public Brigada(String nombreBrig, String especialidad, boolean libre, Cuartel cuartel, boolean estadoBr) {
         this.nombreBrig = nombreBrig;
         this.especialidad = especialidad;
         this.libre = libre;
-        this.Cuartel = Cuartel;
+        this.cuartel = cuartel;
         this.estadoBr = estadoBr;
     }
 
-    public int getIdBrigada() {
+    public int getBrigada() {
         return Brigada;
     }
 
-    public void setIdBrigada(int idBrigada) {
-        this.Brigada = idBrigada;
+    public void setBrigada(int Brigada) {
+        this.Brigada = Brigada;
     }
 
     public String getNombreBrig() {
@@ -65,12 +65,12 @@ public class Brigada {
         this.libre = libre;
     }
 
-    public int getCuartel() {
-        return Cuartel;
+    public Cuartel getCuartel() {
+        return cuartel;
     }
 
-    public void setCuartel(int Cuartel) {
-        this.Cuartel = Cuartel;
+    public void setCuartel(Cuartel cuartel) {
+        this.cuartel = cuartel;
     }
 
     public boolean isEstadoBr() {
@@ -81,11 +81,10 @@ public class Brigada {
         this.estadoBr = estadoBr;
     }
 
-    //--------------------------------------------------------------------------
     @Override
     public String toString() {
-        return "Brigada{" + "idBrigada=" + Brigada + ", nombreBrig=" + nombreBrig + ", especialidad=" + especialidad + ", libre=" + libre + ", idCuartel=" + Cuartel + ", estadoBr=" + estadoBr + '}';
+        return "Brigada{" + "Brigada=" + Brigada + ", nombreBrig=" + nombreBrig + ", especialidad=" + especialidad + ", libre=" + libre + ", cuartel=" + cuartel + ", estadoBr=" + estadoBr + '}';
     }
-    
 
+    
 }

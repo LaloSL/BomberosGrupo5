@@ -9,12 +9,16 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class BrigadaData {
-    
-    private Connection con = null;
-    
-    public BrigadaData(){
-        con = Conexion.getConectar();
-    }
+    private Connection con;
+    //private Connection con = null;
+ public BrigadaData(Connection con) {
+    this.con = con;
+}
+   
+//    public BrigadaData(){
+//        this.con = con;
+////        con = Conexion.getConectar();
+//    }
 //------------------------------------------------------------------------------
 //método guardar Brigada:
     public void guardarBrigada(Brigada brigada) {
@@ -31,7 +35,7 @@ public class BrigadaData {
                 ps.setString(1, brigada.getNombreBrig());
                 ps.setString(2, brigada.getEspecialidad());
                 ps.setBoolean(3, brigada.isLibre());
-                ps.setInt(4, brigada.getCuartel());
+                ps.setInt(4, brigada.getCuartel().getIdCuartel());
                 ps.setBoolean(5, brigada.isEstadoBr());
 
                 ps.executeUpdate();
@@ -39,7 +43,7 @@ public class BrigadaData {
                 ResultSet rs=ps.getGeneratedKeys();
 
                 if (rs.next()) {
-                    brigada.setIdBrigada(rs.getInt(1));
+                    brigada.setBrigada(rs.getInt(1));
                     JOptionPane.showMessageDialog(null, "Brigada Agregada Exitosamente ");
                 }
                 ps.close();

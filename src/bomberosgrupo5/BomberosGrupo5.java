@@ -18,9 +18,22 @@ public class BomberosGrupo5 {
 
     
     public static void main(String[] args) {
-        
+        Conexion con = new Conexion();
+        Connection connection = con.getConexion(); // Obtener la conexión válida
+
+        BrigadaData brig = new BrigadaData(connection);
+        CuartelData cua1 = new CuartelData(connection);
         //prueba de conexión: 
-        Conexion.getConectar(); //prueba ok
+        //Conexion.getConectar(); //prueba ok
+//        Conexion con = new Conexion();
+//        BrigadaData brig = new BrigadaData(con);
+
+//        Conexion con = new Conexion();
+//        BrigadaData brig = new BrigadaData((Connection) con);
+//
+//
+//        CuartelData cua1=new CuartelData((Connection) con);
+//    -------------------------------------------------------------------    
         
         // Prueba del método guardar Cuartel [ok] Cargado!!!!
 //        Cuartel cuar=new Cuartel("Cuartel 9", "Falucho 850",2085, 2085,"266888999", "Cuartel.9@sl.com.ar",true); //dato en memoria
@@ -50,18 +63,34 @@ public class BomberosGrupo5 {
 //------------------------------------------------------------------------------        
         
 //    // Prueba de método guardar bombero():  // error al acceder a la tabla bombero
-    Bombero bom1 = new Bombero(987, "Pablo Perez", "A+", LocalDate.of(1981, 5, 25), "2664567698", 12, true);
-    BomberoData bom = new BomberoData();
-    bom.guardarBombero(bom1);
+//    Bombero bom1 = new Bombero(987, "Pablo Perez", "A+", LocalDate.of(1981, 5, 25), "2664567698",7, true);
+//    BomberoData bom = new BomberoData();
+//    bom.guardarBombero(bom1);
 
-//        Brigada briga = new Brigada("Cola","Rescate de Macotas", true, 3, true);
-//        BrigadaData brig = new BrigadaData();
+//        Brigada briga = new Brigada("Toxico","Drogas Peligrosas", true, cuar1, true);
+//       //BrigadaData brig = new BrigadaData();
 //        brig.guardarBrigada(briga);
-
-////         Prueba del método guardar Cuartel [ok] Cargado!!!!
+//
+//////         Prueba del método guardar Cuartel [ok] Cargado!!!!
 //        Cuartel cuar1=new Cuartel("Cuartel Central", "Av Roca 600",2085, 2085,"266888999", "Cuartel.central@sl.com.ar",true); //dato en memoria
-//        CuartelData cua=new CuartelData(); 
-//        cua.guardarCuartel(cuar1);  
+////        CuartelData cua=new CuartelData(); 
+//        cua1.guardarCuartel(cuar1);  
+
+
+// Crear una instancia válida de Cuartel
+Cuartel cuar1 = new Cuartel("Cuartel VM", "Av Origone 1200", 2085, 2085, "266888999", "Cuartel.VM@sl.com.ar", true);
+//CuartelData cua1 = new CuartelData(con);
+
+// Guardar el Cuartel en la base de datos
+cua1.guardarCuartel(cuar1);
+
+// Crear una nueva Brigada utilizando el Cuartel previamente creado
+Brigada briga = new Brigada("Toxico", "Drogas Peligrosas", true, cuar1, true);
+//BrigadaData brig = new BrigadaData(con);
+
+// Guardar la Brigada en la base de datos
+brig.guardarBrigada(briga);
+
             
 
     }

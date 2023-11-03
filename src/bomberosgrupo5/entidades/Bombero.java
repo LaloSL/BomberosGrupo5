@@ -13,7 +13,7 @@ public class Bombero {
     private String grupoSanguineo;
     private LocalDate fechaNac;
     private String celular;
-    private Brigada Brigada;
+    private Brigada brigada;
     private boolean estadoB;
     
 
@@ -21,28 +21,27 @@ public class Bombero {
     public Bombero() {
     }
 
-    public Bombero(int dni, String nombreApellido, String grupoSanguineo, LocalDate fechaNac, String celular, int codBrigada, boolean estadoB) {
-        this.dni = dni;
-        this.nombreApellido = nombreApellido;
-        this.grupoSanguineo = grupoSanguineo;
-        this.fechaNac = fechaNac;
-        this.celular = celular;
-        this.Brigada = Brigada;
-        this.estadoB = estadoB;
-    }
-
-    public Bombero(int idBombero, int dni, String nombreApellido, String grupoSanguineo, LocalDate fechaNac, String celular, int codBrigada, boolean estadoB) {
+    public Bombero(int idBombero, int dni, String nombreApellido, String grupoSanguineo, LocalDate fechaNac, String celular, Brigada brigada, boolean estadoB) {
         this.idBombero = idBombero;
         this.dni = dni;
         this.nombreApellido = nombreApellido;
         this.grupoSanguineo = grupoSanguineo;
         this.fechaNac = fechaNac;
         this.celular = celular;
-        this.Brigada = Brigada;
+        this.brigada = brigada;
         this.estadoB = estadoB;
     }
-    
-    // Getters & Setters:
+
+    public Bombero(int dni, String nombreApellido, String grupoSanguineo, LocalDate fechaNac, String celular, Brigada brigada, boolean estadoB) {
+        this.dni = dni;
+        this.nombreApellido = nombreApellido;
+        this.grupoSanguineo = grupoSanguineo;
+        this.fechaNac = fechaNac;
+        this.celular = celular;
+        this.brigada = brigada;
+        this.estadoB = estadoB;
+    }
+
     public int getIdBombero() {
         return idBombero;
     }
@@ -91,13 +90,13 @@ public class Bombero {
         this.celular = celular;
     }
 
-//    public int getBrigada() {
-//        return Brigada;
-//    }
-//
-//    public void setBrigada(int codBrigada) {
-//        this.Brigada = codBrigada;
-//    }
+    public Brigada getBrigada() {
+        return brigada;
+    }
+
+    public void setBrigada(Brigada brigada) {
+        this.brigada = brigada;
+    }
 
     public boolean isEstadoB() {
         return estadoB;
@@ -106,14 +105,13 @@ public class Bombero {
     public void setEstadoB(boolean estadoB) {
         this.estadoB = estadoB;
     }
-//------------------------------------------------------------------------------
+
     @Override
     public String toString() {
-        return "Bombero{" + "idBombero=" + idBombero + ", dni=" + dni + ", nombreApellido=" + nombreApellido + ", grupoSanguineo=" + grupoSanguineo + ", fechaNac=" + fechaNac + ", celular=" + celular + ", codBrigada=" + Brigada + ", estadoB=" + estadoB + '}';
+        return "Bombero{" + "idBombero=" + idBombero + ", dni=" + dni + ", nombreApellido=" + nombreApellido + ", grupoSanguineo=" + grupoSanguineo + ", fechaNac=" + fechaNac + ", celular=" + celular + ", brigada=" + brigada + ", estadoB=" + estadoB + '}';
     }
-
     
-    
+ 
 }
 
 
@@ -124,67 +122,4 @@ public class Bombero {
 
 
 
-// public class BomberoData {
-//    // ...
 //
-//    public int obtenerIdBrigada(String nombreBrigada) {
-//        int idBrigada = -1; // Valor predeterminado en caso de que no se encuentre la brigada
-//
-//        try {
-//            String sql = "SELECT idBrigada FROM brigada WHERE nombreBrig = ?";
-//            PreparedStatement ps = con.prepareStatement(sql);
-//            ps.setString(1, nombreBrigada);
-//            ResultSet rs = ps.executeQuery();
-//
-//            if (rs.next()) {
-//                idBrigada = rs.getInt("idBrigada");
-//            }
-//            
-//            rs.close();
-//            ps.close();
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al obtener el ID de Brigada");
-//        }
-//
-//        return idBrigada;
-//    }
-//
-//    public void guardarBombero(Bombero bombero, String nombreBrigada) {
-//        int idBrigada = obtenerIdBrigada(nombreBrigada); // Obtener el ID de Brigada
-//
-//        if (idBrigada != -1) {
-//            String sql = "INSERT INTO bombero (dni, nombreApellido, grupoSanguineo, fechaNac, celular, Brigada, estadoB) VALUES (?, ?, ?, ?, ?, ?, ?)";
-//
-//            try {
-//                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//
-//                ps.setInt(1, bombero.getDni());
-//                ps.setString(2, bombero.getNombreApellido());
-//                ps.setString(3, bombero.getGrupoSanguineo());
-//                ps.setDate(4, Date.valueOf(bombero.getFechaNac()));
-//                ps.setString(5, bombero.getCelular());
-//                ps.setInt(6, idBrigada); // Usar el ID de Brigada obtenido
-//                ps.setBoolean(7, bombero.isEstadoB());
-//
-//                ps.executeUpdate();
-//
-//                ResultSet rs = ps.getGeneratedKeys();
-//
-//                if (rs.next()) {
-//                    bombero.setIdBombero(rs.getInt(1));
-//                    JOptionPane.showMessageDialog(null, "Bombero Agregado Exitosamente");
-//                }
-//                ps.close();
-//            } catch (SQLException ex) {
-//                JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla bombero");
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(null, "No se encontró la Brigada con el nombre especificado.");
-//        }
-//    }
-//}
-
-
-
-
-

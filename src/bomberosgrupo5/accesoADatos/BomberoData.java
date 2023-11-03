@@ -14,55 +14,64 @@ import javax.swing.JOptionPane;
 
 public class BomberoData {
     
-    private Connection con = null;
+//    private Connection con = null;
+//    
     
-    public BomberoData(){ 
-        con = Conexion.getConectar();
-    }
+//    public BomberoData(){ 
+//        con = Conexion.getConectar();
+//    }
+    
+    private Connection con;
+    //private Connection con = null;
+ public BomberoData(Connection con) {
+    this.con = con;
+}
+    
+    
+    
 //------------------------------------------------------------------------------
-//public void guardarBombero(Bombero bombero, Brigada brigada) {
-//    int idBrigada = brigada.getIdBrigada();
-//    System.out.println("brigada: "+idBrigada);
-//           // obtenerIdBrigada("cola"); // Obtener el ID de Brigada
+////public void guardarBombero(Bombero bombero, Brigada brigada) {
+////    int idBrigada = brigada.getIdBrigada();
+////    System.out.println("brigada: "+idBrigada);
+////           // obtenerIdBrigada("cola"); // Obtener el ID de Brigada
+////
+//////    if (idBrigada != -1) {
+//////        String sql = "INSERT INTO bombero (dni, nombreApellido, grupoSanguineo, fechaNac, celular, Brigada, estadoB) VALUES (?, ?, ?, ?, ?, ?, ?)";
+//////
+//////        try {
+//////            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//////
+//////            ps.setInt(1, bombero.getDni());
+//////            ps.setString(2, bombero.getNombreApellido());
+//////            ps.setString(3, bombero.getGrupoSanguineo());
+//////            ps.setDate(4, Date.valueOf(bombero.getFechaNac()));
+//////            ps.setString(5, bombero.getCelular());
+//////            ps.setInt(6, idBrigada); // Usar el ID de Brigada obtenido
+//////            ps.setBoolean(7, bombero.isEstadoB());
+//////
+//////            ps.executeUpdate();
+//////
+//////            ResultSet rs = ps.getGeneratedKeys();
+//////
+//////            if (rs.next()) {
+//////                bombero.setIdBombero(rs.getInt(1));
+//////                JOptionPane.showMessageDialog(null, "Bombero Agregado Exitosamente");
+//////            }
+//////            ps.close();
+//////        } catch (SQLException ex) {
+//////            JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla bombero");
+//////        }
+//////    } else {
+//////        JOptionPane.showMessageDialog(null, "No se encontró la Brigada con el nombre especificado.");
+//////    }
+////}
+////
+////
 //
-////    if (idBrigada != -1) {
-////        String sql = "INSERT INTO bombero (dni, nombreApellido, grupoSanguineo, fechaNac, celular, Brigada, estadoB) VALUES (?, ?, ?, ?, ?, ?, ?)";
-////
-////        try {
-////            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-////
-////            ps.setInt(1, bombero.getDni());
-////            ps.setString(2, bombero.getNombreApellido());
-////            ps.setString(3, bombero.getGrupoSanguineo());
-////            ps.setDate(4, Date.valueOf(bombero.getFechaNac()));
-////            ps.setString(5, bombero.getCelular());
-////            ps.setInt(6, idBrigada); // Usar el ID de Brigada obtenido
-////            ps.setBoolean(7, bombero.isEstadoB());
-////
-////            ps.executeUpdate();
-////
-////            ResultSet rs = ps.getGeneratedKeys();
-////
-////            if (rs.next()) {
-////                bombero.setIdBombero(rs.getInt(1));
-////                JOptionPane.showMessageDialog(null, "Bombero Agregado Exitosamente");
-////            }
-////            ps.close();
-////        } catch (SQLException ex) {
-////            JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla bombero");
-////        }
-////    } else {
-////        JOptionPane.showMessageDialog(null, "No se encontró la Brigada con el nombre especificado.");
-////    }
-//}
 //
 //
-
-
-
-public void guardarBombero(Bombero bombero,Brigada brigada) {
-    int idBrigada = brigada.getIdBrigada();
-    System.out.println("brigada: "+idBrigada);
+public void guardarBombero(Bombero bombero) {
+    
     String sql = "INSERT INTO bombero (dni, nombreApellido, grupoSanguineo, fechaNac, celular, Brigada, estadoB)"
                  + "VALUE(?, ?, ?, ?, ?, ?, ?)";        
 
@@ -74,7 +83,7 @@ public void guardarBombero(Bombero bombero,Brigada brigada) {
                 ps.setString(3, bombero.getGrupoSanguineo());
                 ps.setDate(4, Date.valueOf(bombero.getFechaNac()));
                 ps.setString(5, bombero.getCelular());
-                ps.setInt(6, idBrigada);
+                ps.setInt(6, bombero.getBrigada().getBrigada());
                 ps.setBoolean(7, bombero.isEstadoB());
     
                 ps.executeUpdate();
@@ -92,9 +101,9 @@ public void guardarBombero(Bombero bombero,Brigada brigada) {
        
         }
 
-    
-
-    
+//    
+//
+//    
     
 //    public void modificarBombero (Bombero bombero){
 //        

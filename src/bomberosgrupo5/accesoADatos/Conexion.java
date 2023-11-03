@@ -1,37 +1,41 @@
 // Clase Conexion (Proyecto BomberosGrupo5)
 
 package bomberosgrupo5.accesoADatos;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-//** @author Asus
 public class Conexion {
+    private String url = "jdbc:mariadb://localhost/cuartel de bomberos";  // Corrige la URL de conexión.
+    private String usuario = "root";
+    private String password = "";
+    private Connection conexion;
 
-    private static final String URL="jdbc:mariadb://localhost/";
-    private static final String DB="cuartel de bomberos"; 
-    private static final String USUARIO="root"; 
-    private static final String PASSWORD=""; 
-    private static Connection connection; 
-
-    private Conexion() { //no se puede instanciar objetos de esta clase
+    public Conexion() {
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");  // Utiliza el controlador correcto.
+        } catch (ClassNotFoundException ex) {
+           JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos: " + ex.getMessage());
+        }
     }
 
-    public static Connection getConectar() { //FY  Por lo tanto debemos utilizar este método static
+    public Conexion(String url, String usuario, String password) throws ClassNotFoundException {
+        this.url = url;
+        this.usuario = usuario;
+        this.password = password;
 
-        if (connection == null) {
+        Class.forName("org.mariadb.jdbc.Driver");  // Utiliza el controlador correcto.
+    }
+
+    public Connection getConexion() {
+        if (conexion == null) {
             try {
-                Class.forName("org.mariadb.jdbc.Driver"); //cargamos el driver
-                connection = DriverManager.getConnection(URL + DB, USUARIO, PASSWORD); //conectamos el driver
-                //JOptionPane.showMessageDialog(null, "Conectado exitosamente ");
-
-            } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(null, "Error al cargar Driver de conexión ");
-
+                conexion = DriverManager.getConnection(url, usuario, password);
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error de conexión con la Base de Datos ");
+                JOptionPane.showMessageDialog(null, "Error de conexión a base de datos: " + ex.getMessage());
             }
         }
-        return connection;
+        return conexion;
     }
 }

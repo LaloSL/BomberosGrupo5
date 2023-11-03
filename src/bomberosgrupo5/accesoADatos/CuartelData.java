@@ -7,12 +7,16 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 
 public class CuartelData {
-
-    private Connection con = null;
-
-    public CuartelData() { 
-        con = Conexion.getConectar();
-    }
+ private Connection con;
+    //private Connection con = null;
+ public CuartelData(Connection con) {
+    this.con = con;
+}
+//    private Connection con = null;
+//
+//    public CuartelData() { 
+//        con = Conexion.getConectar();
+//    }
 //------------------------------------------------------------------------------
     // método guardar cuartel:
     public void guardarCuartel(Cuartel cuartel) {
