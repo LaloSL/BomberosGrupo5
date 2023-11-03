@@ -50,13 +50,19 @@ public class BomberosGrupo5 {
 //------------------------------------------------------------------------------        
         
 //    // Prueba de método guardar bombero():  // error al acceder a la tabla bombero
-//    Bombero bom1 = new Bombero(12222223, "Juan Perez", "0+", LocalDate.of(1975, 5, 25), "2661111111", 7, true);
-//    BomberoData bom = new BomberoData();
-//    bom.guardarBombero(bom1);
+    Bombero bom1 = new Bombero(987, "Pablo Perez", "A+", LocalDate.of(1981, 5, 25), "2664567698", 12, true);
+    BomberoData bom = new BomberoData();
+    bom.guardarBombero(bom1);
 
-        Brigada briga = new Brigada("Cola","Rescate de Macotas", true, 3, true);
-        BrigadaData brig = new BrigadaData();
-        brig.guardarBrigada(briga);
+//        Brigada briga = new Brigada("Cola","Rescate de Macotas", true, 3, true);
+//        BrigadaData brig = new BrigadaData();
+//        brig.guardarBrigada(briga);
+
+////         Prueba del método guardar Cuartel [ok] Cargado!!!!
+//        Cuartel cuar1=new Cuartel("Cuartel Central", "Av Roca 600",2085, 2085,"266888999", "Cuartel.central@sl.com.ar",true); //dato en memoria
+//        CuartelData cua=new CuartelData(); 
+//        cua.guardarCuartel(cuar1);  
+            
 
     }
     

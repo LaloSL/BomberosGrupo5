@@ -2,6 +2,7 @@
 package bomberosgrupo5.accesoADatos;
 
 import bomberosgrupo5.entidades.Brigada;
+import bomberosgrupo5.entidades.Cuartel;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,11 @@ public class BrigadaData {
 //método guardar Brigada:
     public void guardarBrigada(Brigada brigada) {
         
-            String sql = "INSERT INTO brigada (nombreBrig, especialidad, libre, idCuartel, estadoBr)"
-                    + "VALUE(? ,? ,? ,? ,?)";
+//            String sql = "INSERT INTO brigada (nombreBrig, especialidad, libre, idCuartel, estadoBr)"
+//                    + "VALUE(? ,? ,? ,? ,?)";
+            
+            String sql = "INSERT INTO brigada (nombreBrig, especialidad, libre, Cuartel, estadoBr)"
+                    + " VALUES (?, ?, ?, ?, ?)";
 
             try {
                 PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -41,10 +45,39 @@ public class BrigadaData {
                 ps.close();
                 
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla brigada ");
+                JOptionPane.showMessageDialog(null, "Errorrrr al acceder a la Tabla brigada ");
             }
        
         }
+//    ---------------------------------------------------------------------------------------
+    
+    public int obtenerIdBrigada(String nombreBrigada) {
+    int idBrigada = -1; // Valor predeterminado si no se encuentra ninguna coincidencia
+    
+//    String sql = "SELECT Brigada FROM brigada WHERE nombreBrig = ?";
+        String sql = "SELECT Brigada FROM brigada WHERE nombreBrig = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, nombreBrigada);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()) {
+            idBrigada = rs.getInt("Brigada");
+        }
+        
+        rs.close();
+        ps.close();
+    } catch (SQLException ex) {
+        // Manejo de errores
+        ex.printStackTrace();
+    }
+    
+    return idBrigada;
+}
+
+//---------------------------------------------------------------    
     
     
     // método modificar Brigada:----------------------------------------------
@@ -151,6 +184,11 @@ public class BrigadaData {
 //        }
 //        return   brigadas;            
 //      }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 
 
 }
