@@ -135,6 +135,7 @@ public int mostrarOpcionesYObtenerSeleccion(Connection con) {
                 String[] parts = seleccion.split("\\. ");
                 if (parts.length == 2) {
                     idCuartelElegido = Integer.parseInt(parts[0]);
+                    System.out.println(" id "+idCuartelElegido);
                 }
             }
         }
