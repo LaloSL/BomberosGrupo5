@@ -17,36 +17,68 @@ private Connection con;
 
 //------------------------------------------------------------------------------
 //método guardar Brigada:
-    public void guardarBrigada(Brigada brigada) {
-        
-            
-            String sql = "INSERT INTO brigada (nombreBrig, especialidad, libre, Cuartel, estadoBr)"
-                    + " VALUES (?, ?, ?, ?, ?)";
+ 
+ public void guardarBrigada(Brigada brigada) {
+    String sql = "INSERT INTO brigada (nombreBrig, especialidad, libre, Cuartel, estadoBr) VALUES (?, ?, ?, ?, ?)";
 
-            try {
-                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+    try {
+        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.setString(1, brigada.getNombreBrig());
+        ps.setString(2, brigada.getEspecialidad());
+        ps.setBoolean(3, brigada.isLibre());
+        ps.setInt(4, brigada.getCuartel().getIdCuartel());
+        ps.setBoolean(5, brigada.isEstadoBr());
 
-                ps.setString(1, brigada.getNombreBrig());
-                ps.setString(2, brigada.getEspecialidad());
-                ps.setBoolean(3, brigada.isLibre());
-                ps.setInt(4, brigada.getCuartel().getIdCuartel());
-                ps.setBoolean(5, brigada.isEstadoBr());
+        int rowsAffected = ps.executeUpdate();
 
-                ps.executeUpdate();
-
-                ResultSet rs=ps.getGeneratedKeys();
-
-                if (rs.next()) {
-                    brigada.setIdBrigada(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Brigada Agregada Exitosamente ");
-                }
-                ps.close();
-                
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Errorrrr al acceder a la Tabla brigada ");
+        if (rowsAffected > 0) {
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                brigada.setIdBrigada(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Brigada Agregada Exitosamente");
             }
-       
+            ps.close();
+        } else {
+            JOptionPane.showMessageDialog(null, "La ID de brigada ya existe en la base de datos. No se pudo agregar la brigada.");
         }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla brigada: " + ex.getMessage());
+    }
+}
+
+ 
+ 
+ 
+//    public void guardarBrigada(Brigada brigada) {
+//        
+//            
+//            String sql = "INSERT INTO brigada (nombreBrig, especialidad, libre, Cuartel, estadoBr)"
+//                    + " VALUES (?, ?, ?, ?, ?)";
+//
+//            try {
+//                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//
+//                ps.setString(1, brigada.getNombreBrig());
+//                ps.setString(2, brigada.getEspecialidad());
+//                ps.setBoolean(3, brigada.isLibre());
+//                ps.setInt(4, brigada.getCuartel().getIdCuartel());
+//                ps.setBoolean(5, brigada.isEstadoBr());
+//
+//                ps.executeUpdate();
+//
+//                ResultSet rs=ps.getGeneratedKeys();
+//
+//                if (rs.next()) {
+//                    brigada.setIdBrigada(rs.getInt(1));
+//                    JOptionPane.showMessageDialog(null, "Brigada Agregada Exitosamente ");
+//                }
+//                ps.close();
+//                
+//            } catch (SQLException ex) {
+//                JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla brigada ");
+//            }
+//       
+//        }
 //    ---------------------------------------------------------------------------------------
     
     public int obtenerIdBrigada(String nombreBrigada) {
@@ -188,5 +220,65 @@ private Connection con;
         return super.clone(); //To change body of generated methods, choose Tools | Templates.
     }
 
+//-------------------desde aca------------------------
+    
+public int contarBrigadasPorCuartel(int numeroCuartel) {
+        int cantidadBrigadas = 0;
+
+        try {
+            String sql = "SELECT COUNT(*) AS cantidad FROM brigada WHERE Cuartel = ? AND estadoBr = 1";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, numeroCuartel);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                cantidadBrigadas = rs.getInt("cantidad");
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            // Manejar excepciones, por ejemplo, imprimir el error
+            ex.printStackTrace();
+        }
+
+        return cantidadBrigadas;
+    }
+
+
+
+
+
+public boolean hayCupoParaNuevaBrigada(int numeroCuartel) {
+    int cantidadBrigadas = contarBrigadasPorCuartel(numeroCuartel);
+    int capacidadMaxima = 3; // Cambia esto según la capacidad máxima de brigadas por cuartel que desees
+
+    return cantidadBrigadas < capacidadMaxima;
+}
+
+//brigadas con el mismo nombre
+public boolean existeBrigadaConNombreEnCuartel(String nombreBrigada, int idCuartel) {
+    String sql = "SELECT COUNT(*) FROM brigada WHERE nombreBrig = ? AND Cuartel = ?";
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, nombreBrigada);
+        ps.setInt(2, idCuartel);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next() && rs.getInt(1) > 0) {
+            return true; // Ya existe una brigada con el mismo nombre en el cuartel especificado
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al verificar la existencia de la brigada en el cuartel.");
+    }
+    return false; // No existe una brigada con el mismo nombre en el cuartel especificado
+}
+
+
 
 }
+
+
+
+
+

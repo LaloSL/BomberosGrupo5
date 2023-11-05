@@ -10,6 +10,7 @@ public class Brigada {
     private boolean libre;
     private Cuartel cuartel;
     private boolean estadoBr;
+    private int idCuartel;
 
     // Constructores:
 
@@ -32,6 +33,16 @@ public class Brigada {
         this.cuartel = cuartel;
         this.estadoBr = estadoBr;
     }
+    
+//    ---------------------agrego otro constructor donde le paso idcuartel solamente---------------------
+    public Brigada(String nombre, String especialidad, boolean activa, int idCuartel, boolean estadoBr) {
+     this.nombreBrig = nombreBrig;
+     this.especialidad = especialidad;
+     this.libre = libre;
+    this.idCuartel = idCuartel; // Establecer la identificación del cuartel
+    this.estadoBr = estadoBr;
+}
+//-----------------------------------------------------------------------------
 
     public int getIdBrigada() {
         return idBrigada;
