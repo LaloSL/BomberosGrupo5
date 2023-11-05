@@ -185,9 +185,9 @@ public class BomberosGrupo5 {
                                 int idBomberoElegido = bom.mostrarOpciones(connection);
                                 Bombero bombero = bom.buscarBomberoId(idBomberoElegido);
 
-// 
+
                                 if (bombero != null) {
-////                                    
+                                   
                                     String nombreApellido = JOptionPane.showInputDialog("Ingrese el nombre y apellido del Bombero: ");
                                     int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del Bombero: "));
                                     String grupoSanguineo = JOptionPane.showInputDialog("Ingrese el grupo sanguíneo del Bombero:");
@@ -197,8 +197,8 @@ public class BomberosGrupo5 {
                                     if (bom.existeBomberoConNombre(nombreApellido, connection)) {
                                         JOptionPane.showMessageDialog(null, "El Nombre existe en la BD, No se puede agregar este bombero");
                                     } else {
-                                        Bombero bom1 = new Bombero(dni, nombreApellido, grupoSanguineo, fechaNac, celular, bombero.getBrigada(), true);
-                                        bom.guardarBombero(bom1, connection);
+//                                        Bombero bom1 = new Bombero(dni, nombreApellido, grupoSanguineo, fechaNac, celular, bombero.getBrigada(), true);
+                                        bom.mostrarOpciones(connection);
                                         JOptionPane.showMessageDialog(null, "Bombero agregado exitosamente");
                                     }
 

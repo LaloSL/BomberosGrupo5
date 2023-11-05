@@ -235,7 +235,7 @@ public void guardarBombero(Bombero bombero) {
      
      public int mostrarOpciones(Connection con) {
     int idBomberoElegido = -1; // Valor predeterminado para indicar que no se ha seleccionado ningún cuartel
-    List<String> nombresBomberos = new ArrayList<>();
+    List<String> brigadaDisponible = new ArrayList<>();
 
     String sql = "SELECT Bombero, nombreApellido FROM bombero WHERE estadoB = 1";
 
@@ -247,18 +247,18 @@ public void guardarBombero(Bombero bombero) {
             int idBombero = rs.getInt("Bombero");
             String nombresBombero = rs.getString("nombreApellido");
 
-            nombresBomberos.add(idBombero + ". " + nombresBombero);
+            brigadaDisponible.add(idBombero + ". " + nombresBombero);
         }
         ps.close();
 
-        if (!nombresBomberos.isEmpty()) {
+        if (!brigadaDisponible.isEmpty()) {
             String seleccion = (String) JOptionPane.showInputDialog(null,
-                    "Elija un Bombero:\n" + String.join("\n", nombresBomberos),
-                    "Selección de Cuartel",
+                    "Elija una Brigada:\n" + String.join("\n", brigadaDisponible),
+                    "Selección de Brigada",
                     JOptionPane.PLAIN_MESSAGE,
                     null,
-                    nombresBomberos.toArray(),
-                    nombresBomberos.get(0));
+                    brigadaDisponible.toArray(),
+                    brigadaDisponible.get(0));
 
             if (seleccion != null) {
                 String[] parts = seleccion.split("\\. ");
