@@ -146,33 +146,33 @@ public void guardarBombero(Bombero bombero) {
 //        }
 
 
-//     public Bombero  buscarBomberoId (int idBombero){
-//        //busca bombero por ID y con el estado 1(activo)
-//        String sql = "SELECT dni, nombreApellido, fechaNac, celular, CodBrigada FROM bombero WHERE idBombero = ? and estadoB = 1";
-//        Bombero bombero =null;
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);            
-//            ps.setInt(1, idBombero);
-//            ResultSet rs=ps.executeQuery();      
-//            if(rs.next()){
-//                bombero=new Bombero();
-//                bombero.setDni(rs.getInt("dni"));
-//                bombero.setNombreApellido(rs.getString("NombreApellido"));
-//                bombero.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
-//                bombero.setCelular(rs.getString("Celular"));
-//                bombero.setCodBrigada(rs.getInt("idBrigada"));
-//                bombero.isEstadoB();
-//            }else{
-//                JOptionPane.showMessageDialog(null, "No existe el bombero con el ID indicado");
-//            }
-//            ps.close();
-//        
-//        
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
-//        }
-//        return bombero;               
-//      }
+     public Bombero  buscarBomberoId (int idBombero){
+        //busca bombero por ID y con el estado 1(activo)
+        String sql = "SELECT dni, nombreApellido, fechaNac, celular, Brigada FROM bombero WHERE idBombero = ? and estadoB = 1";
+        Bombero bombero =null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);            
+            ps.setInt(1, idBombero);
+            ResultSet rs=ps.executeQuery();      
+            if(rs.next()){
+                bombero=new Bombero();
+                bombero.setDni(rs.getInt("dni"));
+                bombero.setNombreApellido(rs.getString("NombreApellido"));
+                bombero.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
+                bombero.setCelular(rs.getString("Celular"));
+                bombero.setBrigada((Brigada) rs.getObject("idBrigada"));
+                bombero.isEstadoB();
+            }else{
+                JOptionPane.showMessageDialog(null, "No existe el bombero con el ID indicado");
+            }
+            ps.close();
+        
+        
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
+        }
+        return bombero;               
+      }
      
      
      
@@ -232,7 +232,76 @@ public void guardarBombero(Bombero bombero) {
 //        return   bomberos;            
 //      }
 
+     
+     public int mostrarOpciones(Connection con) {
+    int idBomberoElegido = -1; // Valor predeterminado para indicar que no se ha seleccionado ningún cuartel
+    List<String> nombresBomberos = new ArrayList<>();
 
+    String sql = "SELECT Bombero, nombreApellido FROM bombero WHERE estadoB = 1";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int idBombero = rs.getInt("Bombero");
+            String nombresBombero = rs.getString("nombreApellido");
+
+            nombresBomberos.add(idBombero + ". " + nombresBombero);
+        }
+        ps.close();
+
+        if (!nombresBomberos.isEmpty()) {
+            String seleccion = (String) JOptionPane.showInputDialog(null,
+                    "Elija un Bombero:\n" + String.join("\n", nombresBomberos),
+                    "Selección de Cuartel",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    nombresBomberos.toArray(),
+                    nombresBomberos.get(0));
+
+            if (seleccion != null) {
+                String[] parts = seleccion.split("\\. ");
+                if (parts.length == 2) {
+                    idBomberoElegido = Integer.parseInt(parts[0]);
+                }
+            }
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener nombres de cuarteles: " + ex.getMessage());
+    }
+
+    return idBomberoElegido;
+}
+
+
+     public boolean existeBomberoConNombre(String nombreApellido, Connection con) {
+    boolean existe = false;
+    String sql = "SELECT COUNT(*) FROM bombero WHERE nombreApellido = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, nombreApellido);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            int count = rs.getInt(1);
+            if (count > 0) {
+                existe = true; // El bombero con el mismo nombre ya existe en la base de datos
+            }
+        }
+        
+        rs.close();
+        ps.close();
+    } catch (SQLException ex) {
+        // Maneja cualquier excepción que pueda ocurrir al consultar la base de datos
+        //ex.printStackTrace();
+    }
+
+    return existe;
+}
+
+   
 
 }  
 

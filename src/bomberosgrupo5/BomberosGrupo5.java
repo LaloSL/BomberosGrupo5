@@ -1,5 +1,4 @@
 // Main para realizar la pruebas de clases Data
-
 package bomberosgrupo5;
 
 import java.sql.*;
@@ -12,15 +11,14 @@ import bomberosgrupo5.entidades.Brigada;
 import bomberosgrupo5.entidades.Cuartel;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
+import org.mariadb.jdbc.Connection;
 
 //** @author Asus
-
 public class BomberosGrupo5 {
 
-    
     public static void main(String[] args) {
         Conexion con = new Conexion();
-        Connection connection = con.getConexion(); // Obtener la conexión válida
+        Connection connection = (Connection) con.getConexion(); // Obtener la conexión válida
 
         BrigadaData brig = new BrigadaData(connection);
         CuartelData cua1 = new CuartelData(connection);
@@ -36,17 +34,14 @@ public class BomberosGrupo5 {
 //
 //        CuartelData cua1=new CuartelData((Connection) con);
 //    -------------------------------------------------------------------    
-        
         // Prueba del método guardar Cuartel [ok] Cargado!!!!
 //        Cuartel cuar=new Cuartel("Cuartel 9", "Falucho 850",2085, 2085,"266888999", "Cuartel.9@sl.com.ar",true); //dato en memoria
 //        CuartelData cua=new CuartelData(); 
 //        cua.guardarCuartel(cuar);  
-
         //prueba de método modificarCuartel(): [verificar, no funciono]
         //Cuartel cuar=new Cuartel(12,"Cuartel 4", "Falucho 800",1085, 1085,"266888888", "Cuartel.4@sl.com.ar",true);
         //CuartelData cua=new CuartelData();
         //cua.modificarCuartel(cuar);
-        
         // prueba de método eliminarCuartel(): 
         //Cuartel cuar=new Cuartel(12,"Cuartel 8", "Falucho 800",2080, 2080,"266888888", "Cuartel.8@sl.com.ar",true);
         //CuartelData cua=new CuartelData();
@@ -56,19 +51,15 @@ public class BomberosGrupo5 {
 //        Brigada briga = new Brigada("alfa","salvamento en derrumbes", true, 1, true);
 //        BrigadaData brig = new BrigadaData();
 //        brig.guardarBrigada(briga);
-          
 //         // creo el objeto BomberoData que me permitirá guardar en BD:
 //         Bombero bomber1 = new Bombero(1222222,"José Pekermán",LocalDate.of(1975, 1, 20),"266111111",1,true);  //dato en memoria
 //         BomberoData bom = new BomberoData();
 //         bom.guardarBombero(bomber1);
-        
 //------------------------------------------------------------------------------        
-        
 //    // Prueba de método guardar bombero():  // error al acceder a la tabla bombero
 //    Bombero bom1 = new Bombero(987, "Pablo Perez", "A+", LocalDate.of(1981, 5, 25), "2664567698",7, true);
 //    BomberoData bom = new BomberoData();
 //    bom.guardarBombero(bom1);
-
 //        Brigada briga = new Brigada("Toxico","Drogas Peligrosas", true, cuar1, true);
 //       //BrigadaData brig = new BrigadaData();
 //        brig.guardarBrigada(briga);
@@ -77,8 +68,6 @@ public class BomberosGrupo5 {
 //        Cuartel cuar1=new Cuartel("Cuartel Central", "Av Roca 600",2085, 2085,"266888999", "Cuartel.central@sl.com.ar",true); //dato en memoria
 ////        CuartelData cua=new CuartelData(); 
 //        cua1.guardarCuartel(cuar1);  
-
-
 ////// Crear una instancia válida de Cuartel
 //Cuartel cuar2 = new Cuartel("Cuartel Tilisarao", "Av Roca 34500", 2085, 2085, "266888999", "Cuartel.TILI@sl.com.ar", true);
 //
@@ -101,8 +90,7 @@ public class BomberosGrupo5 {
 ////   
 //    bom.guardarBombero(bom2);  
 //----------------------------------------------------------------------------------------------------------
-
-  int opcion = 0;
+        int opcion = 0;
 
         while (opcion != 4) {
             String input = JOptionPane.showInputDialog("Elija una acción:\n1. Agregar\n2. Modificar\n3. Eliminar\n4. Salir");
@@ -118,7 +106,7 @@ public class BomberosGrupo5 {
                 case 1:
                     int subOpcion = 0;
                     while (subOpcion != 5) {
-                        String subInput = JOptionPane.showInputDialog("Elija qué agregar:\n1. Cartel\n2. Brigada\n3. Bombero\n4. Salir\n5. Volver al menú anterior");
+                        String subInput = JOptionPane.showInputDialog("Elija qué agregar:\n1. Curtel\n2. Brigada\n3. Bombero\n4. Salir\n5. Volver al menú anterior");
 
                         try {
                             subOpcion = Integer.parseInt(subInput);
@@ -129,7 +117,7 @@ public class BomberosGrupo5 {
 
                         switch (subOpcion) {
                             case 1:
-                                    
+
                                 JOptionPane.showMessageDialog(null, "Complete los datos para agregar un nuevo cuartel");
                                 String nombreCuartel = JOptionPane.showInputDialog("Ingrese el nombre del cuartel:");
 
@@ -162,53 +150,80 @@ public class BomberosGrupo5 {
 //                                 
 //                                // Aquí puedes realizar la lógica para agregar una brigada
 //                                break;
-                                
-                                case 2:
-                                        JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Brigada");
-                                        int idCuartelElegido = cua1.mostrarOpcionesYObtenerSeleccion(connection);
+                            case 2:
+                                JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Brigada");
+                                int idCuartelElegido = cua1.mostrarOpcionesYObtenerSeleccion(connection);
 
-                                        Cuartel cuartel = cua1.buscarCuartelPorId(idCuartelElegido); // Obtiene el cuartel por su ID
+                                Cuartel cuartel = cua1.buscarCuartelPorId(idCuartelElegido); // Obtiene el cuartel por su ID
 
-                                        if (cuartel != null) {
-                                            // Verificar si hay lugar para una nueva brigada en el cuartel
-                                            if (brig.hayCupoParaNuevaBrigada(idCuartelElegido)) {
-                                                String nombreBrigada = JOptionPane.showInputDialog("Ingrese el nombre de la brigada:");
+                                if (cuartel != null) {
+                                    // Verificar si hay lugar para una nueva brigada en el cuartel
+                                    if (brig.hayCupoParaNuevaBrigada(idCuartelElegido)) {
+                                        String nombreBrigada = JOptionPane.showInputDialog("Ingrese el nombre de la brigada:");
 
-                                                // Verificar si el nombre de la brigada ya existe en ese cuartel
-                                                if (brig.existeBrigadaConNombreEnCuartel(nombreBrigada, idCuartelElegido)) {
-                                                    JOptionPane.showMessageDialog(null, "Ya existe una brigada con el mismo nombre en este cuartel. No se puede agregar.");
-                                                } else {
-                                                    String especialidad = JOptionPane.showInputDialog("Ingrese la especialidad de la brigada:");
-
-                                                    Brigada briga = new Brigada(nombreBrigada, especialidad, true, cuartel, true);
-                                                    brig.guardarBrigada(briga);
-                                                    JOptionPane.showMessageDialog(null, "Brigada agregada exitosamente.");
-                                                }
-                                            } else {
-                                                JOptionPane.showMessageDialog(null, "El cuartel está completo. No se puede agregar más brigadas.");
-                                            }
+                                        // Verificar si el nombre de la brigada ya existe en ese cuartel
+                                        if (brig.existeBrigadaConNombreEnCuartel(nombreBrigada, idCuartelElegido)) {
+                                            JOptionPane.showMessageDialog(null, "Ya existe una brigada con el mismo nombre en este cuartel. No se puede agregar.");
                                         } else {
-                                            JOptionPane.showMessageDialog(null, "No se pudo obtener el cuartel. Asegúrate de que el cuartel seleccionado sea válido.");
-                                        }
-                                        break;
+                                            String especialidad = JOptionPane.showInputDialog("Ingrese la especialidad de la brigada:");
 
+                                            Brigada briga = new Brigada(nombreBrigada, especialidad, true, cuartel, true);
+                                            brig.guardarBrigada(briga);
+                                            JOptionPane.showMessageDialog(null, "Brigada agregada exitosamente.");
+                                        }
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "El cuartel está completo. No se puede agregar más brigadas.");
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "No se pudo obtener el cuartel. Asegúrate de que el cuartel seleccionado sea válido.");
+                                }
+                                break;
 
                             case 3:
+
                                 JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Bombero");
-                                // Aquí puedes realizar la lógica para agregar un bombero
-                                break;
+                                int idBomberoElegido = bom.mostrarOpciones(connection);
+                                Bombero bombero = bom.buscarBomberoId(idBomberoElegido);
+
+// 
+                                if (bombero != null) {
+////                                    
+                                    String nombreApellido = JOptionPane.showInputDialog("Ingrese el nombre y apellido del Bombero: ");
+                                    int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del Bombero: "));
+                                    String grupoSanguineo = JOptionPane.showInputDialog("Ingrese el grupo sanguíneo del Bombero:");
+                                    LocalDate fechaNac = LocalDate.parse(JOptionPane.showInputDialog("Ingrese la fecha de nacimiento del Bombero (AAAA-MM-DD):"));
+                                    String celular = JOptionPane.showInputDialog("Ingrese el número de celular del Bombero:");
+
+                                    if (bom.existeBomberoConNombre(nombreApellido, connection)) {
+                                        JOptionPane.showMessageDialog(null, "El Nombre existe en la BD, No se puede agregar este bombero");
+                                    } else {
+                                        Bombero bom1 = new Bombero(dni, nombreApellido, grupoSanguineo, fechaNac, celular, bombero.getBrigada(), true);
+                                        bom.guardarBombero(bom1, connection);
+                                        JOptionPane.showMessageDialog(null, "Bombero agregado exitosamente");
+                                    }
+
+                                    break;
+
+                                
+                        
                             case 4:
                                 JOptionPane.showMessageDialog(null, "Ha seleccionado Salir. ¡Hasta luego!");
                                 System.exit(0);
                                 break;
+                                
                             case 5:
                                 // Volver al menú anterior
                                 break;
-                            default:
+                            default:                               
                                 JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, elija 1, 2, 3, 4 o 5.");
                         }
                     }
                     break;
+                    
+            
+        
+    
+
                 case 2:
                     JOptionPane.showMessageDialog(null, "Ha seleccionado Modificar");
                     // Aquí puedes realizar la lógica para modificar
@@ -225,17 +240,6 @@ public class BomberosGrupo5 {
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
     }
-    
+
 }
