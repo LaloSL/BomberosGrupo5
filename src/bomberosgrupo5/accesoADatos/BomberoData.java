@@ -29,47 +29,8 @@ public class BomberoData {
     
     
     
-//------------------------------------------------------------------------------
-////public void guardarBombero(Bombero bombero, Brigada brigada) {
-////    int idBrigada = brigada.getIdBrigada();
-////    System.out.println("brigada: "+idBrigada);
-////           // obtenerIdBrigada("cola"); // Obtener el ID de Brigada
-////
-//////    if (idBrigada != -1) {
-//////        String sql = "INSERT INTO bombero (dni, nombreApellido, grupoSanguineo, fechaNac, celular, Brigada, estadoB) VALUES (?, ?, ?, ?, ?, ?, ?)";
-//////
-//////        try {
-//////            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//////
-//////            ps.setInt(1, bombero.getDni());
-//////            ps.setString(2, bombero.getNombreApellido());
-//////            ps.setString(3, bombero.getGrupoSanguineo());
-//////            ps.setDate(4, Date.valueOf(bombero.getFechaNac()));
-//////            ps.setString(5, bombero.getCelular());
-//////            ps.setInt(6, idBrigada); // Usar el ID de Brigada obtenido
-//////            ps.setBoolean(7, bombero.isEstadoB());
-//////
-//////            ps.executeUpdate();
-//////
-//////            ResultSet rs = ps.getGeneratedKeys();
-//////
-//////            if (rs.next()) {
-//////                bombero.setIdBombero(rs.getInt(1));
-//////                JOptionPane.showMessageDialog(null, "Bombero Agregado Exitosamente");
-//////            }
-//////            ps.close();
-//////        } catch (SQLException ex) {
-//////            JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla bombero");
-//////        }
-//////    } else {
-//////        JOptionPane.showMessageDialog(null, "No se encontró la Brigada con el nombre especificado.");
-//////    }
-////}
-////
-////
-//
-//
-//
+//-------------------GUARDAR BOMBERO---------------------------------------------------------
+
 public void guardarBombero(Bombero bombero) {
     
     String sql = "INSERT INTO bombero (dni, nombreApellido, grupoSanguineo, fechaNac, celular, idBrigada, estadoB)"
@@ -102,51 +63,11 @@ public void guardarBombero(Bombero bombero) {
        
         }
 
+//------------------------------------------------------------------------------------------------------
 //    
-//
-//    
-    
-//    public void modificarBombero (Bombero bombero){
-//        
-//        String sql = "UPDATE bombero SET dni=?, nombreApellido=?, fechaNac=?, celular=?, idBrigada=?"
-//                + "WHERE idBombero=? ";
-//        try {
-//            PreparedStatement ps= con.prepareStatement(sql);
-//            ps.setInt(1, bombero.getDni());
-//            ps.setString(2, bombero.getNombreApellido());
-//            ps.setDate(3, Date.valueOf(bombero.getFechaNac()));
-//            ps.setString(4, bombero.getCelular());
-//            ps.setInt(5, bombero.getCodBrigada());
-//            int exito = ps.executeUpdate();
-//            if( exito==1){
-//                JOptionPane.showMessageDialog(null, "Bombero Modificado");
-//            }       
-//        
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
-//        }
-//        
-//    }
-    
-//     public void eliminarBombero (int idBombero){
-//        
-//        String sql = "UPDATE bombero SET estadoB = 0 WHERE idBombero = ?";
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);
-//            ps.setInt(1, idBombero);
-//            int exito=ps.executeUpdate();
-//            if(exito==1){
-//                JOptionPane.showMessageDialog(null, "Bombero borrado");
-//            }
-//        
-//        
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
-//        }
-//          
-//        }
 
 
+//-------------------------------------------------------------------------------------------------
      public Bombero  buscarBomberoId (int idBombero){
         //busca bombero por ID y con el estado 1(activo)
         String sql = "SELECT dni, nombreApellido, fechaNac, celular, idBrigada FROM bombero WHERE idBombero = ? and estadoB = 1";
@@ -174,38 +95,9 @@ public void guardarBombero(Bombero bombero) {
         }
         return bombero;               
       }
-     
-   //-------------  buscarBomberoPorDni--------
-//     public Bombero buscarBomberoPorDni(int dni, Connection connection) {
-//    Bombero bomberoEncontrado = null;
-//    String sql = "SELECT * FROM bombero WHERE dni = ?";
-//
-//    try {
-//        PreparedStatement ps = connection.prepareStatement(sql);
-//        ps.setInt(1, dni);
-//        ResultSet rs = ps.executeQuery();
-//
-//        if (rs.next()) {
-//            // Si se encuentra un bombero con el DNI especificado, crea un objeto Bombero con los datos obtenidos de la base de datos
-//            bomberoEncontrado = new Bombero(
-//                rs.getInt("dni"),
-//                rs.getString("nombreApellido"),
-//                rs.getString("grupoSanguineo"),
-//                rs.getDate("fechaNac").toLocalDate(),
-//                rs.getString("celular"),
-//                null, // Aquí deberías obtener la brigada asociada, si la tienes en la base de datos
-//                rs.getBoolean("estadoBom")
-//                    
-//            );
-//        }
-//
-//        ps.close();
-//    } catch (SQLException ex) {
-//        JOptionPane.showMessageDialog(null, "Error al buscar al bombero por DNI: " + ex.getMessage());
-//    }
-//
-//    return bomberoEncontrado;
-//}
+//-----------------------------------------------------------------------------------------------------     
+
+//-------------------------------
 public Bombero buscarBomberoPorDni(int dni, Connection connection) {
     
     Bombero bomberoEncontrado = null;
@@ -286,7 +178,7 @@ public Bombero buscarBomberoPorDni(int dni, Connection connection) {
 }
 
    //-----------------------------------------
-//cuenta bombero segun idBrigada
+//----------------cuenta bombero segun idBrigada  y cupo de bomberos------------
      public int contarBomberosPorBrigada(int idBrigada) {
     int cantidadBomberos = 0;
 
@@ -316,20 +208,64 @@ public Bombero buscarBomberoPorDni(int dni, Connection connection) {
 
     return cantidadBbomberos < capacidadMaxima;
 }
+//-----------------------------------------------------------------------
      
      
      
      
 //---------------------------------ELIMINAR--------------------------------
+//-----------------------Listo los bomberos para seleccionar al que van a eliminar
+    public int mostrarBomberosAEliminar(Connection con) {
+    int idBomberoAEliminar = -1; // Valor predeterminado para indicar que no se ha seleccionado ningún bombero
+    List<String> bomberosAEliminar = new ArrayList<>();
 
-//--------------CAMBIO EL ESTADO DE UN BOMBERO-------------
-public void actualizarBombero(Bombero bombero) {
-    String sql = "UPDATE bombero SET estadoB = false WHERE dni = ?";
+    String sql = "SELECT idBombero, dni, nombreApellido FROM bombero WHERE estadoB = 1";
 
     try {
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, bombero.getDni());
+        ResultSet rs = ps.executeQuery();
 
+        while (rs.next()) {
+            int idBombero = rs.getInt("idBombero");
+            int dniBombero = rs.getInt("dni");
+            String nombreApellido = rs.getString("nombreApellido");
+
+            bomberosAEliminar.add(idBombero + ". DNI: " + dniBombero + ", Nombre: " + nombreApellido);
+        }
+        ps.close();
+
+        if (!bomberosAEliminar.isEmpty()) {
+            String seleccion = (String) JOptionPane.showInputDialog(null,
+                    "Elija un bombero a eliminar:\n" + String.join("\n", bomberosAEliminar),
+                    "Selección de Bombero a Eliminar",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    bomberosAEliminar.toArray(),
+                    bomberosAEliminar.get(0));
+
+            if (seleccion != null) {
+                String[] parts = seleccion.split("\\. ");
+                if (parts.length == 2) {
+                    idBomberoAEliminar = Integer.parseInt(parts[0]);
+                    System.out.println("ID del Bombero a eliminar: " + idBomberoAEliminar);
+                }
+            }
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener la lista de bomberos a eliminar: " + ex.getMessage());
+    }
+
+    return idBomberoAEliminar;
+}
+ 
+//-------------------------------------------------------------------------------
+//--------------CAMBIO EL ESTADO DE UN BOMBERO-------------
+public void cambiarEstadoBombero(int idBombero, Connection con) {
+    String sql = "UPDATE bombero SET estadoB = 0 WHERE idBombero = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idBombero);
         int rowsAffected = ps.executeUpdate();
 
         if (rowsAffected > 0) {
@@ -340,10 +276,46 @@ public void actualizarBombero(Bombero bombero) {
 
         ps.close();
     } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al actualizar el bombero: " + ex.getMessage());
+        JOptionPane.showMessageDialog(null, "Error al cambiar el estado del bombero: " + ex.getMessage());
     }
 }
 
-     
+//---------------------------------------------------------------------------------------------------
+
+//-------------averiguo bomberos que pertenecen a una misma brigada -----------------------
+public List<Integer> obtenerBomberosPorBrigada(int idBrigada, Connection con) {
+    List<Integer> idsBomberos = new ArrayList<>();
+
+    String sql = "SELECT idBombero FROM bombero WHERE idBrigada = ? AND estadoB = 1";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idBrigada);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int idBombero = rs.getInt("idBombero");
+            idsBomberos.add(idBombero);
+        }
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener los IDs de los bomberos de la brigada: " + ex.getMessage());
+    }
+
+    return idsBomberos;
+}
+//------------Borrado logico de bomberos que pertenecen a un brigada--------------
+public void cambiarEstadoBomberosPorBrigada(int idBrigada, Connection con) {
+    // Obtener la lista de IDs de bomberos que pertenecen a la brigada
+    List<Integer> idsBomberosAEliminar = obtenerBomberosPorBrigada(idBrigada, con);
+
+    for (Integer idBombero : idsBomberosAEliminar) {
+        cambiarEstadoBombero(idBombero, con);
+    }
+
+    //JOptionPane.showMessageDialog(null, "Bomberos eliminados exitosamente.");
+}
+
+//-------------------------------------
 }  
 

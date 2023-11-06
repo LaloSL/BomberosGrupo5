@@ -111,7 +111,7 @@ public int mostrarOpcionesYObtenerSeleccion(Connection con) {
     List<String> nombresCuartel = new ArrayList<>();
 
     String sql = "SELECT idCuartel, nombreCuartel FROM cuartel WHERE estadoC = 1";
-    System.out.println(""+sql);
+    //System.out.println(""+sql);
 
     try {
         PreparedStatement ps = con.prepareStatement(sql);
@@ -171,7 +171,7 @@ public boolean existeCuartelConNombre(String nombreCuartel) {
 //buscu un cuartel por id y lo devuelvo
 public Cuartel buscarCuartelPorId(int idCuartel) {
     String sql = "SELECT nombreCuartel, direccion, coordX, coordY, telefono, correo, estadoC "
-            + "FROM cuartel WHERE estadoC = 1";
+            + "FROM cuartel WHERE idCuartel = ? AND estadoC = 1";
 
     Cuartel cuartel = null;
 
