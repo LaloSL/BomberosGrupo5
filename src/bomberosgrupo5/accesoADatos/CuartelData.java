@@ -58,8 +58,8 @@ public class CuartelData {
 //------------------------------------------------------------------------------
 //método modificarCuartel:
     public void modificarCuartel(Cuartel cuartel) {
-        String sql = "UPDATE cuartel SET nombreCuartel=?, direccion=?, coordX=?, coordY=?, telefono=?, correo=? WHERE idCuartel=?";
-
+        String sql = "UPDATE cuartel SET nombreCuartel = ?, direccion = ?, coordX = ?, coordY = ?, telefono = ?, correo = ? WHERE idCuartel = ?";
+        System.out.println(""+cuartel);
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 
@@ -111,13 +111,14 @@ public int mostrarOpcionesYObtenerSeleccion(Connection con) {
     List<String> nombresCuartel = new ArrayList<>();
 
     String sql = "SELECT idCuartel, nombreCuartel FROM cuartel WHERE estadoC = 1";
+    System.out.println(""+sql);
 
     try {
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
-
+        
         while (rs.next()) {
-            int idCuartel = rs.getInt("cuartel");
+            int idCuartel = rs.getInt("idCuartel");
             String nombreCuartel = rs.getString("nombreCuartel");
 
             nombresCuartel.add(idCuartel + ". " + nombreCuartel);
@@ -137,7 +138,7 @@ public int mostrarOpcionesYObtenerSeleccion(Connection con) {
                 String[] parts = seleccion.split("\\. ");
                 if (parts.length == 2) {
                     idCuartelElegido = Integer.parseInt(parts[0]);
-                   
+                    
                 }
             }
         }
@@ -169,7 +170,8 @@ public boolean existeCuartelConNombre(String nombreCuartel) {
 
 //buscu un cuartel por id y lo devuelvo
 public Cuartel buscarCuartelPorId(int idCuartel) {
-    String sql = "SELECT idCuartel, nombreCuartel, direccion, coordX, coordY, telefono, correo, estadoC FROM cuartel WHERE estadoC = 1";
+    String sql = "SELECT nombreCuartel, direccion, coordX, coordY, telefono, correo, estadoC "
+            + "FROM cuartel WHERE estadoC = 1";
 
     Cuartel cuartel = null;
 
@@ -180,7 +182,6 @@ public Cuartel buscarCuartelPorId(int idCuartel) {
 
         if (rs.next()) {
             cuartel = new Cuartel();
-            cuartel.setIdCuartel(idCuartel);
             cuartel.setNombreCuartel(rs.getString("nombreCuartel"));
             cuartel.setDireccion(rs.getString("direccion"));
             cuartel.setCoordX(rs.getInt("coordX"));
@@ -193,7 +194,7 @@ public Cuartel buscarCuartelPorId(int idCuartel) {
         }
         ps.close();
     } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel: " + ex.getMessage());
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel: ");
     }
 
     return cuartel;
