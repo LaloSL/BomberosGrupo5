@@ -2,6 +2,7 @@
 
 package bomberosgrupo5.entidades;
 
+import java.sql.Time;
 import java.time.LocalDate;
 
 //** @author Asus
@@ -10,6 +11,7 @@ public class Siniestro {
     private int idSiniestro;
     private String tipo;
     private LocalDate fechaSiniestro;
+    private Time horaSiniestro;
     private int coordX;
     private int coordY;
     private String detalles;
@@ -17,13 +19,25 @@ public class Siniestro {
     private int puntuacion;
     private Brigada brigada;
 
-    // Constructores:
-    public Siniestro() {
-    }
-
-    public Siniestro(String tipo, LocalDate fechaSiniestro, int coordX, int coordY, String detalles, LocalDate fechaResol, int puntuacion, int codBrigada) {
+    // Constructor con todos sus atributos:  // primero con todos los atributos.
+    public Siniestro(int idSiniestro, String tipo, LocalDate fechaSiniestro, Time horaSiniestro, int coordX, int coordY, String detalles, LocalDate fechaResol, int puntuacion, Brigada brigada) {
+        this.idSiniestro = idSiniestro;
         this.tipo = tipo;
         this.fechaSiniestro = fechaSiniestro;
+        this.horaSiniestro = horaSiniestro;
+        this.coordX = coordX;
+        this.coordY = coordY;
+        this.detalles = detalles;
+        this.fechaResol = fechaResol;
+        this.puntuacion = puntuacion;
+        this.brigada = brigada;
+    }
+    
+    // Constructor sin atributo idSiniestro:   /// luego sin atributo idSinisestro. 
+    public Siniestro(String tipo, LocalDate fechaSiniestro, Time horaSiniestro, int coordX, int coordY, String detalles, LocalDate fechaResol, int puntuacion, Brigada brigada) {
+        this.tipo = tipo;
+        this.fechaSiniestro = fechaSiniestro;
+        this.horaSiniestro = horaSiniestro;
         this.coordX = coordX;
         this.coordY = coordY;
         this.detalles = detalles;
@@ -32,19 +46,12 @@ public class Siniestro {
         this.brigada = brigada;
     }
 
-    public Siniestro(int idSiniestro, String tipo, LocalDate fechaSiniestro, int coordX, int coordY, String detalles, LocalDate fechaResol, int puntuacion, int codBrigada) {
-        this.idSiniestro = idSiniestro;
-        this.tipo = tipo;
-        this.fechaSiniestro = fechaSiniestro;
-        this.coordX = coordX;
-        this.coordY = coordY;
-        this.detalles = detalles;
-        this.fechaResol = fechaResol;
-        this.puntuacion = puntuacion;
-        this.brigada =  brigada;
+    // Constructor vacio:   // por último atributo vacio.
+    public Siniestro() {
     }
-    
-    // Geters & Setters:
+//------------------------------------------------------------------------------
+
+// Getters & setters:
     public int getIdSiniestro() {
         return idSiniestro;
     }
@@ -67,6 +74,14 @@ public class Siniestro {
 
     public void setFechaSiniestro(LocalDate fechaSiniestro) {
         this.fechaSiniestro = fechaSiniestro;
+    }
+
+    public Time getHoraSiniestro() {
+        return horaSiniestro;
+    }
+
+    public void setHoraSiniestro(Time horaSiniestro) {
+        this.horaSiniestro = horaSiniestro;
     }
 
     public int getCoordX() {
@@ -109,20 +124,19 @@ public class Siniestro {
         this.puntuacion = puntuacion;
     }
 
-    public Brigada getCodBrigada() {
+    public Brigada getBrigada() {
         return brigada;
     }
-    
 
-    // Gettres & Setters:
-    public void setCodBrigada(int codBrigada) {
+    public void setBrigada(Brigada brigada) {
         this.brigada = brigada;
     }
-    //--------------------------------------------------------------------------
+    
+//------------------------------------------------------------------------------    
 
     @Override
     public String toString() {
-        return "Siniestro{" + "idSiniestro=" + idSiniestro + ", tipo=" + tipo + ", fechaSiniestro=" + fechaSiniestro + ", coordX=" + coordX + ", coordY=" + coordY + ", detalles=" + detalles + ", fechaResol=" + fechaResol + ", puntuacion=" + puntuacion + ", Brigada=" + brigada + '}';
+        return "Siniestro{" + "idSiniestro=" + idSiniestro + ", tipo=" + tipo + ", fechaSiniestro=" + fechaSiniestro + ", horaSiniestro=" + horaSiniestro + ", coordX=" + coordX + ", coordY=" + coordY + ", detalles=" + detalles + ", fechaResol=" + fechaResol + ", puntuacion=" + puntuacion + ", brigada=" + brigada + '}';
     }
-
+    
 }
