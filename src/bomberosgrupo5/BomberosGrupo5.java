@@ -180,30 +180,33 @@ public class BomberosGrupo5 {
                                 break;
 
                             case 3:
-
+                                
                                 JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Bombero");
-                                int idBomberoElegido = bom.mostrarOpciones(connection);
-                                Bombero bombero = bom.buscarBomberoId(idBomberoElegido);
-
-
-                                if (bombero != null) {
-                                   
-                                    String nombreApellido = JOptionPane.showInputDialog("Ingrese el nombre y apellido del Bombero: ");
-                                    int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del Bombero: "));
-                                    String grupoSanguineo = JOptionPane.showInputDialog("Ingrese el grupo sanguíneo del Bombero:");
-                                    LocalDate fechaNac = LocalDate.parse(JOptionPane.showInputDialog("Ingrese la fecha de nacimiento del Bombero (AAAA-MM-DD):"));
-                                    String celular = JOptionPane.showInputDialog("Ingrese el número de celular del Bombero:");
-
-                                    if (bom.existeBomberoConNombre(nombreApellido, connection)) {
-                                        JOptionPane.showMessageDialog(null, "El Nombre existe en la BD, No se puede agregar este bombero");
-                                    } else {
-//                                        Bombero bom1 = new Bombero(dni, nombreApellido, grupoSanguineo, fechaNac, celular, bombero.getBrigada(), true);
-                                        bom.mostrarOpciones(connection);
-                                        JOptionPane.showMessageDialog(null, "Bombero agregado exitosamente");
-                                    }
-
+                                int idBrigadaElegido = brig.mostrarOpciones(connection);
+                                System.out.println(" "+idBrigadaElegido);
+                                Brigada brigada = brig.buscarBrigadaPorId(idBrigadaElegido);
+                                boolean cant=bom.hayCupoParaNuevoBombero(idBrigadaElegido);
+//                                Bombero bombero = bom.buscarBomberoId(idBomberoElegido);
+//
+//
+//                                if (bombero != null) {
+//                                   
+//                                    String nombreApellido = JOptionPane.showInputDialog("Ingrese el nombre y apellido del Bombero: ");
+//                                    int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del Bombero: "));
+//                                    String grupoSanguineo = JOptionPane.showInputDialog("Ingrese el grupo sanguíneo del Bombero:");
+//                                    LocalDate fechaNac = LocalDate.parse(JOptionPane.showInputDialog("Ingrese la fecha de nacimiento del Bombero (AAAA-MM-DD):"));
+//                                    String celular = JOptionPane.showInputDialog("Ingrese el número de celular del Bombero:");
+//
+//                                    if (bom.existeBomberoConNombre(nombreApellido, connection)) {
+//                                        JOptionPane.showMessageDialog(null, "El Nombre existe en la BD, No se puede agregar este bombero");
+//                                    } else {
+////                                        Bombero bom1 = new Bombero(dni, nombreApellido, grupoSanguineo, fechaNac, celular, bombero.getBrigada(), true);
+//                                        bom.mostrarOpciones(connection);
+//                                        JOptionPane.showMessageDialog(null, "Bombero agregado exitosamente");
+//                                    }
+//                                }
                                     break;
-
+                                    
                                 
                         
                             case 4:

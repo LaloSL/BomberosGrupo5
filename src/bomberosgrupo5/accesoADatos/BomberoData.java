@@ -233,46 +233,7 @@ public void guardarBombero(Bombero bombero) {
 //      }
 
      
-     public int mostrarOpciones(Connection con) {
-    int idBomberoElegido = -1; // Valor predeterminado para indicar que no se ha seleccionado ningún cuartel
-    List<String> brigadaDisponible = new ArrayList<>();
 
-    String sql = "SELECT Bombero, nombreApellido FROM bombero WHERE estadoB = 1";
-
-    try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-
-        while (rs.next()) {
-            int idBombero = rs.getInt("Bombero");
-            String nombresBombero = rs.getString("nombreApellido");
-
-            brigadaDisponible.add(idBombero + ". " + nombresBombero);
-        }
-        ps.close();
-
-        if (!brigadaDisponible.isEmpty()) {
-            String seleccion = (String) JOptionPane.showInputDialog(null,
-                    "Elija una Brigada:\n" + String.join("\n", brigadaDisponible),
-                    "Selección de Brigada",
-                    JOptionPane.PLAIN_MESSAGE,
-                    null,
-                    brigadaDisponible.toArray(),
-                    brigadaDisponible.get(0));
-
-            if (seleccion != null) {
-                String[] parts = seleccion.split("\\. ");
-                if (parts.length == 2) {
-                    idBomberoElegido = Integer.parseInt(parts[0]);
-                }
-            }
-        }
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al obtener nombres de cuarteles: " + ex.getMessage());
-    }
-
-    return idBomberoElegido;
-}
 
 
      public boolean existeBomberoConNombre(String nombreApellido, Connection con) {
@@ -301,7 +262,36 @@ public void guardarBombero(Bombero bombero) {
     return existe;
 }
 
-   
+   //-----------------------------------------
+//cuenta bombero segun idBrigada
+     public int contarBomberosPorBrigada(int idBrigada) {
+    int cantidadBomberos = 0;
 
+    try {
+        String sql = "SELECT COUNT(*) AS cantidad FROM bombero WHERE idBrigada = ? AND estadoB = 1";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idBrigada);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            cantidadBomberos = rs.getInt("cantidad");
+        }
+
+        ps.close();
+    } catch (SQLException ex) {
+        // Manejar excepciones, por ejemplo, imprimir el error
+        ex.printStackTrace();
+    }
+         System.out.println("cant: "+cantidadBomberos);
+    return cantidadBomberos;
+}
+
+     public boolean hayCupoParaNuevoBombero(int idBrigada) {
+    int cantidadBbomberos = contarBomberosPorBrigada(idBrigada);
+    int capacidadMaxima = 5; // Cambia esto según la capacidad máxima de brigadas por cuartel que desees
+
+    return cantidadBbomberos < capacidadMaxima;
+}
 }  
 
