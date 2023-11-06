@@ -72,7 +72,7 @@ public class BomberoData {
 //
 public void guardarBombero(Bombero bombero) {
     
-    String sql = "INSERT INTO bombero (dni, nombreApellido, grupoSanguineo, fechaNac, celular, Brigada, estadoB)"
+    String sql = "INSERT INTO bombero (dni, nombreApellido, grupoSanguineo, fechaNac, celular, idBrigada, estadoB)"
                  + "VALUE(?, ?, ?, ?, ?, ?, ?)";        
 
             try {
@@ -84,6 +84,7 @@ public void guardarBombero(Bombero bombero) {
                 ps.setDate(4, Date.valueOf(bombero.getFechaNac()));
                 ps.setString(5, bombero.getCelular());
                 ps.setInt(6, bombero.getBrigada().getIdBrigada());
+                
                 ps.setBoolean(7, bombero.isEstadoB());
     
                 ps.executeUpdate();
@@ -148,7 +149,7 @@ public void guardarBombero(Bombero bombero) {
 
      public Bombero  buscarBomberoId (int idBombero){
         //busca bombero por ID y con el estado 1(activo)
-        String sql = "SELECT dni, nombreApellido, fechaNac, celular, Brigada FROM bombero WHERE idBombero = ? and estadoB = 1";
+        String sql = "SELECT dni, nombreApellido, fechaNac, celular, idBrigada FROM bombero WHERE idBombero = ? and estadoB = 1";
         Bombero bombero =null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);            
@@ -236,13 +237,14 @@ public void guardarBombero(Bombero bombero) {
 
 
 
-     public boolean existeBomberoConNombre(String nombreApellido, Connection con) {
+     public boolean existeBomberoConNombre(String nombreApellido, int dni, Connection con) {
     boolean existe = false;
-    String sql = "SELECT COUNT(*) FROM bombero WHERE nombreApellido = ?";
+    String sql = "SELECT COUNT(*) FROM bombero WHERE nombreApellido = ? AND dni = ?";
 
     try {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, nombreApellido);
+        ps.setInt(2, dni);
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {

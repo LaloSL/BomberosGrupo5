@@ -323,7 +323,7 @@ public boolean existeBrigadaConNombreEnCuartel(String nombreBrigada, int idCuart
 
 //buscar brigada por id
      public Brigada buscarBrigadaPorId(int idBrigada) {
-    String sql = "SELECT nombreBrig, especialidad, libre, Cuartel, estadoBr FROM brigada WHERE idBrigada = ?";
+    String sql = "SELECT nombreBrig, especialidad, libre, idCuartel, estadoBr FROM brigada WHERE idBrigada = ?";
     Brigada brigada = null;
 
     try {
