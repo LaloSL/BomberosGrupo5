@@ -11,7 +11,7 @@ import bomberosgrupo5.entidades.Brigada;
 import bomberosgrupo5.entidades.Cuartel;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
-import org.mariadb.jdbc.Connection;
+//import org.mariadb.jdbc.Connection;
 
 //** @author Asus
 public class BomberosGrupo5 {
@@ -108,7 +108,7 @@ public class BomberosGrupo5 {
                 case 1:
                     int subOpcion = 0;
                     while (subOpcion != 5) {
-                        String subInput = JOptionPane.showInputDialog("Elija qué agregar:\n1. Curtel\n2. Brigada\n3. Bombero\n4. Salir\n5. Volver al menú anterior");
+                        String subInput = JOptionPane.showInputDialog("Elija qué agregar:\n1. Cuartel\n2. Brigada\n3. Bombero\n4. Salir\n5. Volver al menú anterior");
 
                         try {
                             subOpcion = Integer.parseInt(subInput);
@@ -137,21 +137,6 @@ public class BomberosGrupo5 {
                                 }
                                 break;
 
-//                            case 2:
-//                                JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Brigada");
-//                                 int idCuartelElegido = cua1.mostrarOpcionesYObtenerSeleccion(connection);
-//                                 if(brig.hayCupoParaNuevaBrigada(idCuartelElegido)){
-//                                     String nombreBrigada = JOptionPane.showInputDialog("Ingrese el nombre de la brigada:");
-//                                     String especialidad = JOptionPane.showInputDialog("Ingrese la especialidad de la brigada:"); 
-//                                     
-//                                     Brigada briga = new Brigada(nombreBrigada, especialidad, true, idCuartelElegido, true);
-//                                     brig.guardarBrigada(briga);
-//                                 } else{
-//                                      JOptionPane.showMessageDialog(null, "El cuartel esta completo");
-//                                 }
-//                                 
-//                                // Aquí puedes realizar la lógica para agregar una brigada
-//                                break;
                             case 2:
                                 JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Brigada");
                                 int idCuartelElegido = cua1.mostrarOpcionesYObtenerSeleccion(connection);
@@ -294,7 +279,52 @@ public class BomberosGrupo5 {
                 case 3:
                     JOptionPane.showMessageDialog(null, "Ha seleccionado Eliminar");
                     // Aquí puedes realizar la lógica para eliminar
+
+                    int subOpcionEliminar = 0;
+                    while (subOpcionEliminar != 4) {
+                        String subInputEliminar = JOptionPane.showInputDialog("Elija qué eliminar:\n1. Cuartel\n2. Brigada\n3. Bombero\n4. Volver al menú principal");
+
+                        try {
+                            subOpcionEliminar = Integer.parseInt(subInputEliminar);
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, ingrese un número válido.");
+                            continue; // Volver al inicio del bucle
+                        }
+
+                        switch (subOpcionEliminar) {
+                            case 1: //ELIMINAR CUARTEL
+                                // Aquí puedes realizar la lógica para eliminar un cuartel
+                                break;
+                            case 2: //ELIMINAR BRIGADA
+                                // Aquí puedes realizar la lógica para eliminar una brigada
+                                break;
+                            case 3: //ELIMINAR BOMBERO
+                               int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del Bombero: "));
+                                // Invocar el método para buscar bombero por DNI y obtener el objeto Bombero
+                                Bombero bomberoAEliminar = bom.buscarBomberoPorDni(dni, connection);
+
+                                if (bomberoAEliminar != null) {
+                                    // Modificar el estado del bombero para indicar que ha sido eliminado
+                                    bomberoAEliminar.setEstadoB(false);
+                                    // Imprimir mensaje de depuración
+                                    System.out.println("Estado del Bombero a eliminar: " + bomberoAEliminar.isEstadoB());
+                                    // Actualizar el registro en la base de datos
+                                    bom.actualizarBombero(bomberoAEliminar);
+                                    JOptionPane.showMessageDialog(null, "Bombero eliminado exitosamente.");
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "No se encontró un bombero con el DNI especificado.");
+                                }
+                                break;
+                            case 4:
+                                // Volver al menú principal
+                                break;
+                            default:
+                                JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, elija 1, 2, 3 o 4.");
+                        }
+                    }
+
                     break;
+
                 case 4:
                     JOptionPane.showMessageDialog(null, "Ha seleccionado Salir. ¡Hasta luego!");
                     break;

@@ -175,65 +175,86 @@ public void guardarBombero(Bombero bombero) {
         return bombero;               
       }
      
-     
-     
-//     public Bombero  buscarBomberoDni (int dni){
-//        //busca alumnos por ID y con el estado 1(activo)
-//        String sql = "SELECT nombreApellido, fechaNac, celular, CodBrigada FROM bombero WHERE dni = ? and estadoB = 1";
-//        Bombero bombero =null;
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);            
-//            ps.setInt(1, dni);
-//            ResultSet rs=ps.executeQuery();      
-//            if(rs.next()){
-//                bombero=new Bombero();
-//                bombero.setDni(rs.getInt("dni"));
-//                bombero.setNombreApellido(rs.getString("NombreApellido"));
-//                bombero.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
-//                bombero.setCelular(rs.getString("Celular"));
-//                bombero.setCodBrigada(rs.getInt("idBrigada"));
-//                bombero.isEstadoB();
-//            }else{
-//                JOptionPane.showMessageDialog(null, "No existe el bombero con el DNI indicado");
-//            }
-//            ps.close();
-//        
-//        
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero");
+   //-------------  buscarBomberoPorDni--------
+//     public Bombero buscarBomberoPorDni(int dni, Connection connection) {
+//    Bombero bomberoEncontrado = null;
+//    String sql = "SELECT * FROM bombero WHERE dni = ?";
+//
+//    try {
+//        PreparedStatement ps = connection.prepareStatement(sql);
+//        ps.setInt(1, dni);
+//        ResultSet rs = ps.executeQuery();
+//
+//        if (rs.next()) {
+//            // Si se encuentra un bombero con el DNI especificado, crea un objeto Bombero con los datos obtenidos de la base de datos
+//            bomberoEncontrado = new Bombero(
+//                rs.getInt("dni"),
+//                rs.getString("nombreApellido"),
+//                rs.getString("grupoSanguineo"),
+//                rs.getDate("fechaNac").toLocalDate(),
+//                rs.getString("celular"),
+//                null, // Aquí deberías obtener la brigada asociada, si la tienes en la base de datos
+//                rs.getBoolean("estadoBom")
+//                    
+//            );
 //        }
-//        return bombero;               
-//      }
-     
-     
-//     public List<Bombero>  listarBomberos (){
-//        //
-//        String sql = "SELECT idBombero, dni, nombreApellido, fechaNac, celular, CodBrigada FROM bombero WHERE estadoB = 1";
-//        ArrayList<Bombero> bomberos=new ArrayList<>();
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);            
-//            
-//            ResultSet rs=ps.executeQuery();      
-//            while(rs.next()){
-//                Bombero bombero=new Bombero();
-//                bombero.setIdBombero(rs.getInt("idBombero"));
-//                bombero.setDni(rs.getInt("dni"));
-//                bombero.setNombreApellido(rs.getString("NombreApellido"));
-//                bombero.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
-//                bombero.setCelular(rs.getString("Celular"));
-//                bombero.setCodBrigada(rs.getInt("CodBrigada"));
-//                bombero.isEstadoB();
-//                bomberos.add(bombero);    
-//            }
-//            ps.close();
-//        
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla bombero");
-//        }
-//        return   bomberos;            
-//      }
+//
+//        ps.close();
+//    } catch (SQLException ex) {
+//        JOptionPane.showMessageDialog(null, "Error al buscar al bombero por DNI: " + ex.getMessage());
+//    }
+//
+//    return bomberoEncontrado;
+//}
+public Bombero buscarBomberoPorDni(int dni, Connection connection) {
+    
+    Bombero bomberoEncontrado = null;
+    String sql = "SELECT * FROM bombero WHERE dni = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, dni);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            // Si se encuentra un bombero con el DNI especificado, crea un objeto Bombero con los datos obtenidos de la base de datos
+            bomberoEncontrado = new Bombero(
+                rs.getInt("dni"),
+                rs.getString("nombreApellido"),
+                rs.getString("grupoSanguineo"),
+                rs.getDate("fechaNac").toLocalDate(),
+                rs.getString("celular"),
+                null, // Aquí deberías obtener la brigada asociada, si la tienes en la base de datos
+                rs.getBoolean("estadoBom")
+            );
+
+            // Formatea la información del bombero como una cadena de texto
+            String infoBombero = "DNI: " + bomberoEncontrado.getDni() + "\n" +
+                                "Nombre y Apellido: " + bomberoEncontrado.getNombreApellido() + "\n" +
+                                "Grupo Sanguíneo: " + bomberoEncontrado.getGrupoSanguineo() + "\n" +
+                                "Fecha de Nacimiento: " + bomberoEncontrado.getFechaNac() + "\n" +
+                                "Celular: " + bomberoEncontrado.getCelular() + "\n" +
+                                "Estado: " + (bomberoEncontrado.isEstadoB() ? "Activo" : "Inactivo");
+
+            // Muestra la información en un cuadro de diálogo
+            JOptionPane.showMessageDialog(null, "Información del Bombero:\n" + infoBombero);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró un bombero con el DNI especificado.");
+        }
+
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al buscar al bombero por DNI: " + ex.getMessage());
+    }
+
+    return bomberoEncontrado;
+}
 
      
+//---------------------------------------------------------------------------------------------------
+     
+     
+//------------------------------------------------------------------------------
 
 
 
@@ -295,5 +316,34 @@ public void guardarBombero(Bombero bombero) {
 
     return cantidadBbomberos < capacidadMaxima;
 }
+     
+     
+     
+     
+//---------------------------------ELIMINAR--------------------------------
+
+//--------------CAMBIO EL ESTADO DE UN BOMBERO-------------
+public void actualizarBombero(Bombero bombero) {
+    String sql = "UPDATE bombero SET estadoB = false WHERE dni = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, bombero.getDni());
+
+        int rowsAffected = ps.executeUpdate();
+
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(null, "Bombero eliminado exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo eliminar al bombero.");
+        }
+
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar el bombero: " + ex.getMessage());
+    }
+}
+
+     
 }  
 
