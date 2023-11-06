@@ -291,7 +291,7 @@ public void guardarBombero(Bombero bombero) {
 
      public boolean hayCupoParaNuevoBombero(int idBrigada) {
     int cantidadBbomberos = contarBomberosPorBrigada(idBrigada);
-    int capacidadMaxima = 5; // Cambia esto según la capacidad máxima de brigadas por cuartel que desees
+    int capacidadMaxima = 3; // Cambia esto según la capacidad máxima de brigadas por cuartel que desees
 
     return cantidadBbomberos < capacidadMaxima;
 }

@@ -187,7 +187,7 @@ public class BomberosGrupo5 {
                                 int idBrigadaElegido = brig.mostrarOpciones(connection);
                               
                                 Brigada idBrigada = brig.buscarBrigadaPorId(idBrigadaElegido);
-                                //boolean cant=bom.hayCupoParaNuevoBombero(idBrigadaElegido);
+                                
                                 //Bombero bomb = bom.buscarBomberoId(idBrigadaElegido);
                                
                                 if (idBrigada != null) {
@@ -214,10 +214,10 @@ public class BomberosGrupo5 {
                                             //JOptionPane.showMessageDialog(null, "Bombero agregado exitosamente.");
                                         }
                                     } else {
-                                        JOptionPane.showMessageDialog(null, "El cuartel está completo. No se puede agregar más brigadas.");
+                                        JOptionPane.showMessageDialog(null, "Brifada Completa. No se puede agregar más bomberos.");
                                     }
                                 } else {
-                                    JOptionPane.showMessageDialog(null, "No se pudo obtener el cuartel. Asegúrate de que el cuartel seleccionado sea válido.");
+                                    JOptionPane.showMessageDialog(null, "No se pudo obtener la brigada. Asegúrate de que la brigada seleccionada sea válida.");
                                 }
 
                                     break;
