@@ -58,18 +58,20 @@ public class CuartelData {
 //------------------------------------------------------------------------------
 //método modificarCuartel:
     public void modificarCuartel(Cuartel cuartel) {
-        String sql = "UPDATE cuartel SET nombreCuartel = ?, direccion = ?, coordX = ?, coordY = ?, telefono = ?, correo = ? WHERE idCuartel = ?";
+        String sql = "UPDATE cuartel SET nombreCuartel = ?"
+                 //", direccion = ?, coordX = ?, coordY = ?, telefono = ?, correo = ? 
+                +"WHERE idCuartel = ?";
         System.out.println(""+cuartel);
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setString(1, cuartel.getNombreCuartel());
-            ps.setString(2, cuartel.getDireccion());
-            ps.setInt(3, cuartel.getCoordX());
-            ps.setInt(4, cuartel.getCoordY());
-            ps.setString(5, cuartel.getTelefono());
-            ps.setString(6, cuartel.getCorreo());
-            ps.setInt(7, cuartel.getIdCuartel());
+//            ps.setString(2, cuartel.getDireccion());
+//            ps.setInt(3, cuartel.getCoordX());
+//            ps.setInt(4, cuartel.getCoordY());
+//            ps.setString(5, cuartel.getTelefono());
+//            ps.setString(6, cuartel.getCorreo());
+//            ps.setInt(7, cuartel.getIdCuartel());
 
             int exito = ps.executeUpdate();
 
@@ -200,6 +202,28 @@ public Cuartel buscarCuartelPorId(int idCuartel) {
     return cuartel;
 }
 
+//-----------------------------------------------------------------
+// aca esta el problemon....
+
+public void actualizarNombreCuartel(int idCuartel, String nuevoNombre) {
+    String sql = "UPDATE cuartel SET nombreCuartel = ? WHERE idCuartel = ? AND estadoC = 1";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, nuevoNombre);
+        ps.setInt(2, idCuartel);
+
+        int exito = ps.executeUpdate();
+
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "Nombre de cuartel actualizado exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al actualizar el nombre del cuartel. Asegúrate de que el cuartel exista y el estado sea 1.");
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel: " );
+    }
+}
 
 
 
