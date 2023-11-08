@@ -317,21 +317,5 @@ public void cambiarEstadoBomberosPorBrigada(int idBrigada, Connection con) {
 }
 
 //-------------------------------------
-
-//---------------------cambiar estados de bomberos en brigadas--------------
-public void cambiarEstadoBomberosPorBrigadas(List<Integer> idsBrigadas, Connection con) {
-    for (Integer idBrigada : idsBrigadas) {
-        List<Integer> idsBomberosAEliminar = obtenerBomberosPorBrigada(idBrigada, con);
-
-        for (Integer idBombero : idsBomberosAEliminar) {
-            cambiarEstadoBombero(idBombero, con);
-        }
-    }
-
-    //JOptionPane.showMessageDialog(null, "Bomberos eliminados exitosamente.");
-}
-
-
-//------------------------------------------------------------------------
 }  
 

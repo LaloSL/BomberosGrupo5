@@ -226,7 +226,7 @@ public boolean existeCuartelConNombre(String nombreCuartel) {
 //
 //    return cuartel;
 
-public Cuartel buscarCuartelPorId(int Cuartel) {
+public Cuartel buscarCuartelPorId(int Cuartel, Connection con) {
     String sql = "SELECT nombreCuartel, direccion, coordX, coordY, telefono, correo, estadoC "
             + "FROM cuartel WHERE Cuartel = ? AND estadoC = 1";
 
