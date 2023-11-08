@@ -22,22 +22,21 @@ public class SiniestroData {
 
 //------------------------------------------------------------------------------
     public void guardarSiniestro(Siniestro siniestro) {
-        String sql = "INSERT INTO siniestro (tipo, fechaSiniestro, horaSiniestro, coordx, coordy, detalles, fechaResol, puntuacion, idBrigada) "
+        String sql = "INSERT INTO siniestro (tipo,fechaSiniestro,horaSiniestro,coordx,coordy,detalles,fechaResol,puntuacion,idBrigada) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, siniestro.getIdCodigo()); // Si tienes un campo autoincremental, utiliza el valor apropiado
-            ps.setString(2, siniestro.getTipo());
-            ps.setDate(3, Date.valueOf(siniestro.getFechaSiniestro()));
-            ps.setTime(4, Time.valueOf(siniestro.getHoraSiniestro()));
-            ps.setString(5, siniestro.getCoordx());
-            ps.setString(6, siniestro.getCoordy());
-            ps.setString(7, siniestro.getDetalles());
-            ps.setDate(8, Date.valueOf(siniestro.getFechaResol()));
-            ps.setInt(9, siniestro.getPuntuacion());
-            ps.setInt(10, siniestro.getBrigada());
+            ps.setString(1, siniestro.getTipo());
+            ps.setDate(2, Date.valueOf(siniestro.getFechaSiniestro()));
+        //    ps.setTime(3, Time.valueOf(siniestro.getHoraSiniestro()));
+        //    ps.setString(4, siniestro.getCoordx());
+        //    ps.setString(5, siniestro.getCoordy());
+            ps.setString(6, siniestro.getDetalles());
+            ps.setDate(7, Date.valueOf(siniestro.getFechaResol()));
+            ps.setInt(8, siniestro.getPuntuacion());
+        //    ps.setInt(9, siniestro.getBrigada();
 
             ps.executeUpdate();
 
