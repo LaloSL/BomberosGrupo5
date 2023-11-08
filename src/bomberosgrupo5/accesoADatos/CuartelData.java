@@ -58,20 +58,18 @@ public class CuartelData {
 //------------------------------------------------------------------------------
 //método modificarCuartel:
     public void modificarCuartel(Cuartel cuartel) {
-        String sql = "UPDATE cuartel SET nombreCuartel = ?"
-                 //", direccion = ?, coordX = ?, coordY = ?, telefono = ?, correo = ? 
-                +"WHERE idCuartel = ?";
-        System.out.println(""+cuartel);
+        String sql = "UPDATE Cuartel SET nombreCuartel = ?, direccion = ?, coordX = ?, coordY = ?, telefono = ?, correo = ? WHERE Cuartel = ?";
+        
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setString(1, cuartel.getNombreCuartel());
-//            ps.setString(2, cuartel.getDireccion());
-//            ps.setInt(3, cuartel.getCoordX());
-//            ps.setInt(4, cuartel.getCoordY());
-//            ps.setString(5, cuartel.getTelefono());
-//            ps.setString(6, cuartel.getCorreo());
-//            ps.setInt(7, cuartel.getIdCuartel());
+            ps.setString(2, cuartel.getDireccion());
+            ps.setInt(3, cuartel.getCoordX());
+            ps.setInt(4, cuartel.getCoordY());
+            ps.setString(5, cuartel.getTelefono());
+            ps.setString(6, cuartel.getCorreo());
+            ps.setInt(7, cuartel.getIdCuartel());
 
             int exito = ps.executeUpdate();
 
@@ -90,7 +88,7 @@ public class CuartelData {
 //------------------------------------------------------------------------------
 
 public void eliminarCuartel(int id){
-    String sql="UPDATE cuartel SET estadoC=0 WHERE idCuartel=?";
+    String sql="UPDATE cuartel SET estadoC=0 WHERE Cuartel=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -112,7 +110,7 @@ public int mostrarOpcionesYObtenerSeleccion(Connection con) {
     int idCuartelElegido = -1; // Valor predeterminado para indicar que no se ha seleccionado ningún cuartel
     List<String> nombresCuartel = new ArrayList<>();
 
-    String sql = "SELECT idCuartel, nombreCuartel FROM cuartel WHERE estadoC = 1";
+    String sql = "SELECT Cuartel, nombreCuartel FROM cuartel WHERE estadoC = 1";
     //System.out.println(""+sql);
 
     try {
@@ -120,10 +118,10 @@ public int mostrarOpcionesYObtenerSeleccion(Connection con) {
         ResultSet rs = ps.executeQuery();
         
         while (rs.next()) {
-            int idCuartel = rs.getInt("idCuartel");
+            int Cuartel = rs.getInt("Cuartel");
             String nombreCuartel = rs.getString("nombreCuartel");
 
-            nombresCuartel.add(idCuartel + ". " + nombreCuartel);
+            nombresCuartel.add(Cuartel + ". " + nombreCuartel);
         }
         ps.close();
 
@@ -171,15 +169,15 @@ public boolean existeCuartelConNombre(String nombreCuartel) {
 
 
 //buscu un cuartel por id y lo devuelvo
-public Cuartel buscarCuartelPorId(int idCuartel) {
+public Cuartel buscarCuartelPorId(int Cuartel) {
     String sql = "SELECT nombreCuartel, direccion, coordX, coordY, telefono, correo, estadoC "
-            + "FROM cuartel WHERE idCuartel = ? AND estadoC = 1";
+            + "FROM cuartel WHERE Cuartel = ? AND estadoC = 1";
 
     Cuartel cuartel = null;
 
     try {
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, idCuartel);
+        ps.setInt(1, Cuartel);
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {
@@ -205,13 +203,13 @@ public Cuartel buscarCuartelPorId(int idCuartel) {
 //-----------------------------------------------------------------
 // aca esta el problemon....
 
-public void actualizarNombreCuartel(int idCuartel, String nuevoNombre) {
-    String sql = "UPDATE cuartel SET nombreCuartel = ? WHERE idCuartel = ? AND estadoC = 1";
+public void actualizarNombreCuartel(int Cuartel, String nuevoNombre) {
+    String sql = "UPDATE cuartel SET nombreCuartel = ? WHERE Cuartel = ? AND estadoC = 1";
 
     try {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, nuevoNombre);
-        ps.setInt(2, idCuartel);
+        ps.setInt(2, Cuartel);
 
         int exito = ps.executeUpdate();
 

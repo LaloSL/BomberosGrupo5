@@ -223,7 +223,7 @@ public class BomberosGrupo5 {
 
 //---------------------------------------MODIFICAR----------------------------------------------------------------------------------                    
 //                
-              case 2:
+                case 2:
                     JOptionPane.showMessageDialog(null, "Ha seleccionado Modificar");
 
                     int subOpcionModificar = 0;
@@ -238,28 +238,31 @@ public class BomberosGrupo5 {
                                 JOptionPane.showMessageDialog(null, "Seleccione el cuartel que desea modificar:");
 
                                 int idCuartelAModificar = cua1.mostrarOpcionesYObtenerSeleccion(connection);
-                                    System.out.println(""+idCuartelAModificar);
-                                    String nuevoNombreCuartel = JOptionPane.showInputDialog("Ingrese el nuevo nombre del cuartel:");
-                                    cua1.actualizarNombreCuartel(idCuartelAModificar, nuevoNombreCuartel);
-                                    
-//                                Cuartel cuartelAModificar = cua1.buscarCuartelPorId(idCuartelAModificar);
-//                                
-//
-//                                if (cuartelAModificar != null) {
-//
-//                                    String nuevoNombreCuartel = JOptionPane.showInputDialog("Ingrese el nuevo nombre del cuartel:");
-//                                    if (!nuevoNombreCuartel.isEmpty()) {
-//                                        cuartelAModificar.setNombreCuartel(nuevoNombreCuartel);
-//                                    }
-//
-//                                    // Repite este proceso para otros atributos que desees modificar, como dirección, longitud, latitud, teléfono, correo, etc.
-//                                    // Luego, actualiza el cuartel en la base de datos
-//                                    cua1.modificarCuartel(cuartelAModificar);
 
+                                Cuartel cuartelAModificar = cua1.buscarCuartelPorId(idCuartelAModificar);
+                                if (cuartelAModificar != null) {
+                                    String nuevoNombreCuartel = JOptionPane.showInputDialog("Ingrese el nuevo nombre del cuartel:");
+                                    String nuevaDireccion = JOptionPane.showInputDialog("Ingrese la nueva dirección:");
+                                    int nuevaCoordX = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva coordenada X:"));
+                                    int nuevaCoordY = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva coordenada Y:"));
+                                    String nuevoTelefono = JOptionPane.showInputDialog("Ingrese el nuevo teléfono:");
+                                    String nuevoCorreo = JOptionPane.showInputDialog("Ingrese el nuevo correo:");
+                                    
+                                    cuartelAModificar.setNombreCuartel(nuevoNombreCuartel);
+                                    cuartelAModificar.setDireccion(nuevaDireccion);
+                                    cuartelAModificar.setCoordX(nuevaCoordX);
+                                    cuartelAModificar.setCoordY(nuevaCoordY);
+                                    cuartelAModificar.setTelefono(nuevoTelefono);
+                                    cuartelAModificar.setCorreo(nuevoCorreo);
+                                    
+                                    cua1.modificarCuartel(cuartelAModificar);
                                     JOptionPane.showMessageDialog(null, "Cuartel modificado exitosamente.");
-//                                } else {
-//                                    JOptionPane.showMessageDialog(null, "No se pudo encontrar el cuartel seleccionado. Asegúrate de que el cuartel sea válido.");
-//                                }
+                                
+                                }//else{
+                                    //JOptionPane.showMessageDialog(null, "No se pudo encontrar el cuartel seleccionado");
+                                //}
+
+              
                                 break;
 
                             case 2:
@@ -282,8 +285,8 @@ public class BomberosGrupo5 {
                     }
 
                     break;
-                
-              //  case 2: // Modificar
+
+                //  case 2: // Modificar
 //                    int subOpcionModificar = 0;
 //                    while (subOpcionModificar != 4) {
 //                        String subInputModificar = JOptionPane.showInputDialog("Elija qué modificar:\n1. Cuartel\n2. Brigada\n3. Bombero\n4. Volver al menú principal");
@@ -313,11 +316,7 @@ public class BomberosGrupo5 {
 //                        }
 //                    }
 //                    break;
-
 //----------------------------------------------ELIMINAR----------------------------------------------------------------------------
-               
-
-                            
                 case 3:
                     JOptionPane.showMessageDialog(null, "Ha seleccionado Eliminar");
                     // Aquí puedes realizar la lógica para eliminar
@@ -336,12 +335,12 @@ public class BomberosGrupo5 {
                         switch (subOpcionEliminar) {
                             //--------------------Eliminar Cuartel-----------------------
                             case 1: //ELIMINAR CUARTEL
-                                int idCuartelAEliminar= cua1.mostrarCuartelesAEliminar(connection);
+                                int idCuartelAEliminar = cua1.mostrarCuartelesAEliminar(connection);
                                 List<Integer> idsBrigadas = brig.obtenerIdsBrigadasPorIdCuartel(idCuartelAEliminar, connection);
                                 bom.cambiarEstadoBomberosPorBrigadas(idsBrigadas, connection);
                                 brig.cambiarEstadoBrigadas(idsBrigadas, connection);
                                 cua1.cambiarEstadoCuartel(idCuartelAEliminar, connection);
-                                
+
                                 break;
 
                             //-----------------Eliminar Brigada---------------------
@@ -350,7 +349,7 @@ public class BomberosGrupo5 {
                                 List<Integer> idsBomberosAEliminar = bom.obtenerBomberosPorBrigada(idBrigadaAEliminar, connection);
                                 bom.cambiarEstadoBomberosPorBrigada(idBrigadaAEliminar, connection);
                                 brig.cambiarEstadoBrigada(idBrigadaAEliminar, connection);
-                                
+
                                 break;
 
                             //---------------ELIMINAR BOMBERO------------------------    
