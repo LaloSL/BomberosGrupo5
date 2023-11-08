@@ -143,7 +143,7 @@ public class BomberosGrupo5 {
                                 JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Brigada");
                                 int idCuartelElegido = cua1.mostrarOpcionesYObtenerSeleccion(connection);
 
-                                Cuartel cuartel = cua1.buscarCuartelPorId(idCuartelElegido); // Obtiene el cuartel por su ID
+                                Cuartel cuartel = cua1.buscarCuartelPorId(idCuartelElegido, connection); // Obtiene el cuartel por su ID
 
                                 if (cuartel != null) {
                                     // Verificar si hay lugar para una nueva brigada en el cuartel
