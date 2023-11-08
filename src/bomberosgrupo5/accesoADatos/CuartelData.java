@@ -226,6 +226,76 @@ public void actualizarNombreCuartel(int idCuartel, String nuevoNombre) {
 }
 
 
+//----------------------------------------ELIMINAR CUARTEL---------------------------------------------------------
 
+//------------------------selecciono cuartel a eliminar-----------------------------------------------------
+
+public int mostrarCuartelesAEliminar(Connection con) {
+    int idCuartelAEliminar = -1; // Valor predeterminado para indicar que no se ha seleccionado ningún cuartel
+    List<String> cuartelesAEliminar = new ArrayList<>();
+
+    String sql = "SELECT Cuartel, nombreCuartel FROM cuartel WHERE estadoC = 1";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int idCuartel = rs.getInt("Cuartel");
+            String nombreCuartel = rs.getString("nombreCuartel");
+
+            cuartelesAEliminar.add(idCuartel + ". " + nombreCuartel);
+        }
+        ps.close();
+
+        if (!cuartelesAEliminar.isEmpty()) {
+            String seleccion = (String) JOptionPane.showInputDialog(null,
+                    "Elija un cuartel a eliminar:\n" + String.join("\n", cuartelesAEliminar),
+                    "Selección de Cuartel a Eliminar",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    cuartelesAEliminar.toArray(),
+                    cuartelesAEliminar.get(0));
+
+            if (seleccion != null) {
+                String[] parts = seleccion.split("\\. ");
+                if (parts.length == 2) {
+                    idCuartelAEliminar = Integer.parseInt(parts[0]);
+                    System.out.println("ID del Cuartel a eliminar: " + idCuartelAEliminar);
+                }
+            }
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener la lista de cuarteles a eliminar: " + ex.getMessage());
+    }
+
+    return idCuartelAEliminar;
+}
+
+//--------------------------------------------------------------------------------------------
+
+//---------------------cambiar estado de cuartel---------------------------------------
+public void cambiarEstadoCuartel(int idCuartel, Connection con) {
+    String sql = "UPDATE cuartel SET estadoC = 0 WHERE Cuartel = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idCuartel);
+        int rowsAffected = ps.executeUpdate();
+
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(null, "Cuartel eliminado exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo eliminar el cuartel.");
+        }
+
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al cambiar el estado del cuartel: " + ex.getMessage());
+    }
+}
+
+
+//---------------------------------------------------------------------------------
 
 }

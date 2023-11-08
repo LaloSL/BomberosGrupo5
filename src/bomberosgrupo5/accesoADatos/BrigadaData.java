@@ -293,10 +293,72 @@ public int mostrarBrigadasAEliminar(Connection con) {
      
      //------------------------------------------------------------------
      
-     
+ 
+
+//--------------eliminar brigada cambiando el estado------------------------------------------
+public void cambiarEstadoBrigada(int idBrigada, Connection con) {
+    String sql = "UPDATE brigada SET estadoBr = 0 WHERE idBrigada = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idBrigada);
+        int rowsAffected = ps.executeUpdate();
+
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(null, "Brigada eliminada exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo eliminar la brigada.");
+        }
+
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al cambiar el estado de la brigada: " + ex.getMessage());
+    }
+}
+
+//--------------------------------------------------------------------------------------------
+
+//------------------obtengo idBrigada teniendo idCuartel------------------------------------
 
 
+public List<Integer> obtenerIdsBrigadasPorIdCuartel(int idCuartel, Connection con) {
+    List<Integer> idsBrigadas = new ArrayList<>();
 
+    String sql = "SELECT idBrigada FROM brigada WHERE Cuartel = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idCuartel);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int idBrigada = rs.getInt("idBrigada");
+            idsBrigadas.add(idBrigada);
+        }
+
+        ps.close();
+    } catch (SQLException ex) {
+        // Manejar excepciones, por ejemplo, imprimir el error
+        ex.printStackTrace();
+    }
+
+    return idsBrigadas;
+}
+
+
+//-----------------------------------------------------------------------------------------
+
+//----------------------cambiar estado de brigadasss--------------------------------------
+public void cambiarEstadoBrigadas(List<Integer> idsBrigadas, Connection con) {
+    for (Integer idBrigada : idsBrigadas) {
+        cambiarEstadoBrigada(idBrigada, con);
+    }
+
+    JOptionPane.showMessageDialog(null, "Brigadas eliminadas exitosamente.");
+}
+
+
+//---------------------------------------------------------------------------------------
 
 }
 

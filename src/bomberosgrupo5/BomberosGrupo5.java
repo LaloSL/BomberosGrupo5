@@ -334,19 +334,23 @@ public class BomberosGrupo5 {
                         }
 
                         switch (subOpcionEliminar) {
+                            //--------------------Eliminar Cuartel-----------------------
                             case 1: //ELIMINAR CUARTEL
-                                // Aquí puedes realizar la lógica para eliminar un cuartel
+                                int idCuartelAEliminar= cua1.mostrarCuartelesAEliminar(connection);
+                                List<Integer> idsBrigadas = brig.obtenerIdsBrigadasPorIdCuartel(idCuartelAEliminar, connection);
+                                bom.cambiarEstadoBomberosPorBrigadas(idsBrigadas, connection);
+                                brig.cambiarEstadoBrigadas(idsBrigadas, connection);
+                                cua1.cambiarEstadoCuartel(idCuartelAEliminar, connection);
+                                
                                 break;
 
                             //-----------------Eliminar Brigada---------------------
                             case 2: //ELIMINAR BRIGADA
                                 int idBrigadaAEliminar = brig.mostrarBrigadasAEliminar(connection);
-                                System.out.println("id " + idBrigadaAEliminar);
-
                                 List<Integer> idsBomberosAEliminar = bom.obtenerBomberosPorBrigada(idBrigadaAEliminar, connection);
                                 bom.cambiarEstadoBomberosPorBrigada(idBrigadaAEliminar, connection);
-
-                                //falta eliminar brigada
+                                brig.cambiarEstadoBrigada(idBrigadaAEliminar, connection);
+                                
                                 break;
 
                             //---------------ELIMINAR BOMBERO------------------------    
