@@ -3,16 +3,14 @@ package bomberosgrupo5.accesoADatos;
 
 import bomberosgrupo5.entidades.Cuartel;
 import bomberosgrupo5.entidades.Siniestro;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Time;
+import java.sql.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 
 public class SiniestroData {
+    
+    Calendar hora=new GregorianCalendar();
 
     private Connection con;
 
@@ -30,9 +28,9 @@ public class SiniestroData {
 
             ps.setString(1, siniestro.getTipo());
             ps.setDate(2, Date.valueOf(siniestro.getFechaSiniestro()));
-        //    ps.setTime(3, Time.valueOf(siniestro.getHoraSiniestro()));
-        //    ps.setString(4, siniestro.getCoordx());
-        //    ps.setString(5, siniestro.getCoordy());
+            ps.setString(3, (siniestro.getFechaSiniestro()));
+            ps.setInt(4, siniestro.getCoordX());
+            ps.setInt(5, siniestro.getCoordY());
             ps.setString(6, siniestro.getDetalles());
             ps.setDate(7, Date.valueOf(siniestro.getFechaResol()));
             ps.setInt(8, siniestro.getPuntuacion());
