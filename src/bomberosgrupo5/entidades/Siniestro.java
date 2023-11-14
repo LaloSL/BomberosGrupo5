@@ -2,7 +2,7 @@
 
 package bomberosgrupo5.entidades;
 
-import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 //** @author Asus
@@ -10,48 +10,40 @@ public class Siniestro {
 
     private int idSiniestro;
     private String tipo;
-    private LocalDate fechaSiniestro;
-    private Time horaSiniestro;
     private int coordX;
     private int coordY;
     private String detalles;
-    private LocalDate fechaResol;
     private int puntuacion;
-    private Brigada brigada;
+    private Brigada idBrigada;
+    private Timestamp fechaSiniestro;
+    private Timestamp fechaResol;
 
-    // Constructor con todos sus atributos:  // primero con todos los atributos.
-    public Siniestro(int idSiniestro, String tipo, LocalDate fechaSiniestro, Time horaSiniestro, int coordX, int coordY, String detalles, LocalDate fechaResol, int puntuacion, Brigada brigada) {
-        this.idSiniestro = idSiniestro;
-        this.tipo = tipo;
-        this.fechaSiniestro = fechaSiniestro;
-        this.horaSiniestro = horaSiniestro;
-        this.coordX = coordX;
-        this.coordY = coordY;
-        this.detalles = detalles;
-        this.fechaResol = fechaResol;
-        this.puntuacion = puntuacion;
-        this.brigada = brigada;
-    }
-    
-    // Constructor sin atributo idSiniestro:   /// luego sin atributo idSinisestro. 
-    public Siniestro(String tipo, LocalDate fechaSiniestro, Time horaSiniestro, int coordX, int coordY, String detalles, LocalDate fechaResol, int puntuacion, Brigada brigada) {
-        this.tipo = tipo;
-        this.fechaSiniestro = fechaSiniestro;
-        this.horaSiniestro = horaSiniestro;
-        this.coordX = coordX;
-        this.coordY = coordY;
-        this.detalles = detalles;
-        this.fechaResol = fechaResol;
-        this.puntuacion = puntuacion;
-        this.brigada = brigada;
-    }
-
-    // Constructor vacio:   // por último atributo vacio.
     public Siniestro() {
     }
-//------------------------------------------------------------------------------
 
-// Getters & setters:
+    public Siniestro(int idSiniestro, String tipo, int coordX, int coordY, String detalles, int puntuacion, Brigada idBrigada, Timestamp fechaSiniestro, Timestamp fechaResol) {
+        this.idSiniestro = idSiniestro;
+        this.tipo = tipo;
+        this.coordX = coordX;
+        this.coordY = coordY;
+        this.detalles = detalles;
+        this.puntuacion = puntuacion;
+        this.idBrigada = idBrigada;
+        this.fechaSiniestro = fechaSiniestro;
+        this.fechaResol = fechaResol;
+    }
+
+    public Siniestro(String tipo, int coordX, int coordY, String detalles, int puntuacion, Brigada idBrigada, Timestamp fechaSiniestro, Timestamp fechaResol) {
+        this.tipo = tipo;
+        this.coordX = coordX;
+        this.coordY = coordY;
+        this.detalles = detalles;
+        this.puntuacion = puntuacion;
+        this.idBrigada = idBrigada;
+        this.fechaSiniestro = fechaSiniestro;
+        this.fechaResol = fechaResol;
+    }
+
     public int getIdSiniestro() {
         return idSiniestro;
     }
@@ -66,22 +58,6 @@ public class Siniestro {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public LocalDate getFechaSiniestro() {
-        return fechaSiniestro;
-    }
-
-    public void setFechaSiniestro(LocalDate fechaSiniestro) {
-        this.fechaSiniestro = fechaSiniestro;
-    }
-
-    public Time getHoraSiniestro() {
-        return horaSiniestro;
-    }
-
-    public void setHoraSiniestro(Time horaSiniestro) {
-        this.horaSiniestro = horaSiniestro;
     }
 
     public int getCoordX() {
@@ -108,14 +84,6 @@ public class Siniestro {
         this.detalles = detalles;
     }
 
-    public LocalDate getFechaResol() {
-        return fechaResol;
-    }
-
-    public void setFechaResol(LocalDate fechaResol) {
-        this.fechaResol = fechaResol;
-    }
-
     public int getPuntuacion() {
         return puntuacion;
     }
@@ -124,19 +92,36 @@ public class Siniestro {
         this.puntuacion = puntuacion;
     }
 
-    public Brigada getBrigada() {
-        return brigada;
+    public Brigada getIdBrigada() {
+        return idBrigada;
     }
 
-    public void setBrigada(Brigada brigada) {
-        this.brigada = brigada;
+    public void setIdBrigada(Brigada idBrigada) {
+        this.idBrigada = idBrigada;
     }
-    
-//------------------------------------------------------------------------------    
+
+    public Timestamp getFechaSiniestro() {
+        return fechaSiniestro;
+    }
+
+    public void setFechaSiniestro(Timestamp fechaSiniestro) {
+        this.fechaSiniestro = fechaSiniestro;
+    }
+
+    public Timestamp getFechaResol() {
+        return fechaResol;
+    }
+
+    public void setFechaResol(Timestamp fechaResol) {
+        this.fechaResol = fechaResol;
+    }
 
     @Override
     public String toString() {
-        return "Siniestro{" + "idSiniestro=" + idSiniestro + ", tipo=" + tipo + ", fechaSiniestro=" + fechaSiniestro + ", horaSiniestro=" + horaSiniestro + ", coordX=" + coordX + ", coordY=" + coordY + ", detalles=" + detalles + ", fechaResol=" + fechaResol + ", puntuacion=" + puntuacion + ", brigada=" + brigada + '}';
+        return "Siniestro{" + "idSiniestro=" + idSiniestro + ", tipo=" + tipo + ", coordX=" + coordX + ", coordY=" + coordY + ", detalles=" + detalles + ", puntuacion=" + puntuacion + ", idBrigada=" + idBrigada + ", fechaSiniestro=" + fechaSiniestro + ", fechaResol=" + fechaResol + '}';
     }
+
+    
+
     
 }

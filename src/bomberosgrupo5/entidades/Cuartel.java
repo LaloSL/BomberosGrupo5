@@ -18,8 +18,8 @@ public class Cuartel {
     public Cuartel() {
     }
 
-    public Cuartel( int Cuartel, String nombreCuartel, String direccion, int coordX, int coordY, String telefono, String correo, boolean estadoC) {
-        this.Cuartel = Cuartel;
+    public Cuartel(int idCuartel, String nombreCuartel, String direccion, int coordX, int coordY, String telefono, String correo, boolean estadoC) {
+        this.Cuartel = idCuartel;
         this.nombreCuartel = nombreCuartel;
         this.direccion = direccion;
         this.coordX = coordX;
@@ -40,11 +40,11 @@ public class Cuartel {
     }
 
     // Gettres & Setters:
-    public int getCuartel() {
+    public int getIdCuartel() {
         return Cuartel;
     }
 
-    public void setCuartel(int idCuartel) {
+    public void setIdCuartel(int idCuartel) {
         this.Cuartel = idCuartel;
     }
 
@@ -107,7 +107,7 @@ public class Cuartel {
     //--------------------------------------------------------------------------
     @Override
     public String toString() {
-        return "Cuartel{" + "Cuartel=" + Cuartel + ", nombreCuartel=" + nombreCuartel + ", direccion=" + direccion + ", coordX=" + coordX + ", coordY=" + coordY + ", telefono=" + telefono + ", correo=" + correo + ", estadoC=" + estadoC + '}';
+        return "Cuartel{" + "idCuartel=" + Cuartel + ", nombreCuartel=" + nombreCuartel + ", direccion=" + direccion + ", coordX=" + coordX + ", coordY=" + coordY + ", telefono=" + telefono + ", correo=" + correo + ", estadoC=" + estadoC + '}';
     }
 
 }

@@ -44,7 +44,7 @@ public class CuartelData {
             ResultSet rs = ps.getGeneratedKeys();
 
             if (rs.next()) {
-                cuartel.setCuartel(rs.getInt(1));
+                cuartel.setIdCuartel(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Cuartel Agregado Exitosamente ");
             }
             ps.close();
@@ -58,62 +58,39 @@ public class CuartelData {
 //------------------------------------------------------------------------------
 //método modificarCuartel:
     public void modificarCuartel(Cuartel cuartel) {
-//        String sql = "UPDATE Cuartel SET nombreCuartel = ?, direccion = ?, coordX = ?, coordY = ?, telefono = ?, correo = ? WHERE Cuartel = ?";
-//        
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);
-//
-//            ps.setString(1, cuartel.getNombreCuartel());
+        String sql = "UPDATE cuartel SET nombreCuartel = ?"
+                 //", direccion = ?, coordX = ?, coordY = ?, telefono = ?, correo = ? 
+                +"WHERE idCuartel = ?";
+        System.out.println(""+cuartel);
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, cuartel.getNombreCuartel());
 //            ps.setString(2, cuartel.getDireccion());
 //            ps.setInt(3, cuartel.getCoordX());
 //            ps.setInt(4, cuartel.getCoordY());
 //            ps.setString(5, cuartel.getTelefono());
 //            ps.setString(6, cuartel.getCorreo());
 //            ps.setInt(7, cuartel.getIdCuartel());
-//
-//            int exito = ps.executeUpdate();
-//
-//            if (exito == 1) {
-//                JOptionPane.showMessageDialog(null, "Cuartel modificado exitosamente.");
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Error al modificar el cuartel." );
-//                
-//    
-//            }
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//    JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla cuartel. Detalles: " + ex.getMessage());
-//            
-//            JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla cuartel.");
-//        }
 
-             String sql = "UPDATE cuartel SET nombreCuartel = ?, direccion = ?, coordX = ?, coordY = ?, telefono = ?, correo = ? WHERE Cuartel = ?"; // Cambia "Cuartel" a "idCuartel" o la columna adecuada en tu base de datos
+            int exito = ps.executeUpdate();
 
-    try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, cuartel.getNombreCuartel());
-        ps.setString(2, cuartel.getDireccion());
-        ps.setInt(3, cuartel.getCoordX());
-        ps.setInt(4, cuartel.getCoordY());
-        ps.setString(5, cuartel.getTelefono());
-        ps.setString(6, cuartel.getCorreo());
-        ps.setInt(7, cuartel.getCuartel());
-
-        int exito = ps.executeUpdate();
-        if (exito == 1) {
-            JOptionPane.showMessageDialog(null, "Cuartel modificado exitosamente.");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró el cuartel con ID " + cuartel.getCuartel() + " para modificar.");
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Cuartel modificado exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al modificar el cuartel.");
+            }
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla cuartel.");
         }
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel: " + ex.getMessage());
-    }
+    
 
 }
 //------------------------------------------------------------------------------
 
 public void eliminarCuartel(int id){
-    String sql="UPDATE cuartel SET estadoC=0 WHERE Cuartel=?";
+    String sql="UPDATE cuartel SET estadoC=0 WHERE idCuartel=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -135,7 +112,7 @@ public int mostrarOpcionesYObtenerSeleccion(Connection con) {
     int idCuartelElegido = -1; // Valor predeterminado para indicar que no se ha seleccionado ningún cuartel
     List<String> nombresCuartel = new ArrayList<>();
 
-    String sql = "SELECT cuartel, nombreCuartel FROM cuartel WHERE estadoC = 1";
+    String sql = "SELECT idCuartel, nombreCuartel FROM cuartel WHERE estadoC = 1";
     //System.out.println(""+sql);
 
     try {
@@ -143,10 +120,10 @@ public int mostrarOpcionesYObtenerSeleccion(Connection con) {
         ResultSet rs = ps.executeQuery();
         
         while (rs.next()) {
-            int Cuartel = rs.getInt("Cuartel");
+            int idCuartel = rs.getInt("idCuartel");
             String nombreCuartel = rs.getString("nombreCuartel");
 
-            nombresCuartel.add(Cuartel + ". " + nombreCuartel);
+            nombresCuartel.add(idCuartel + ". " + nombreCuartel);
         }
         ps.close();
 
@@ -170,7 +147,7 @@ public int mostrarOpcionesYObtenerSeleccion(Connection con) {
     } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, "Error al obtener nombres de cuarteles: ");
     }
-    //System.out.println(""+idCuartelElegido);
+
     return idCuartelElegido;
 }
 
@@ -194,47 +171,15 @@ public boolean existeCuartelConNombre(String nombreCuartel) {
 
 
 //buscu un cuartel por id y lo devuelvo
-//public Cuartel buscarCuartelPorId(int Cuartel, Connection con) {
-//    String sql = "SELECT nombreCuartel, direccion, coordX, coordY, telefono, correo, estadoC "
-//            + "FROM cuartel WHERE Cuartel = ? AND estadoC = 1";
-//
-//    Cuartel cuartel = null;
-//    
-//
-//    try {
-//        PreparedStatement ps = con.prepareStatement(sql);
-//        ps.setInt(1, Cuartel);
-//        ResultSet rs = ps.executeQuery();
-//
-//        if (rs.next()) {
-//            cuartel = new Cuartel();
-//            cuartel.setNombreCuartel(rs.getString("nombreCuartel"));
-//            cuartel.setDireccion(rs.getString("direccion"));
-//            cuartel.setCoordX(rs.getInt("coordX"));
-//            cuartel.setCoordY(rs.getInt("coordY"));
-//            cuartel.setTelefono(rs.getString("telefono"));
-//            cuartel.setCorreo(rs.getString("correo"));
-//            cuartel.setEstadoC(rs.getBoolean("estadoC"));
-//        } else {
-//            JOptionPane.showMessageDialog(null, "No existe el cuartel con el ID indicado");
-//        }
-//        ps.close();
-//    } catch (SQLException ex) {
-//        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel: ");
-//    }
-//    System.out.println(""+cuartel.getCuartel());
-//
-//    return cuartel;
-
-public Cuartel buscarCuartelPorId(int Cuartel, Connection con) {
+public Cuartel buscarCuartelPorId(int idCuartel) {
     String sql = "SELECT nombreCuartel, direccion, coordX, coordY, telefono, correo, estadoC "
-            + "FROM cuartel WHERE Cuartel = ? AND estadoC = 1";
+            + "FROM cuartel WHERE idCuartel = ? AND estadoC = 1";
 
     Cuartel cuartel = null;
 
     try {
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, Cuartel);
+        ps.setInt(1, idCuartel);
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {
@@ -251,35 +196,22 @@ public Cuartel buscarCuartelPorId(int Cuartel, Connection con) {
         }
         ps.close();
     } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel: " + ex.getMessage());
-    }
-
-    if (cuartel != null) {
-        // Imprime el contenido de cuartel antes de retornarlo
-        System.out.println("Contenido del cuartel:");
-        System.out.println("Nombre: " + cuartel.getNombreCuartel());
-        System.out.println("Dirección: " + cuartel.getDireccion());
-        System.out.println("CoordX: " + cuartel.getCoordX());
-        System.out.println("CoordY: " + cuartel.getCoordY());
-        System.out.println("Teléfono: " + cuartel.getTelefono());
-        System.out.println("Correo: " + cuartel.getCorreo());
-        System.out.println("Estado: " + cuartel.isEstadoC());
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel: ");
     }
 
     return cuartel;
 }
 
-
 //-----------------------------------------------------------------
 // aca esta el problemon....
 
-public void actualizarNombreCuartel(int Cuartel, String nuevoNombre) {
-    String sql = "UPDATE cuartel SET nombreCuartel = ? WHERE Cuartel = ? AND estadoC = 1";
+public void actualizarNombreCuartel(int idCuartel, String nuevoNombre) {
+    String sql = "UPDATE cuartel SET nombreCuartel = ? WHERE idCuartel = ? AND estadoC = 1";
 
     try {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, nuevoNombre);
-        ps.setInt(2, Cuartel);
+        ps.setInt(2, idCuartel);
 
         int exito = ps.executeUpdate();
 
@@ -366,4 +298,170 @@ public void cambiarEstadoCuartel(int idCuartel, Connection con) {
 
 //---------------------------------------------------------------------------------
 
+
+//-------------------------------MODIFICAR------------------------------------
+
+//-------------------------------Modificar cuartel---------------------------
+//--------------modificar nombre---------------
+
+public void modificarNombre(int idCuaM,Connection con) {
+        String nuevoNombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre del cuartel:");
+
+        String sql = "UPDATE cuartel SET nombreCuartel=? WHERE idCuartel=?";
+
+        try {
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setString(1, nuevoNombre);
+                ps.setInt(2, idCuaM);
+
+                int exito = ps.executeUpdate();
+                if (exito == 1) {
+                    JOptionPane.showMessageDialog(null, "Nombre del cuartel actualizado exitosamente.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo actualizar el nombre del cuartel. Asegúrate de que el cuartel sea válido.");
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar el nombre del cuartel.");
+        }
+    }
+//--------------------------------------------------------------------------------
+
+//-----------Modificar Direccion---------------------------
+
+public void modificarDireccion(int idCuaM, Connection con) {
+    String nuevaDireccion = JOptionPane.showInputDialog("Ingrese la nueva dirección del cuartel:");
+
+    String sql = "UPDATE cuartel SET direccion=? WHERE idCuartel=?";
+
+    try {
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nuevaDireccion);
+            ps.setInt(2, idCuaM);
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Dirección del cuartel actualizada exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar la dirección del cuartel. Asegúrate de que el cuartel sea válido.");
+            }
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar la dirección del cuartel: " + ex.getMessage());
+    }
 }
+//-----------------------Modificar coordX---------------------------------------------------------
+
+public void modificarCoordX(int idCuaM, Connection con) {
+    String nuevaCoordX = JOptionPane.showInputDialog("Ingrese la nueva cordenada X del cuartel:");
+
+    String sql = "UPDATE cuartel SET coordX=? WHERE idCuartel=?";
+
+    try {
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nuevaCoordX);
+            ps.setInt(2, idCuaM);
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Cordenada X actualizada exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar la cordenada X del cuartel. Asegúrate de que el cuartel sea válido.");
+            }
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar la cordenada X: " + ex.getMessage());
+    }
+}
+
+//-----------------------Modificar coordX---------------------------------------------------------
+
+public void modificarCoordY(int idCuaM, Connection con) {
+    String nuevaCoordY = JOptionPane.showInputDialog("Ingrese la nueva cordenada Y del cuartel:");
+
+    String sql = "UPDATE cuartel SET coordY=? WHERE idCuartel=?";
+
+    try {
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nuevaCoordY);
+            ps.setInt(2, idCuaM);
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Cordenada Y actualizada exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar la cordenada Y del cuartel. Asegúrate de que el cuartel sea válido.");
+            }
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar la cordenada Y: " + ex.getMessage());
+    }
+}
+
+//-----------------------Modificar Telefono---------------------------------------------------------
+
+public void modificarTelefono(int idCuaM, Connection con) {
+    String nuevoTel = JOptionPane.showInputDialog("Ingrese el nuevo telefono del cuartel:");
+
+    String sql = "UPDATE cuartel SET telefono=? WHERE idCuartel=?";
+
+    try {
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nuevoTel);
+            ps.setInt(2, idCuaM);
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Telefono del cuartel actualizado exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar el telefono del cuartel. Asegúrate de que el cuartel sea válido.");
+            }
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar el telefono del cuartel: " + ex.getMessage());
+    }
+}
+
+//-----------------------Modificar Telefono---------------------------------------------------------
+
+public void modificarCorreo(int idCuaM, Connection con) {
+    String nvoCorreo = JOptionPane.showInputDialog("Ingrese el nuevo telefono del cuartel:");
+
+    String sql = "UPDATE cuartel SET correo=? WHERE idCuartel=?";
+
+    try {
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nvoCorreo);
+            ps.setInt(2, idCuaM);
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Correo del cuartel actualizado exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar el correo del cuartel. Asegúrate de que el cuartel sea válido.");
+            }
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar el correo del cuartel: " + ex.getMessage());
+    }
+}
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
