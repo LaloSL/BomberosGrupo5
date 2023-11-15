@@ -171,6 +171,62 @@ public boolean existeCuartelConNombre(String nombreCuartel) {
 
 
 //buscu un cuartel por id y lo devuelvo
+//public Cuartel buscarCuartelPorId(int idCuartel) {
+//    String sql = "SELECT `idCuartel`, `nombreCuartel`, `direccion`, `coordX`, `coordY`, `telefono`, `correo`, `estadoC` "
+//            + "FROM `cuartel` WHERE `idCuartel` = ? AND `estadoC` = 1";
+//
+//    Cuartel cuartel = null;
+//
+//    try {
+//        PreparedStatement ps = con.prepareStatement(sql);
+//        ps.setInt(1, idCuartel);
+//        ResultSet rs = ps.executeQuery();
+//
+//        if (rs.next()) {
+//            cuartel = new Cuartel(rs.getInt("idCuartel"), rs.getString("nombreCuartel"), rs.getString("direccion"),
+//                                  rs.getInt("coordX"), rs.getInt("coordY"), rs.getString("telefono"),
+//                                  rs.getString("correo"), rs.getBoolean("estadoC"));
+//        } else {
+//            JOptionPane.showMessageDialog(null, "No existe el cuartel con el ID indicado");
+//        }
+//        ps.close();
+//    } catch (SQLException ex) {
+//        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel: " + ex.getMessage());
+//    }
+//
+//    return cuartel;
+//}
+//
+////public Cuartel buscarCuartelPorId(int idCuartel) {
+////    String sql = "SELECT idCuartel, nombreCuartel, direccion, coordX, coordY, telefono, correo, estadoC "
+////            + "FROM cuartel WHERE idCuartel = ? AND estadoC = 1";
+////
+////    Cuartel cuartel = null;
+////
+////    try {
+////        PreparedStatement ps = con.prepareStatement(sql);
+////        ps.setInt(1, idCuartel);
+////        ResultSet rs = ps.executeQuery();
+////
+////        if (rs.next()) {
+////            // Incluye idCuartel al construir el objeto Cuartel
+////            cuartel = new Cuartel(rs.getInt("idCuartel"), rs.getString("nombreCuartel"), rs.getString("direccion"),
+////                                  rs.getInt("coordX"), rs.getInt("coordY"), rs.getString("telefono"),
+////                                  rs.getString("correo"), rs.getBoolean("estadoC"));
+////        } else {
+////            JOptionPane.showMessageDialog(null, "No existe el cuartel con el ID indicado");
+////        }
+////        ps.close();
+////    } catch (SQLException ex) {
+////        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel: ");
+////    }
+////
+////    return cuartel;
+////}
+//
+
+
+
 public Cuartel buscarCuartelPorId(int idCuartel) {
     String sql = "SELECT nombreCuartel, direccion, coordX, coordY, telefono, correo, estadoC "
             + "FROM cuartel WHERE idCuartel = ? AND estadoC = 1";

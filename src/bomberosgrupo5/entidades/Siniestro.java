@@ -2,8 +2,9 @@
 
 package bomberosgrupo5.entidades;
 
-import java.sql.Timestamp;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 //** @author Asus
 public class Siniestro {
@@ -15,13 +16,13 @@ public class Siniestro {
     private String detalles;
     private int puntuacion;
     private Brigada idBrigada;
-    private Timestamp fechaSiniestro;
-    private Timestamp fechaResol;
+    private LocalDateTime fechaSiniestro;
+    private LocalDateTime fechaResol;
 
     public Siniestro() {
     }
 
-    public Siniestro(int idSiniestro, String tipo, int coordX, int coordY, String detalles, int puntuacion, Brigada idBrigada, Timestamp fechaSiniestro, Timestamp fechaResol) {
+    public Siniestro(int idSiniestro, String tipo, int coordX, int coordY, String detalles, int puntuacion, Brigada idBrigada, LocalDateTime fechaSiniestro, LocalDateTime fechaResol) {
         this.idSiniestro = idSiniestro;
         this.tipo = tipo;
         this.coordX = coordX;
@@ -33,7 +34,7 @@ public class Siniestro {
         this.fechaResol = fechaResol;
     }
 
-    public Siniestro(String tipo, int coordX, int coordY, String detalles, int puntuacion, Brigada idBrigada, Timestamp fechaSiniestro, Timestamp fechaResol) {
+    public Siniestro(String tipo, int coordX, int coordY, String detalles, int puntuacion, Brigada idBrigada, LocalDateTime fechaSiniestro, LocalDateTime fechaResol) {
         this.tipo = tipo;
         this.coordX = coordX;
         this.coordY = coordY;
@@ -100,19 +101,19 @@ public class Siniestro {
         this.idBrigada = idBrigada;
     }
 
-    public Timestamp getFechaSiniestro() {
+    public LocalDateTime getFechaSiniestro() {
         return fechaSiniestro;
     }
 
-    public void setFechaSiniestro(Timestamp fechaSiniestro) {
+    public void setFechaSiniestro(LocalDateTime fechaSiniestro) {
         this.fechaSiniestro = fechaSiniestro;
     }
 
-    public Timestamp getFechaResol() {
+    public LocalDateTime getFechaResol() {
         return fechaResol;
     }
 
-    public void setFechaResol(Timestamp fechaResol) {
+    public void setFechaResol(LocalDateTime fechaResol) {
         this.fechaResol = fechaResol;
     }
 
@@ -121,7 +122,6 @@ public class Siniestro {
         return "Siniestro{" + "idSiniestro=" + idSiniestro + ", tipo=" + tipo + ", coordX=" + coordX + ", coordY=" + coordY + ", detalles=" + detalles + ", puntuacion=" + puntuacion + ", idBrigada=" + idBrigada + ", fechaSiniestro=" + fechaSiniestro + ", fechaResol=" + fechaResol + '}';
     }
 
-    
-
+   
     
 }

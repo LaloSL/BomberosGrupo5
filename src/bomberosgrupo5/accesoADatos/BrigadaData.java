@@ -21,7 +21,7 @@ public class BrigadaData {
 //------------------------------------------------------------------------------
 //método guardar Brigada:
     public void guardarBrigada(Brigada brigada) {
-        String sql = "INSERT INTO brigada (nombreBrig, especialidad, libre, Cuartel, estadoBr) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO brigada (nombreBrig, especialidad, libre, idCuartel, estadoBr) VALUES (?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -47,6 +47,33 @@ public class BrigadaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla brigada: " + ex.getMessage());
         }
     }
+//    public void guardarBrigada(Brigada brigada) {
+//        String sql = "INSERT INTO brigada (nombreBrig, especialidad, libre, Cuartel, estadoBr) VALUES (?, ?, ?, ?, ?)";
+//
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//            ps.setString(1, brigada.getNombreBrig());
+//            ps.setString(2, brigada.getEspecialidad());
+//            ps.setBoolean(3, brigada.isLibre());
+//            ps.setInt(4, brigada.getCuartel().getIdCuartel());
+//            ps.setBoolean(5, brigada.isEstadoBr());
+//
+//            int rowsAffected = ps.executeUpdate();
+//
+//            if (rowsAffected > 0) {
+//                ResultSet rs = ps.getGeneratedKeys();
+//                if (rs.next()) {
+//                    brigada.setIdBrigada(rs.getInt(1));
+//                    JOptionPane.showMessageDialog(null, "Brigada Agregada Exitosamente");
+//                }
+//                ps.close();
+//            } else {
+//                JOptionPane.showMessageDialog(null, "La ID de brigada ya existe en la base de datos. No se pudo agregar la brigada.");
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla brigada: " + ex.getMessage());
+//        }
+//    }
 
 //    ---------------------------------------------------------------------------------------
     public int obtenerIdBrigada(String nombreBrigada) {
@@ -85,7 +112,7 @@ public class BrigadaData {
         int cantidadBrigadas = 0;
 
         try {
-            String sql = "SELECT COUNT(*) AS cantidad FROM brigada WHERE Cuartel = ? AND estadoBr = 1";
+            String sql = "SELECT COUNT(*) AS cantidad FROM brigada WHERE idCuartel = ? AND estadoBr = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, numeroCuartel);
 
@@ -113,7 +140,7 @@ public class BrigadaData {
 
 //brigadas con el mismo nombre
     public boolean existeBrigadaConNombreEnCuartel(String nombreBrigada, int idCuartel) {
-        String sql = "SELECT COUNT(*) FROM brigada WHERE nombreBrig = ? AND Cuartel = ?";
+        String sql = "SELECT COUNT(*) FROM brigada WHERE nombreBrig = ? AND idCuartel = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nombreBrigada);
@@ -480,4 +507,31 @@ public class BrigadaData {
     }
 
 //----------------------------------------------------------------------------------------------------------------- 
+    
+//--------------------------------------- OPCION ELIMINAR SINIESTRO--------------------------------------------------------
+//--------------------------libero brigada---------------------------------------------
+
+public void marcarBrigadaComoLibre(Connection con, int idBrigada) {
+    String sql = "UPDATE brigada SET libre = 1 WHERE idBrigada = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idBrigada);
+
+        int filasAfectadas = ps.executeUpdate();
+
+        if (filasAfectadas > 0) {
+            JOptionPane.showMessageDialog(null, "Brigada libre");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró la Brigada con ID: " + idBrigada);
+        }
+
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al marcar la Brigada como libre: " + ex.getMessage());
+    }
+}
+
+//------------------------------------------------------------------------------------  
+//--------------------------------------FIN OPCION ELIMINAR SINIESTRO-------------------------------------------------------
 }

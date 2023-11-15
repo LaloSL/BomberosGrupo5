@@ -5,7 +5,7 @@ package bomberosgrupo5.entidades;
 //** @author Asus
 public class Cuartel {
 
-    private int Cuartel;
+    private int idCuartel;
     private String nombreCuartel;
     private String direccion;
     private int coordX;
@@ -19,7 +19,7 @@ public class Cuartel {
     }
 
     public Cuartel(int idCuartel, String nombreCuartel, String direccion, int coordX, int coordY, String telefono, String correo, boolean estadoC) {
-        this.Cuartel = idCuartel;
+        this.idCuartel = idCuartel;
         this.nombreCuartel = nombreCuartel;
         this.direccion = direccion;
         this.coordX = coordX;
@@ -39,13 +39,12 @@ public class Cuartel {
         this.estadoC = estadoC;
     }
 
-    // Gettres & Setters:
     public int getIdCuartel() {
-        return Cuartel;
+        return idCuartel;
     }
 
     public void setIdCuartel(int idCuartel) {
-        this.Cuartel = idCuartel;
+        this.idCuartel = idCuartel;
     }
 
     public String getNombreCuartel() {
@@ -104,10 +103,10 @@ public class Cuartel {
         this.estadoC = estadoC;
     }
 
-    //--------------------------------------------------------------------------
     @Override
     public String toString() {
-        return "Cuartel{" + "idCuartel=" + Cuartel + ", nombreCuartel=" + nombreCuartel + ", direccion=" + direccion + ", coordX=" + coordX + ", coordY=" + coordY + ", telefono=" + telefono + ", correo=" + correo + ", estadoC=" + estadoC + '}';
+        return "Cuartel{" + "idCuartel=" + idCuartel + ", nombreCuartel=" + nombreCuartel + ", direccion=" + direccion + ", coordX=" + coordX + ", coordY=" + coordY + ", telefono=" + telefono + ", correo=" + correo + ", estadoC=" + estadoC + '}';
     }
 
+   
 }

@@ -83,33 +83,56 @@ public class BomberosGrupo5 {
                             //--------------------------------------AGREGAR BRIGADA------------------
                             case 2:
                                 JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Brigada");
+
+                                // Obtener el cuartel por su ID
                                 int idCuartelElegido = cua1.mostrarOpcionesYObtenerSeleccion(connection);
 
-                                Cuartel cuartel = cua1.buscarCuartelPorId(idCuartelElegido); // Obtiene el cuartel por su ID
+                                // Verificar si hay lugar para una nueva brigada en el cuartel
+                                if (brig.hayCupoParaNuevaBrigada(idCuartelElegido)) {
+                                    String nombreBrigada = JOptionPane.showInputDialog("Ingrese el nombre de la brigada:");
 
-                                if (cuartel != null) {
-                                    // Verificar si hay lugar para una nueva brigada en el cuartel
-                                    if (brig.hayCupoParaNuevaBrigada(idCuartelElegido)) {
-                                        String nombreBrigada = JOptionPane.showInputDialog("Ingrese el nombre de la brigada:");
-
-                                        // Verificar si el nombre de la brigada ya existe en ese cuartel
-                                        if (brig.existeBrigadaConNombreEnCuartel(nombreBrigada, idCuartelElegido)) {
-                                            JOptionPane.showMessageDialog(null, "Ya existe una brigada con el mismo nombre en este cuartel. No se puede agregar.");
-                                        } else {
-                                            String especialidad = JOptionPane.showInputDialog("Ingrese la especialidad de la brigada:");
-
-                                            Brigada briga = new Brigada(nombreBrigada, especialidad, true, cuartel, true);
-                                            brig.guardarBrigada(briga);
-                                            JOptionPane.showMessageDialog(null, "Brigada agregada exitosamente.");
-                                        }
+                                    // Verificar si el nombre de la brigada ya existe en ese cuartel
+                                    if (brig.existeBrigadaConNombreEnCuartel(nombreBrigada, idCuartelElegido)) {
+                                        JOptionPane.showMessageDialog(null, "Ya existe una brigada con el mismo nombre en este cuartel. No se puede agregar.");
                                     } else {
-                                        JOptionPane.showMessageDialog(null, "El cuartel está completo. No se puede agregar más brigadas.");
+                                        String especialidad = brig.elegirEspecialidad(connection);
+
+                                        // Crear y guardar la brigada
+                                        Brigada briga = new Brigada(nombreBrigada, especialidad, true, idCuartelElegido, true);
+                                        brig.guardarBrigada(briga);
+                                        JOptionPane.showMessageDialog(null, "Brigada agregada exitosamente.");
                                     }
                                 } else {
-                                    JOptionPane.showMessageDialog(null, "No se pudo obtener el cuartel. Asegúrate de que el cuartel seleccionado sea válido.");
+                                    JOptionPane.showMessageDialog(null, "El cuartel está completo. No se puede agregar más brigadas.");
                                 }
                                 break;
 
+//                            case 2:
+//                                JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Brigada");
+//                                int idCuartelElegido = cua1.mostrarOpcionesYObtenerSeleccion(connection);
+//                                Cuartel cuartel1 = cua1.buscarCuartelPorId(idCuartelElegido); // Obtiene el cuartel por su ID
+//                                if (cuartel1 != null) {
+//                                    // Verificar si hay lugar para una nueva brigada en el cuartel
+//                                    if (brig.hayCupoParaNuevaBrigada(idCuartelElegido)) {
+//                                        String nombreBrigada = JOptionPane.showInputDialog("Ingrese el nombre de la brigada:");
+//
+//                                        // Verificar si el nombre de la brigada ya existe en ese cuartel
+//                                        if (brig.existeBrigadaConNombreEnCuartel(nombreBrigada, idCuartelElegido)) {
+//                                            JOptionPane.showMessageDialog(null, "Ya existe una brigada con el mismo nombre en este cuartel. No se puede agregar.");
+//                                        } else {
+//                                           String especialidad = brig.elegirEspecialidad(connection);
+//
+//                                            Brigada briga = new Brigada(nombreBrigada, especialidad, true, cuartel1, true);
+//                                            brig.guardarBrigada(briga);
+//                                            JOptionPane.showMessageDialog(null, "Brigada agregada exitosamente.");
+//                                        }
+//                                    } else {
+//                                        JOptionPane.showMessageDialog(null, "El cuartel está completo. No se puede agregar más brigadas.");
+//                                    }
+//                                } else {
+//                                    JOptionPane.showMessageDialog(null, "No se pudo obtener el cuartel. Asegúrate de que el cuartel seleccionado sea válido.");
+//                                }
+//                                break;
                             //-------------------------------AGREGAR BOMBERO-------------------------------------    
                             case 3:
 
@@ -118,11 +141,9 @@ public class BomberosGrupo5 {
 
                                 Brigada idBrigada = brig.buscarBrigadaPorId(idBrigadaElegido, connection);
 
-                                //Bombero bomb = bom.buscarBomberoId(idBrigadaElegido);
                                 if (idBrigada != null) {
 
                                     if (bom.hayCupoParaNuevoBombero(idBrigadaElegido)) {
-                                        //String nombreBrigada = JOptionPane.showInputDialog("Ingrese el nombre de la brigada:");
 
                                         int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del Bombero: "));
                                         String nombreApellido = JOptionPane.showInputDialog("Ingrese nombre y apellido del Bombero");
@@ -138,7 +159,6 @@ public class BomberosGrupo5 {
                                             Bombero bom1 = new Bombero(dni, nombreApellido, grupoSanguineo, fechaNac, celular, idBrigada, true);
                                             bom.guardarBombero(bom1);
 
-                                            //JOptionPane.showMessageDialog(null, "Bombero agregado exitosamente.");
                                         }
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Brifada Completa. No se puede agregar más bomberos.");
@@ -261,7 +281,7 @@ public class BomberosGrupo5 {
                                                 case 2:
                                                     String especialidad = brig.elegirEspecialidad(connection);
                                                     brig.modificarEspecialidad(idBrigadaAModificar, especialidad, connection);
-                                                   
+
                                                     break;
                                                 case 3:
                                                     boolean nuevoEstado = brig.obtenerEstado();
@@ -412,27 +432,77 @@ public class BomberosGrupo5 {
                         switch (subOpcionSiniestro) {
                             //--------------------Agregar Siniestro-----------------------
                             case 1:
-                                JOptionPane.showMessageDialog(null, "Selecciona a que brigada vas a cargar este siniestro");
+                                JOptionPane.showMessageDialog(null, "Selecciona a qué brigada vas a cargar este siniestro");
                                 int idBrigadaElegido = brig.brigadasLibres(connection);
                                 brig.brigadaOcupada(idBrigadaElegido, connection);
                                 String tipo = JOptionPane.showInputDialog("Ingrese el tipo de siniestro:");
                                 String fechaHoraSiniestroI = JOptionPane.showInputDialog("Ingrese la fecha y hora del siniestro (dd/MM/yyyy HH:mm):");
-                                int coordx = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada x:"));
-                                int coordy = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada y:"));
-                                String detalles = JOptionPane.showInputDialog("Ingrese los detalles del siniestro:");
-                                String fechaHoraResolI = JOptionPane.showInputDialog("Ingrese la fecha de resolución en caso de tener o deje el campo en blanco:");
-                                int puntuacion = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la puntuación:"));
 
                                 try {
-                                    Timestamp fechaHoraSiniestro = sin.convertirAFechaHora(fechaHoraSiniestroI);
-                                    Timestamp fechaHoraResol = (fechaHoraResolI.isEmpty()) ? null : sin.convertirAFechaHora(fechaHoraResolI);
+                                    LocalDateTime fechaHoraSiniestro = sin.convertirAFechaHora(fechaHoraSiniestroI);
 
-                                    sin.insertarSiniestro(connection, idBrigadaElegido, tipo, fechaHoraSiniestro, coordx, coordy, detalles, fechaHoraResol, puntuacion);
+                                    int coordx;
+                                    while (true) {
+                                        String coordXInput = JOptionPane.showInputDialog("Ingrese la coordenada x:");
+                                        if (coordXInput.isEmpty()) {
+                                            JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico para la coordenada x.");
+                                        } else {
+                                            try {
+                                                coordx = Integer.parseInt(coordXInput);
+                                                break; // Salir del bucle si la conversión fue exitosa
+                                            } catch (NumberFormatException e) {
+                                                JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico válido para la coordenada x.");
+                                            }
+                                        }
+                                    }
 
-                                    JOptionPane.showMessageDialog(null, "Siniestro registrado con éxito.");
-                                } catch (ParseException | SQLException e) {
+                                    int coordy;
+                                    while (true) {
+                                        String coordYInput = JOptionPane.showInputDialog("Ingrese la coordenada y:");
+                                        if (coordYInput.isEmpty()) {
+                                            JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico para la coordenada y.");
+                                        } else {
+                                            try {
+                                                coordy = Integer.parseInt(coordYInput);
+                                                break; // Salir del bucle si la conversión fue exitosa
+                                            } catch (NumberFormatException e) {
+                                                JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico válido para la coordenada y.");
+                                            }
+                                        }
+                                    }
+
+                                    String detalles = JOptionPane.showInputDialog("Ingrese los detalles del siniestro:");
+
+                                    int puntuacion;
+                                    while (true) {
+                                        String puntuacionInput = JOptionPane.showInputDialog("Ingrese la puntuación si finalizo siniestro o un cero si lo carga por primera vez:");
+                                        if (puntuacionInput.isEmpty()) {
+                                            JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico para la puntuación.");
+                                        } else {
+                                            try {
+                                                puntuacion = Integer.parseInt(puntuacionInput);
+                                                break; // Salir del bucle si la conversión fue exitosa
+                                            } catch (NumberFormatException e) {
+                                                JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico válido para la puntuación.");
+                                            }
+                                        }
+                                    }
+
+                                    try {
+                                        String fechaHoraResolI = JOptionPane.showInputDialog("Ingrese la fecha de resolución en caso de tener o deje el campo en blanco:");
+                                        LocalDateTime fechaHoraResol = (fechaHoraResolI.isEmpty()) ? null : sin.convertirAFechaHora(fechaHoraResolI);
+
+                                        sin.insertarSiniestro(connection, idBrigadaElegido, tipo, fechaHoraSiniestro, coordx, coordy, detalles, fechaHoraResol, puntuacion);
+
+                                        JOptionPane.showMessageDialog(null, "Siniestro registrado con éxito.");
+                                    } catch (SQLException | ParseException e) {
+                                        e.printStackTrace();
+                                        JOptionPane.showMessageDialog(null, "Error al insertar el siniestro en la base de datos.");
+                                    }
+
+                                } catch (ParseException e) {
                                     e.printStackTrace();
-                                    JOptionPane.showMessageDialog(null, "Error al convertir la fecha y hora o al insertar el siniestro en la base de datos.");
+                                    JOptionPane.showMessageDialog(null, "Error al convertir la fecha y hora.");
                                 }
                                 break;
 
@@ -497,9 +567,10 @@ public class BomberosGrupo5 {
                             //---------------Eliminar Siniestro------------------------
                             case 3:
                                 int idSiniestroSeleccionado = sin.mostrarSiniestros(connection);
-                                System.out.println("codigo: "+idSiniestroSeleccionado);
                                 int idBrigadaAsociada = sin.obtenerIdBrigadaPorIdSiniestro(connection, idSiniestroSeleccionado);
-                                
+                                brig.marcarBrigadaComoLibre(connection, idBrigadaAsociada);
+                                sin.eliminarSiniestro(connection, idSiniestroSeleccionado);
+
                                 break;
 
                             case 4:
