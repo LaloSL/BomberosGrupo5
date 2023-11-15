@@ -259,7 +259,9 @@ public class BomberosGrupo5 {
 
                                                     break;
                                                 case 2:
-                                                    brig.modificarEspecialidad(idBrigadaAModificar, connection);
+                                                    String especialidad = brig.elegirEspecialidad(connection);
+                                                    brig.modificarEspecialidad(idBrigadaAModificar, especialidad, connection);
+                                                   
                                                     break;
                                                 case 3:
                                                     boolean nuevoEstado = brig.obtenerEstado();
@@ -473,12 +475,12 @@ public class BomberosGrupo5 {
                                                 case 5:
                                                     sin.modificarDetallesSiniestro(idSiniestroAModificar, connection);
                                                     break;
-//                                                case 6:
-//                                                    sin.modificarFechaResolucion(idSiniestroAModificar, connection);
-//                                                    break;
-//                                                case 7:
-//                                                    sin.modificarPuntuacion(idSiniestroAModificar, connection);
-//                                                    break;
+                                                case 6:
+                                                    sin.modificarFechaResolucion(idSiniestroAModificar, connection);
+                                                    break;
+                                                case 7:
+                                                    sin.modificarPuntuacion(idSiniestroAModificar, connection);
+                                                    break;
                                                 default:
                                                     JOptionPane.showMessageDialog(null, "Opción no válida");
                                                     break;
@@ -494,9 +496,10 @@ public class BomberosGrupo5 {
 
                             //---------------Eliminar Siniestro------------------------
                             case 3:
-                                // Código para eliminar un siniestro
-                                // Puedes utilizar un método similar a sin1.mostrarSiniestrosAEliminar(connection)
-                                // Asegúrate de obtener el ID del siniestro que se va a eliminar del usuario
+                                int idSiniestroSeleccionado = sin.mostrarSiniestros(connection);
+                                System.out.println("codigo: "+idSiniestroSeleccionado);
+                                int idBrigadaAsociada = sin.obtenerIdBrigadaPorIdSiniestro(connection, idSiniestroSeleccionado);
+                                
                                 break;
 
                             case 4:

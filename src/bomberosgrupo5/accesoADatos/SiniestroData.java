@@ -374,4 +374,89 @@ public void modificarPuntuacion(int idSiniestro, Connection con) {
 //-----------------------------------------------------------------------
 
 //--------------------------------FIN MODIFICAR SINIESTRO--------------------
+
+
+//-----------------------------ELIMINAR SINIESTRO------------------
+
+//--------------------------listar siniestro para devuelve idCodigo-------------
+
+public int mostrarSiniestros(Connection con) {
+    int idSiniestroSeleccionado = -1;
+    List<String> siniestros = new ArrayList<>();
+
+    String sql = "SELECT idCodigo, detalles FROM siniestro WHERE estadoS = 1";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int idSiniestro = rs.getInt("idCodigo");
+            String detalles = rs.getString("detalles");
+
+            siniestros.add(idSiniestro + ". Detalles: " + detalles);
+        }
+        ps.close();
+
+        if (!siniestros.isEmpty()) {
+            String seleccion = (String) JOptionPane.showInputDialog(null,
+                    "Elija un siniestro:\n" + String.join("\n", siniestros),
+                    "Selección de Siniestro",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    siniestros.toArray(),
+                    siniestros.get(0));
+
+            if (seleccion != null) {
+                String[] parts = seleccion.split("\\. ");
+                if (parts.length == 2) {
+                    idSiniestroSeleccionado = Integer.parseInt(parts[0]);
+                    System.out.println("ID del Siniestro seleccionado: " + idSiniestroSeleccionado);
+                }
+            }
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener la lista de siniestros: " + ex.getMessage());
+    }
+
+    return idSiniestroSeleccionado;
 }
+
+//---------------------------------------------------------------------------
+
+//-------------------------recuperar idBrigada desde idCodigo-------------------------
+
+public int obtenerIdBrigadaPorIdSiniestro(Connection con, int idSiniestro) {
+    int idBrigada = -1;
+
+    String sql = "SELECT idBrigada FROM siniestro WHERE idCodigo = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idSiniestro);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            idBrigada = rs.getInt("idBrigada");
+            System.out.println("ID de la Brigada asociada al Siniestro: " + idBrigada);
+        } else {
+            System.out.println("No se encontró el siniestro con ID: " + idSiniestro);
+        }
+
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener el ID de la Brigada: " + ex.getMessage());
+    }
+
+    return idBrigada;
+}
+
+//------------------------------------------------------------------------------------
+
+//-----------------------------FIN ELIMINAR SINIESTRO-----------------------------
+
+}
+
+
+
