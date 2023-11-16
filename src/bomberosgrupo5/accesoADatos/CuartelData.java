@@ -332,7 +332,7 @@ public int mostrarCuartelesAEliminar(Connection con) {
 
 //---------------------cambiar estado de cuartel---------------------------------------
 public void cambiarEstadoCuartel(int idCuartel, Connection con) {
-    String sql = "UPDATE cuartel SET estadoC = 0 WHERE Cuartel = ?";
+    String sql = "UPDATE cuartel SET estadoC = 0 WHERE idCuartel = ?";
 
     try {
         PreparedStatement ps = con.prepareStatement(sql);

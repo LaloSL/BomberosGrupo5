@@ -28,7 +28,7 @@ public class BrigadaData {
             ps.setString(1, brigada.getNombreBrig());
             ps.setString(2, brigada.getEspecialidad());
             ps.setBoolean(3, brigada.isLibre());
-            ps.setInt(4, brigada.getCuartel().getIdCuartel());
+            ps.setInt(4, brigada.getIdCuartel());
             ps.setBoolean(5, brigada.isEstadoBr());
 
             int rowsAffected = ps.executeUpdate();
@@ -37,7 +37,7 @@ public class BrigadaData {
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
                     brigada.setIdBrigada(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Brigada Agregada Exitosamente");
+                    //JOptionPane.showMessageDialog(null, "Brigada Agregada Exitosamente");
                 }
                 ps.close();
             } else {
@@ -102,10 +102,10 @@ public class BrigadaData {
         return idBrigada;
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone(); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    protected Object clone() throws CloneNotSupportedException {
+//        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+//    }
 
 //-------------------desde aca------------------------
     public int contarBrigadasPorCuartel(int numeroCuartel) {
@@ -127,7 +127,7 @@ public class BrigadaData {
             // Manejar excepciones, por ejemplo, imprimir el error
             ex.printStackTrace();
         }
-        System.out.println("cant " + cantidadBrigadas);
+        //System.out.println("cant " + cantidadBrigadas);
         return cantidadBrigadas;
     }
 
@@ -316,7 +316,7 @@ public class BrigadaData {
     public List<Integer> obtenerIdsBrigadasPorIdCuartel(int idCuartel, Connection con) {
         List<Integer> idsBrigadas = new ArrayList<>();
 
-        String sql = "SELECT idBrigada FROM brigada WHERE Cuartel = ?";
+        String sql = "SELECT idBrigada FROM brigada WHERE idCuartel = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);

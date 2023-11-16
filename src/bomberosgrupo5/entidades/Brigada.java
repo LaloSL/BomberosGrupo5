@@ -92,6 +92,14 @@ public class Brigada {
         this.estadoBr = estadoBr;
     }
 
+    public void setIdCuartel(int idCuartel) {
+        this.idCuartel = idCuartel;
+    }
+
+    public int getIdCuartel() {
+        return idCuartel;
+    }
+
     @Override
     public String toString() {
         return "Brigada{" + "idBrigada=" + idBrigada + ", nombreBrig=" + nombreBrig + ", especialidad=" + especialidad + ", libre=" + libre + ", cuartel=" + cuartel + ", estadoBr=" + estadoBr + '}';
