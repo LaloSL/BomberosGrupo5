@@ -35,7 +35,7 @@ public class Brigada {
     }
     
 //    ---------------------agrego otro constructor donde le paso idcuartel solamente---------------------
-    public Brigada(String nombre, String especialidad, boolean activa, int idCuartel, boolean estadoBr) {
+    public Brigada(String nombreBrig, String especialidad, boolean libre, int idCuartel, boolean estadoBr) {
      this.nombreBrig = nombreBrig;
      this.especialidad = especialidad;
      this.libre = libre;
@@ -90,6 +90,14 @@ public class Brigada {
 
     public void setEstadoBr(boolean estadoBr) {
         this.estadoBr = estadoBr;
+    }
+
+    public void setIdCuartel(int idCuartel) {
+        this.idCuartel = idCuartel;
+    }
+
+    public int getIdCuartel() {
+        return idCuartel;
     }
 
     @Override
