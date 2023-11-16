@@ -6,10 +6,11 @@
 package bomberosgrupo5.vistas;
 
 import java.awt.Color;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-
+import javax.swing.JOptionPane;
 /**
  *
  * @author Asus
@@ -34,21 +35,11 @@ public class MenuView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icono=new ImageIcon(getClass().getResource("/BomberosGrupo5/recursos/Fondo.jpg"));
-        Image miImagen=icono.getImage();
-        escritorio = new javax.swing.JDesktopPane(){
-
-            public void paintComponent(Graphics g){
-                g.drawImage(miImagen,0,0,getWidth(),getHeight(),this);
-            }
-        };
+        escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuFormBombero = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,33 +55,21 @@ public class MenuView extends javax.swing.JFrame {
             .addGap(0, 279, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Bombero");
-
-        jMenuFormBombero.setText("Formulario Bombero");
-        jMenuFormBombero.addActionListener(new java.awt.event.ActionListener() {
+        jMenu1.setText("Cuartel");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuFormBomberoActionPerformed(evt);
+                jMenu1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuFormBombero);
-
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Cuartel");
-
-        jMenuItem2.setText("Formulario Cuartel");
-        jMenu2.add(jMenuItem2);
-
+        jMenu2.setText("Brigada");
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Brigada");
-
-        jMenuItem3.setText("Formulario Brigada");
-        jMenu3.add(jMenuItem3);
-
+        jMenu3.setText("Bombero");
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Siniestros");
+        jMenu4.setText("Siniestro");
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -99,27 +78,26 @@ public class MenuView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(escritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(escritorio)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuFormBomberoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFormBomberoActionPerformed
-        // TODO add your handling code here:
-        escritorio.removeAll();
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+escritorio.removeAll();
         escritorio.repaint();
-        FormularioBomberoView bombero = new FormularioBomberoView();
-        bombero.setVisible(true);
-        //cambia color de fondo
-        bombero.getContentPane().setBackground(new Color(68, 167, 132));
-        escritorio.add(bombero);
         
-    }//GEN-LAST:event_jMenuFormBomberoActionPerformed
+        CuartelView cuartel = new CuartelView();
+        cuartel.setVisible(true);
+        //cambia color de fondo
+       cuartel.getContentPane().setBackground(new Color(68, 167, 132));
+        escritorio.add(cuartel);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,8 +141,5 @@ public class MenuView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuFormBombero;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 }
