@@ -12,10 +12,9 @@ import javax.swing.JOptionPane;
 
 public class BrigadaData {
 
-    private Connection con;
-
-    public BrigadaData(Connection con) {
-        this.con = con;
+   private Connection con = null;
+    public BrigadaData() {
+       con=Conexion.getConexion();
     }
 
 //------------------------------------------------------------------------------
@@ -157,7 +156,7 @@ public class BrigadaData {
     }
 
 //-----------------------metodo listar brigadas-----------------------------------------
-    public int mostrarOpciones(Connection con) {
+    public int mostrarOpciones() {
         int idBrigadaElegida = -1; // Valor predeterminado para indicar que no se ha seleccionado ninguna brigada
         List<String> nombresBrigadas = new ArrayList<>();
 
@@ -200,7 +199,7 @@ public class BrigadaData {
     }
     //------------------------------Listar Especialidades------------------------
 
-    public String elegirEspecialidad(Connection con) {
+    public String elegirEspecialidad() {
 
         String[] especialidades = {"Incendios viviendas e Industrias", "Salvamento en derrumbes", "Rescates de montaña", "Rescate en accidente de transito", "Rerscate en inundaciones", "Operativos prevencion"};
 
@@ -217,7 +216,7 @@ public class BrigadaData {
 
 //-----------------------------------------------------------------------------------------
 //-------------------buscar brigada por id-----------------
-    public Brigada buscarBrigadaPorId(int idBrigada, Connection con) {
+    public Brigada buscarBrigadaPorId(int idBrigada) {
         String sql = "SELECT nombreBrig, especialidad, libre, idCuartel, estadoBr FROM brigada WHERE idBrigada = ?";
         Brigada brigada = null;
 
@@ -247,7 +246,7 @@ public class BrigadaData {
 
 //----------------------------Eliminar Brigada----------------------------
     //-------------Lista brigadas disponibles a eliminar----------------
-    public int mostrarBrigadasAEliminar(Connection con) {
+    public int mostrarBrigadasAEliminar() {
         int idBrigadaAEliminar = -1; // Valor predeterminado para indicar que no se ha seleccionado ninguna brigada
         List<String> brigadasAEliminar = new ArrayList<>();
 
@@ -291,7 +290,7 @@ public class BrigadaData {
 
     //------------------------------------------------------------------
 //--------------eliminar brigada cambiando el estado------------------------------------------
-    public void cambiarEstadoBrigada(int idBrigada, Connection con) {
+    public void cambiarEstadoBrigada(int idBrigada) {
         String sql = "UPDATE brigada SET estadoBr = 0 WHERE idBrigada = ?";
 
         try {
@@ -313,7 +312,7 @@ public class BrigadaData {
 
 //--------------------------------------------------------------------------------------------
 //------------------obtengo idBrigada teniendo idCuartel------------------------------------
-    public List<Integer> obtenerIdsBrigadasPorIdCuartel(int idCuartel, Connection con) {
+    public List<Integer> obtenerIdsBrigadasPorIdCuartel(int idCuartel) {
         List<Integer> idsBrigadas = new ArrayList<>();
 
         String sql = "SELECT idBrigada FROM brigada WHERE idCuartel = ?";
@@ -339,9 +338,9 @@ public class BrigadaData {
 
 //-----------------------------------------------------------------------------------------
 //----------------------cambiar estado de brigadasss--------------------------------------
-    public void cambiarEstadoBrigadas(List<Integer> idsBrigadas, Connection con) {
+    public void cambiarEstadoBrigadas(List<Integer> idsBrigadas) {
         for (Integer idBrigada : idsBrigadas) {
-            cambiarEstadoBrigada(idBrigada, con);
+            cambiarEstadoBrigada(idBrigada);
         }
 
         JOptionPane.showMessageDialog(null, "Brigadas eliminadas exitosamente.");
@@ -350,7 +349,7 @@ public class BrigadaData {
 //---------------------------------------------------------------------------------------
 //----------------------MODIFICAR--------------------------------------------
 //----------------------Modificar Nombre.--------------------------------
-    public void modificarNombreBrigada(int idBrigM, Connection con) {
+    public void modificarNombreBrigada(int idBrigM) {
         String nuevoNombreBrigada = JOptionPane.showInputDialog("Ingrese el nuevo nombre de la brigada:");
 
         String sql = "UPDATE brigada SET nombreBrig=? WHERE idBrigada=?";
@@ -372,7 +371,7 @@ public class BrigadaData {
     }
 
 //----------------------Modificar Especialidad.--------------------------------
-    public void modificarEspecialidad(int idBrigM, String especialidad, Connection con) {
+    public void modificarEspecialidad(int idBrigM, String especialidad) {
 
         String sql = "UPDATE brigada SET especialidad=? WHERE idBrigada=?";
 
@@ -395,7 +394,7 @@ public class BrigadaData {
 
     
     //----------------------Modificar Estado(Libre/Ocupada).--------------------------------
-    public void modificarEstado(int idBrigM, boolean nuevoEstado, Connection con) {
+    public void modificarEstado(int idBrigM, boolean nuevoEstado) {
         String sql = "UPDATE brigada SET libre=? WHERE idBrigada=?";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -441,7 +440,7 @@ public class BrigadaData {
 
 //---------------------------------------------------- SINIESTRO ----------------------------------------------------
 //--------------------------------- AGREGAR SINIESTRO: listar brigadas libre---------------------------------------
-    public int brigadasLibres(Connection con) {
+    public int brigadasLibres() {
         int idBrigadaElegida = -1; // Valor predeterminado para indicar que no se ha seleccionado ninguna brigada
         List<String> nombresBrigadas = new ArrayList<>();
 
@@ -488,7 +487,7 @@ public class BrigadaData {
 
 //----------------------------------------------------------------------------------------------------------------   
 //-------------------------brigada ocupada-------------------------------------------------------------------------
-    public void brigadaOcupada(int idBrigada, Connection con) {
+    public void brigadaOcupada(int idBrigada) {
         String sql = "UPDATE brigada SET libre=0 WHERE idBrigada=?";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -511,7 +510,7 @@ public class BrigadaData {
 //--------------------------------------- OPCION ELIMINAR SINIESTRO--------------------------------------------------------
 //--------------------------libero brigada---------------------------------------------
 
-public void marcarBrigadaComoLibre(Connection con, int idBrigada) {
+public void marcarBrigadaComoLibre(int idBrigada) {
     String sql = "UPDATE brigada SET libre = 1 WHERE idBrigada = ?";
 
     try {

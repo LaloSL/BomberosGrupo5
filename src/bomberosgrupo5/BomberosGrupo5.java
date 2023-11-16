@@ -18,21 +18,19 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JOptionPane;
-//import org.mariadb.jdbc.Connection;
 
-//** @author Asus
+
 public class BomberosGrupo5 {
 
-    private static Brigada idBrigada;
+   // private static Brigada idBrigada;
 
     public static void main(String[] args) throws ParseException {
-        Conexion con = new Conexion();
-        Connection connection = (Connection) con.getConexion(); // Obtener la conexión válida
+       Connection con= Conexion.getConexion();
 
-        BrigadaData brig = new BrigadaData(connection);
-        CuartelData cua1 = new CuartelData(connection);
-        BomberoData bom = new BomberoData(connection);
-        SiniestroData sin = new SiniestroData(connection);
+        BrigadaData brig = new BrigadaData();
+        CuartelData cua1 = new CuartelData();
+        BomberoData bom = new BomberoData();
+        SiniestroData sin = new SiniestroData();
 
         int opcion = 0;
 
@@ -85,7 +83,7 @@ public class BomberosGrupo5 {
                                 JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Brigada");
 
                                 // Obtener el cuartel por su ID
-                                int idCuartelElegido = cua1.mostrarOpcionesYObtenerSeleccion(connection);
+                                int idCuartelElegido = cua1.mostrarOpcionesYObtenerSeleccion();
 
                                 // Verificar si hay lugar para una nueva brigada en el cuartel
                                 if (brig.hayCupoParaNuevaBrigada(idCuartelElegido)) {
@@ -97,7 +95,7 @@ public class BomberosGrupo5 {
                                         if (brig.existeBrigadaConNombreEnCuartel(nombreBrigada, idCuartelElegido)) {
                                             JOptionPane.showMessageDialog(null, "Ya existe una brigada con el mismo nombre en este cuartel. No se puede agregar.");
                                         } else {
-                                            String especialidad = brig.elegirEspecialidad(connection);
+                                            String especialidad = brig.elegirEspecialidad();
 
                                             // Crear y guardar la brigada
                                             Brigada briga = new Brigada(nombreBrigada, especialidad, true, idCuartelElegido, true);
@@ -142,9 +140,9 @@ public class BomberosGrupo5 {
                                 case 3:
 
                                 JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Bombero");
-                                int idBrigadaElegido = brig.mostrarOpciones(connection);
+                                int idBrigadaElegido = brig.mostrarOpciones();
 
-                                Brigada idBrigada = brig.buscarBrigadaPorId(idBrigadaElegido, connection);
+                                Brigada idBrigada = brig.buscarBrigadaPorId(idBrigadaElegido);
 
                                 if (idBrigada != null) {
 
@@ -154,7 +152,7 @@ public class BomberosGrupo5 {
                                         String nombreApellido = JOptionPane.showInputDialog("Ingrese nombre y apellido del Bombero");
 
                                         //Verificar si el nombre del bombero ya existe en ese cuartel
-                                        if (bom.existeBomberoConNombre(nombreApellido, dni, connection)) {
+                                        if (bom.existeBomberoConNombre(nombreApellido, dni)) {
                                             JOptionPane.showMessageDialog(null, "Ya existe un bombero con el mismo nombre en esta brigada. No se puede agregar.");
                                         } else {
                                             String grupoSanguineo = JOptionPane.showInputDialog("Ingrese el grupo Sanguineo: ");
@@ -202,7 +200,7 @@ public class BomberosGrupo5 {
                                     //-----------------------------modificar cuartel-------------------------------------------------
                                     switch (subOpcion) {
                                         case 1:
-                                            int idCuartelAModificar = cua1.mostrarOpcionesYObtenerSeleccion(connection);
+                                            int idCuartelAModificar = cua1.mostrarOpcionesYObtenerSeleccion();
                                             Cuartel cuartelAModificar = cua1.buscarCuartelPorId(idCuartelAModificar);
 
                                             if (cuartelAModificar != null) {
@@ -224,22 +222,22 @@ public class BomberosGrupo5 {
                                                     if (atributoSeleccionado >= 1 && atributoSeleccionado <= 6) {
                                                         switch (atributoSeleccionado) {
                                                             case 1:
-                                                                cua1.modificarNombre(idCuartelAModificar, connection);
+                                                                cua1.modificarNombre(idCuartelAModificar);
                                                                 break;
                                                             case 2:
-                                                                cua1.modificarDireccion(idCuartelAModificar, connection);
+                                                                cua1.modificarDireccion(idCuartelAModificar);
                                                                 break;
                                                             case 3:
-                                                                cua1.modificarCoordX(idCuartelAModificar, connection);
+                                                                cua1.modificarCoordX(idCuartelAModificar);
                                                                 break;
                                                             case 4:
-                                                                cua1.modificarCoordY(idCuartelAModificar, connection);
+                                                                cua1.modificarCoordY(idCuartelAModificar);
                                                                 break;
                                                             case 5:
-                                                                cua1.modificarTelefono(idCuartelAModificar, connection);
+                                                                cua1.modificarTelefono(idCuartelAModificar);
                                                                 break;
                                                             case 6:
-                                                                cua1.modificarCorreo(idCuartelAModificar, connection);
+                                                                cua1.modificarCorreo(idCuartelAModificar);
                                                                 break;
 //                                            case 7:
 //                                                // Opción para salir
@@ -261,8 +259,8 @@ public class BomberosGrupo5 {
                                         //--------------------------------------------MODIFICAR BRIGADA---------------------------------- 
                                         case 2://Modificar Brigada
 
-                                            int idBrigadaAModificar = brig.mostrarOpciones(connection);
-                                            Brigada brigadaAModificar = brig.buscarBrigadaPorId(idBrigadaAModificar, connection);
+                                            int idBrigadaAModificar = brig.mostrarOpciones();
+                                            Brigada brigadaAModificar = brig.buscarBrigadaPorId(idBrigadaAModificar);
 
                                             if (brigadaAModificar != null) {
                                                 int atributoSeleccionado = 0;
@@ -280,18 +278,18 @@ public class BomberosGrupo5 {
                                                     if (atributoSeleccionado >= 1 && atributoSeleccionado <= 3) {
                                                         switch (atributoSeleccionado) {
                                                             case 1:
-                                                                brig.modificarNombreBrigada(idBrigadaAModificar, connection);
+                                                                brig.modificarNombreBrigada(idBrigadaAModificar);
 
                                                                 break;
                                                             case 2:
-                                                                String especialidad = brig.elegirEspecialidad(connection);
-                                                                brig.modificarEspecialidad(idBrigadaAModificar, especialidad, connection);
+                                                                String especialidad = brig.elegirEspecialidad();
+                                                                brig.modificarEspecialidad(idBrigadaAModificar, especialidad);
 
                                                                 break;
                                                             case 3:
                                                                 boolean nuevoEstado = brig.obtenerEstado();
 
-                                                                brig.modificarEstado(idBrigadaAModificar, nuevoEstado, connection);
+                                                                brig.modificarEstado(idBrigadaAModificar, nuevoEstado);
 
                                                                 break;
 
@@ -313,8 +311,8 @@ public class BomberosGrupo5 {
                                         //-------------------------------------MODIFICAR BOMBERO----------------------     
                                         case 3:
 
-                                            int idBomberoAModificar = bom.mostrarOpcionesBomberos(connection);
-                                            Bombero bomberoAModificar = bom.buscarBomberoPorId(idBomberoAModificar, connection);
+                                            int idBomberoAModificar = bom.mostrarOpcionesBomberos();
+                                            Bombero bomberoAModificar = bom.buscarBomberoPorId(idBomberoAModificar);
                                             if (bomberoAModificar != null) {
                                                 int atributoSeleccionadoBombero = 0;
 
@@ -332,16 +330,16 @@ public class BomberosGrupo5 {
                                                     if (atributoSeleccionadoBombero >= 1 && atributoSeleccionadoBombero <= 4) {
                                                         switch (atributoSeleccionadoBombero) {
                                                             case 1:
-                                                                bom.modificarNombreBombero(idBomberoAModificar, connection);
+                                                                bom.modificarNombreBombero(idBomberoAModificar);
                                                                 break;
                                                             case 2:
-                                                                bom.modificarGrupoSanguineoBombero(idBomberoAModificar, connection);
+                                                                bom.modificarGrupoSanguineoBombero(idBomberoAModificar);
                                                                 break;
                                                             case 3:
-                                                                bom.modificarFechaNacimientoBombero(idBomberoAModificar, connection);
+                                                                bom.modificarFechaNacimientoBombero(idBomberoAModificar);
                                                                 break;
                                                             case 4:
-                                                                bom.modificarNumeroCelularBombero(idBomberoAModificar, connection);
+                                                                bom.modificarNumeroCelularBombero(idBomberoAModificar);
                                                                 break;
                                                             default:
                                                                 JOptionPane.showMessageDialog(null, "Opción no válida");
@@ -383,26 +381,26 @@ public class BomberosGrupo5 {
                                     switch (subOpcionEliminar) {
                                         //--------------------Eliminar Cuartel-----------------------
                                         case 1: // ELIMINAR CUARTEL
-                                            int idCuartelAEliminar = cua1.mostrarCuartelesAEliminar(connection);
-                                            List<Integer> idsBrigadas = brig.obtenerIdsBrigadasPorIdCuartel(idCuartelAEliminar, connection);
-                                            bom.cambiarEstadoBomberosPorBrigadas(idsBrigadas, connection);
-                                            brig.cambiarEstadoBrigadas(idsBrigadas, connection);
-                                            cua1.cambiarEstadoCuartel(idCuartelAEliminar, connection);
+                                            int idCuartelAEliminar = cua1.mostrarCuartelesAEliminar();
+                                            List<Integer> idsBrigadas = brig.obtenerIdsBrigadasPorIdCuartel(idCuartelAEliminar);
+                                            bom.cambiarEstadoBomberosPorBrigadas(idsBrigadas);
+                                            brig.cambiarEstadoBrigadas(idsBrigadas);
+                                            cua1.cambiarEstadoCuartel(idCuartelAEliminar);
                                             break;
 
                                         //-----------------Eliminar Brigada---------------------
                                         case 2: // ELIMINAR BRIGADA
-                                            int idBrigadaAEliminar = brig.mostrarBrigadasAEliminar(connection);
-                                            List<Integer> idsBomberosAEliminar = bom.obtenerBomberosPorBrigada(idBrigadaAEliminar, connection);
-                                            bom.cambiarEstadoBomberosPorBrigada(idBrigadaAEliminar, connection);
-                                            brig.cambiarEstadoBrigada(idBrigadaAEliminar, connection);
+                                            int idBrigadaAEliminar = brig.mostrarBrigadasAEliminar();
+                                            List<Integer> idsBomberosAEliminar = bom.obtenerBomberosPorBrigada(idBrigadaAEliminar);
+                                            bom.cambiarEstadoBomberosPorBrigada(idBrigadaAEliminar);
+                                            brig.cambiarEstadoBrigada(idBrigadaAEliminar);
                                             break;
 
                                         //---------------ELIMINAR BOMBERO------------------------    
                                         case 3: // ELIMINAR BOMBERO
-                                            int idBomberoAEliminar = bom.mostrarBomberosAEliminar(connection);
+                                            int idBomberoAEliminar = bom.mostrarBomberosAEliminar();
                                             if (idBomberoAEliminar != -1) {
-                                                bom.cambiarEstadoBombero(idBomberoAEliminar, connection);
+                                                bom.cambiarEstadoBombero(idBomberoAEliminar);
                                             }
                                             break;
 
@@ -438,8 +436,8 @@ public class BomberosGrupo5 {
                                         //--------------------Agregar Siniestro-----------------------
                                         case 1:
                                             JOptionPane.showMessageDialog(null, "Selecciona a qué brigada vas a cargar este siniestro");
-                                            int idBrigadaElegido = brig.brigadasLibres(connection);
-                                            brig.brigadaOcupada(idBrigadaElegido, connection);
+                                            int idBrigadaElegido = brig.brigadasLibres();
+                                            brig.brigadaOcupada(idBrigadaElegido);
                                             String tipo = JOptionPane.showInputDialog("Ingrese el tipo de siniestro:");
                                             String fechaHoraSiniestroI = JOptionPane.showInputDialog("Ingrese la fecha y hora del siniestro (dd/MM/yyyy HH:mm):");
 
@@ -497,7 +495,7 @@ public class BomberosGrupo5 {
                                                     String fechaHoraResolI = JOptionPane.showInputDialog("Ingrese la fecha de resolución en caso de tener o deje el campo en blanco:");
                                                     LocalDateTime fechaHoraResol = (fechaHoraResolI.isEmpty()) ? null : sin.convertirAFechaHora(fechaHoraResolI);
 
-                                                    sin.insertarSiniestro(connection, idBrigadaElegido, tipo, fechaHoraSiniestro, coordx, coordy, detalles, fechaHoraResol, puntuacion);
+                                                    sin.insertarSiniestro(idBrigadaElegido, tipo, fechaHoraSiniestro, coordx, coordy, detalles, fechaHoraResol, puntuacion);
 
                                                     JOptionPane.showMessageDialog(null, "Siniestro registrado con éxito.");
                                                 } catch (SQLException | ParseException e) {
@@ -513,7 +511,7 @@ public class BomberosGrupo5 {
 
                                         //-----------------Modificar Siniestro---------------------
                                         case 2:
-                                            int idSiniestroAModificar = sin.mostrarOpcionesSiniestros(connection);
+                                            int idSiniestroAModificar = sin.mostrarOpcionesSiniestros();
 
                                             // Verifica si el idSiniestroAModificar es válido
                                             if (idSiniestroAModificar != -1) {
@@ -536,25 +534,25 @@ public class BomberosGrupo5 {
                                                     if (atributoSeleccionadoSiniestro >= 1 && atributoSeleccionadoSiniestro <= 7) {
                                                         switch (atributoSeleccionadoSiniestro) {
                                                             case 1:
-                                                                sin.modificarTipoSiniestro(idSiniestroAModificar, connection);
+                                                                sin.modificarTipoSiniestro(idSiniestroAModificar);
                                                                 break;
                                                             case 2:
-                                                                sin.modificarFechaSiniestro(idSiniestroAModificar, connection);
+                                                                sin.modificarFechaSiniestro(idSiniestroAModificar);
                                                                 break;
                                                             case 3:
-                                                                sin.modificarCoordenadaX(idSiniestroAModificar, connection);
+                                                                sin.modificarCoordenadaX(idSiniestroAModificar);
                                                                 break;
                                                             case 4:
-                                                                sin.modificarCoordenadaY(idSiniestroAModificar, connection);
+                                                                sin.modificarCoordenadaY(idSiniestroAModificar);
                                                                 break;
                                                             case 5:
-                                                                sin.modificarDetallesSiniestro(idSiniestroAModificar, connection);
+                                                                sin.modificarDetallesSiniestro(idSiniestroAModificar);
                                                                 break;
                                                             case 6:
-                                                                sin.modificarFechaResolucion(idSiniestroAModificar, connection);
+                                                                sin.modificarFechaResolucion(idSiniestroAModificar);
                                                                 break;
                                                             case 7:
-                                                                sin.modificarPuntuacion(idSiniestroAModificar, connection);
+                                                                sin.modificarPuntuacion(idSiniestroAModificar);
                                                                 break;
                                                             default:
                                                                 JOptionPane.showMessageDialog(null, "Opción no válida");
@@ -571,10 +569,10 @@ public class BomberosGrupo5 {
 
                                         //---------------Eliminar Siniestro------------------------
                                         case 3:
-                                            int idSiniestroSeleccionado = sin.mostrarSiniestros(connection);
-                                            int idBrigadaAsociada = sin.obtenerIdBrigadaPorIdSiniestro(connection, idSiniestroSeleccionado);
-                                            brig.marcarBrigadaComoLibre(connection, idBrigadaAsociada);
-                                            sin.eliminarSiniestro(connection, idSiniestroSeleccionado);
+                                            int idSiniestroSeleccionado = sin.mostrarSiniestros();
+                                            int idBrigadaAsociada = sin.obtenerIdBrigadaPorIdSiniestro(idSiniestroSeleccionado);
+                                            brig.marcarBrigadaComoLibre(idBrigadaAsociada);
+                                            sin.eliminarSiniestro(idSiniestroSeleccionado);
 
                                             break;
 

@@ -13,10 +13,9 @@ import javax.swing.JOptionPane;
 
 public class BomberoData {
 
-    private Connection con;
-
-    public BomberoData(Connection con) {
-        this.con = con;
+    private Connection con = null;
+    public BomberoData() {
+       con=Conexion.getConexion();
     }
 
 //-------------------GUARDAR BOMBERO---------------------------------------------------------
@@ -55,7 +54,7 @@ public class BomberoData {
 //------------------------------------------------------------------------------------------------------
 //    
 //-------------------------------------------------------------------------------------------------
-    public Bombero buscarBomberoId(int idBombero, Connection con) {
+    public Bombero buscarBomberoId(int idBombero) {
         String sql = "SELECT dni, nombreApellido, grupoSanguineo, fechaNac, celular, idBrigada, estadoB FROM bombero WHERE idBombero = ? AND estadoB = 1";
         Bombero bombero = null;
 
@@ -122,7 +121,7 @@ public class BomberoData {
 //      }
 //-----------------------------------------------------------------------------------------------------     
 //-------------------------------
-    public Bombero buscarBomberoPorDni(int dni, Connection connection) {
+    public Bombero buscarBomberoPorDni(int dni) {
 
         Bombero bomberoEncontrado = null;
         String sql = "SELECT * FROM bombero WHERE dni = ?";
@@ -167,7 +166,7 @@ public class BomberoData {
 
 //---------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-    public boolean existeBomberoConNombre(String nombreApellido, int dni, Connection con) {
+    public boolean existeBomberoConNombre(String nombreApellido, int dni) {
         boolean existe = false;
         String sql = "SELECT COUNT(*) FROM bombero WHERE nombreApellido = ? AND dni = ?";
 
@@ -227,7 +226,7 @@ public class BomberoData {
 
 //---------------------------------ELIMINAR--------------------------------
 //-----------------------Listo los bomberos para seleccionar al que van a eliminar
-    public int mostrarBomberosAEliminar(Connection con) {
+    public int mostrarBomberosAEliminar() {
         int idBomberoAEliminar = -1;
         List<String> bomberosAEliminar = new ArrayList<>();
 
@@ -272,7 +271,7 @@ public class BomberoData {
 
 //-------------------------------------------------------------------------------
 //--------------CAMBIO EL ESTADO DE UN BOMBERO-------------
-    public void cambiarEstadoBombero(int idBombero, Connection con) {
+    public void cambiarEstadoBombero(int idBombero) {
         String sql = "UPDATE bombero SET estadoB = 0 WHERE idBombero = ?";
 
         try {
@@ -294,7 +293,7 @@ public class BomberoData {
 
 //---------------------------------------------------------------------------------------------------
 //-------------averiguo bomberos que pertenecen a una misma brigada -----------------------
-    public List<Integer> obtenerBomberosPorBrigada(int idBrigada, Connection con) {
+    public List<Integer> obtenerBomberosPorBrigada(int idBrigada) {
         List<Integer> idsBomberos = new ArrayList<>();
 
         String sql = "SELECT idBombero FROM bombero WHERE idBrigada = ? AND estadoB = 1";
@@ -317,12 +316,12 @@ public class BomberoData {
     }
 //------------Borrado logico de bomberos que pertenecen a un brigada--------------
 
-    public void cambiarEstadoBomberosPorBrigada(int idBrigada, Connection con) {
+    public void cambiarEstadoBomberosPorBrigada(int idBrigada) {
         // Obtener la lista de IDs de bomberos que pertenecen a la brigada
-        List<Integer> idsBomberosAEliminar = obtenerBomberosPorBrigada(idBrigada, con);
+        List<Integer> idsBomberosAEliminar = obtenerBomberosPorBrigada(idBrigada);
 
         for (Integer idBombero : idsBomberosAEliminar) {
-            cambiarEstadoBombero(idBombero, con);
+            cambiarEstadoBombero(idBombero);
         }
 
         //JOptionPane.showMessageDialog(null, "Bomberos eliminados exitosamente.");
@@ -330,12 +329,12 @@ public class BomberoData {
 
 //-------------------------------------
 //---------------------cambiar estados de bomberos en brigadas--------------
-    public void cambiarEstadoBomberosPorBrigadas(List<Integer> idsBrigadas, Connection con) {
+    public void cambiarEstadoBomberosPorBrigadas(List<Integer> idsBrigadas) {
         for (Integer idBrigada : idsBrigadas) {
-            List<Integer> idsBomberosAEliminar = obtenerBomberosPorBrigada(idBrigada, con);
+            List<Integer> idsBomberosAEliminar = obtenerBomberosPorBrigada(idBrigada);
 
             for (Integer idBombero : idsBomberosAEliminar) {
-                cambiarEstadoBombero(idBombero, con);
+                cambiarEstadoBombero(idBombero);
             }
         }
 
@@ -345,7 +344,7 @@ public class BomberoData {
 //------------------------------------------------------------------------
 //-------------------------------MODIFICAR BOMBEROS----------------------------
 //-----------------------opciones de bomberos a modificar-----------------
-    public int mostrarOpcionesBomberos(Connection con) {
+    public int mostrarOpcionesBomberos() {
         int idBomberoElegido = -1; // Valor predeterminado para indicar que no se ha seleccionado ningún bombero
         List<String> nombresBomberos = new ArrayList<>();
 
@@ -389,7 +388,7 @@ public class BomberoData {
 
 //------------------------------------------------------------------------
 //---------------------- buscarbombero por id (MODOFICAR)---------------------
-    public Bombero buscarBomberoPorId(int idBombero, Connection con) {
+    public Bombero buscarBomberoPorId(int idBombero) {
         String sql = "SELECT nombreApellido, grupoSanguineo, fechaNac, celular FROM bombero WHERE idBombero = ?";
         Bombero bombero = null;
 
@@ -438,7 +437,7 @@ public class BomberoData {
 //-------------------------------------------------------------------------
     
 //---------------------modificar nombre y apellido de bomberos--------------
- public void modificarNombreBombero(int idBombero, Connection con) {
+ public void modificarNombreBombero(int idBombero) {
     String nuevoNombreBombero = JOptionPane.showInputDialog("Ingrese el nuevo nombre del bombero:");
 
     String sql = "UPDATE bombero SET nombreApellido=? WHERE idBombero=?";
@@ -462,7 +461,7 @@ public class BomberoData {
 //--------------------------------------------------------------------------
  
 //--------------------------modificar grupo sanguineo-----------------------
-public void modificarGrupoSanguineoBombero(int idBombero, Connection con) {
+public void modificarGrupoSanguineoBombero(int idBombero) {
     String nuevoGrupoSanguineo = JOptionPane.showInputDialog("Ingrese el nuevo grupo sanguíneo del bombero:");
 
     String sql = "UPDATE bombero SET grupoSanguineo=? WHERE idBombero=?";
@@ -486,7 +485,7 @@ public void modificarGrupoSanguineoBombero(int idBombero, Connection con) {
 //------------------------------------------------------------------------- 
 
 //--------------------modificar fecha de nacimiento------------------------
-public void modificarFechaNacimientoBombero(int idBombero, Connection con) {
+public void modificarFechaNacimientoBombero(int idBombero) {
     try {
         String nuevaFechaNacimientoStr = JOptionPane.showInputDialog("Ingrese la nueva fecha de nacimiento del bombero (formato: yyyy-MM-dd):");
 
@@ -517,7 +516,7 @@ public void modificarFechaNacimientoBombero(int idBombero, Connection con) {
 //-------------------------------------------------------------------------
 
 //-----------------------modificar numero celular--------------------------
-public void modificarNumeroCelularBombero(int idBombero, Connection con) {
+public void modificarNumeroCelularBombero(int idBombero) {
     try {
         String nuevoNumeroCelular = JOptionPane.showInputDialog("Ingrese el nuevo número de celular del bombero:");
         String sql = "UPDATE bombero SET celular=? WHERE idBombero=?";

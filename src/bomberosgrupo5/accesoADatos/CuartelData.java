@@ -9,17 +9,13 @@ import javax.swing.JOptionPane;
 
 public class CuartelData {
 
-    private Connection con;
+    
 
-    //private Connection con = null;
-    public CuartelData(Connection con) {
-        this.con = con;
+    private Connection con = null;
+    public CuartelData() {
+       con=Conexion.getConexion();
     }
-//    private Connection con = null;
-//
-//    public CuartelData() { 
-//        con = Conexion.getConectar();
-//    }
+
 //------------------------------------------------------------------------------
     // método guardar cuartel:
 
@@ -108,7 +104,7 @@ public void eliminarCuartel(int id){
 }
 
 //-----------------------DESDE ACA----------------------------
-public int mostrarOpcionesYObtenerSeleccion(Connection con) {
+public int mostrarOpcionesYObtenerSeleccion() {
     int idCuartelElegido = -1; // Valor predeterminado para indicar que no se ha seleccionado ningún cuartel
     List<String> nombresCuartel = new ArrayList<>();
 
@@ -286,7 +282,7 @@ public void actualizarNombreCuartel(int idCuartel, String nuevoNombre) {
 
 //------------------------selecciono cuartel a eliminar-----------------------------------------------------
 
-public int mostrarCuartelesAEliminar(Connection con) {
+public int mostrarCuartelesAEliminar() {
     int idCuartelAEliminar = -1; // Valor predeterminado para indicar que no se ha seleccionado ningún cuartel
     List<String> cuartelesAEliminar = new ArrayList<>();
 
@@ -331,7 +327,7 @@ public int mostrarCuartelesAEliminar(Connection con) {
 //--------------------------------------------------------------------------------------------
 
 //---------------------cambiar estado de cuartel---------------------------------------
-public void cambiarEstadoCuartel(int idCuartel, Connection con) {
+public void cambiarEstadoCuartel(int idCuartel) {
     String sql = "UPDATE cuartel SET estadoC = 0 WHERE idCuartel = ?";
 
     try {
@@ -360,7 +356,7 @@ public void cambiarEstadoCuartel(int idCuartel, Connection con) {
 //-------------------------------Modificar cuartel---------------------------
 //--------------modificar nombre---------------
 
-public void modificarNombre(int idCuaM,Connection con) {
+public void modificarNombre(int idCuaM) {
         String nuevoNombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre del cuartel:");
 
         String sql = "UPDATE cuartel SET nombreCuartel=? WHERE idCuartel=?";
@@ -385,7 +381,7 @@ public void modificarNombre(int idCuaM,Connection con) {
 
 //-----------Modificar Direccion---------------------------
 
-public void modificarDireccion(int idCuaM, Connection con) {
+public void modificarDireccion(int idCuaM) {
     String nuevaDireccion = JOptionPane.showInputDialog("Ingrese la nueva dirección del cuartel:");
 
     String sql = "UPDATE cuartel SET direccion=? WHERE idCuartel=?";
@@ -408,7 +404,7 @@ public void modificarDireccion(int idCuaM, Connection con) {
 }
 //-----------------------Modificar coordX---------------------------------------------------------
 
-public void modificarCoordX(int idCuaM, Connection con) {
+public void modificarCoordX(int idCuaM) {
     String nuevaCoordX = JOptionPane.showInputDialog("Ingrese la nueva cordenada X del cuartel:");
 
     String sql = "UPDATE cuartel SET coordX=? WHERE idCuartel=?";
@@ -432,7 +428,7 @@ public void modificarCoordX(int idCuaM, Connection con) {
 
 //-----------------------Modificar coordX---------------------------------------------------------
 
-public void modificarCoordY(int idCuaM, Connection con) {
+public void modificarCoordY(int idCuaM) {
     String nuevaCoordY = JOptionPane.showInputDialog("Ingrese la nueva cordenada Y del cuartel:");
 
     String sql = "UPDATE cuartel SET coordY=? WHERE idCuartel=?";
@@ -456,7 +452,7 @@ public void modificarCoordY(int idCuaM, Connection con) {
 
 //-----------------------Modificar Telefono---------------------------------------------------------
 
-public void modificarTelefono(int idCuaM, Connection con) {
+public void modificarTelefono(int idCuaM) {
     String nuevoTel = JOptionPane.showInputDialog("Ingrese el nuevo telefono del cuartel:");
 
     String sql = "UPDATE cuartel SET telefono=? WHERE idCuartel=?";
@@ -480,7 +476,7 @@ public void modificarTelefono(int idCuaM, Connection con) {
 
 //-----------------------Modificar Telefono---------------------------------------------------------
 
-public void modificarCorreo(int idCuaM, Connection con) {
+public void modificarCorreo(int idCuaM) {
     String nvoCorreo = JOptionPane.showInputDialog("Ingrese el nuevo telefono del cuartel:");
 
     String sql = "UPDATE cuartel SET correo=? WHERE idCuartel=?";

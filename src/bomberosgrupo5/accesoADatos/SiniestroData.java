@@ -25,10 +25,9 @@ import java.util.List;
 
 public class SiniestroData {
 
-    private Connection con;
-
-    public SiniestroData(Connection con) {
-        this.con = con;
+   private Connection con = null;
+    public SiniestroData() {
+       con=Conexion.getConexion();
     }
 
 //------------------------------------------------------------------------------    
@@ -44,7 +43,7 @@ public class SiniestroData {
 
 //-----------------------------------------------------------------------------
 //---------------------------insertar siniestro-------------------------------
-public void insertarSiniestro(Connection con, int idBrigada, String tipo, LocalDateTime fechaHoraSiniestro, int coordx, int coordy, String detalles, LocalDateTime fechaHoraResol, int puntuacion) throws SQLException {
+public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHoraSiniestro, int coordx, int coordy, String detalles, LocalDateTime fechaHoraResol, int puntuacion) throws SQLException {
     String consulta = "INSERT INTO siniestro (idBrigada, tipo, fechaSiniestro, coordx, coordy, detalles, fechaResol, puntuacion, estadoS) "
             + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)"; 
 
@@ -74,7 +73,7 @@ public void insertarSiniestro(Connection con, int idBrigada, String tipo, LocalD
 //----------------------------------------------------------------------------
 //--------------------------------MODIFICAR SINIESTRO------------------------
 //--------------------lista los siniestros----------------------------------
-    public int mostrarOpcionesSiniestros(Connection con) {
+    public int mostrarOpcionesSiniestros() {
         int idSiniestroElegido = -1; // Valor predeterminado para indicar que no se ha seleccionado ningún siniestro
         List<String> opcionesSiniestros = new ArrayList<>();
 
@@ -122,7 +121,7 @@ public void insertarSiniestro(Connection con, int idBrigada, String tipo, LocalD
 
 //--------------------------------------------------------------------------
 //--------------------modificar tipo---------------------------------------
-    public void modificarTipoSiniestro(int idSiniestro, Connection con) {
+    public void modificarTipoSiniestro(int idSiniestro) {
         try {
             String nuevoTipoSiniestro = JOptionPane.showInputDialog("Ingrese el nuevo tipo de siniestro:");
             String sql = "UPDATE siniestro SET tipo=? WHERE idCodigo=?";
@@ -145,7 +144,7 @@ public void insertarSiniestro(Connection con, int idBrigada, String tipo, LocalD
 
 //-------------------------------------------------------------------------
 //----------------------- modificar fecha----------------------------------
-    public void modificarFechaSiniestro(int idSiniestro, Connection con) {
+    public void modificarFechaSiniestro(int idSiniestro) {
     try {
         String nuevaFechaSiniestro = JOptionPane.showInputDialog("Ingrese la nueva fecha de siniestro (dd/MM/yyyy HH:mm):");
 
@@ -210,7 +209,7 @@ public void insertarSiniestro(Connection con, int idBrigada, String tipo, LocalD
 
 //-------------------------------------------------------------------------
 //----------------------modificar coordenada X----------------------------
-    public void modificarCoordenadaX(int idSiniestro, Connection con) {
+    public void modificarCoordenadaX(int idSiniestro) {
         try {
             String nuevaCoordenadaXStr = JOptionPane.showInputDialog("Ingrese la nueva coordenada X:");
             double nuevaCoordenadaX = Double.parseDouble(nuevaCoordenadaXStr);
@@ -237,7 +236,7 @@ public void insertarSiniestro(Connection con, int idBrigada, String tipo, LocalD
 
 //------------------------------------------------------------------------
 //----------------------------modificar coordenada Y----------------------
-    public void modificarCoordenadaY(int idSiniestro, Connection con) {
+    public void modificarCoordenadaY(int idSiniestro) {
         try {
             String nuevaCoordenadaYStr = JOptionPane.showInputDialog("Ingrese la nueva coordenada Y:");
             double nuevaCoordenadaY = Double.parseDouble(nuevaCoordenadaYStr);
@@ -264,7 +263,7 @@ public void insertarSiniestro(Connection con, int idBrigada, String tipo, LocalD
 
 //------------------------------------------------------------------------
 //---------------------------modificar detalles---------------------------
-    public void modificarDetallesSiniestro(int idSiniestro, Connection con) {
+    public void modificarDetallesSiniestro(int idSiniestro) {
         try {
             String nuevosDetalles = JOptionPane.showInputDialog("Ingrese los nuevos detalles del siniestro:");
 
@@ -288,7 +287,7 @@ public void insertarSiniestro(Connection con, int idBrigada, String tipo, LocalD
 
 //------------------------------------------------------------------------
 //-------------------- modoficar fecha de resolucion ---------------------
-    public void modificarFechaResolucion(int idSiniestro, Connection con) {
+    public void modificarFechaResolucion(int idSiniestro) {
     try {
         String nuevaFechaResolucionStr = JOptionPane.showInputDialog("Ingrese la nueva fecha de resolución (dd/MM/yyyy HH:mm):");
 
@@ -322,7 +321,7 @@ public void insertarSiniestro(Connection con, int idBrigada, String tipo, LocalD
 
 //------------------------------------------------------------------------
 //------------------------- modificar puntuacion -------------------------
-    public void modificarPuntuacion(int idSiniestro, Connection con) {
+    public void modificarPuntuacion(int idSiniestro) {
         try {
             String nuevaPuntuacionStr = JOptionPane.showInputDialog("Ingrese la nueva puntuación:");
             int nuevaPuntuacion = Integer.parseInt(nuevaPuntuacionStr);
@@ -351,7 +350,7 @@ public void insertarSiniestro(Connection con, int idBrigada, String tipo, LocalD
 //--------------------------------FIN MODIFICAR SINIESTRO--------------------
 //-----------------------------ELIMINAR SINIESTRO------------------
 //--------------------------listar siniestro para devuelve idCodigo-------------
-    public int mostrarSiniestros(Connection con) {
+    public int mostrarSiniestros() {
         int idSiniestroSeleccionado = -1;
         List<String> siniestros = new ArrayList<>();
 
@@ -395,7 +394,7 @@ public void insertarSiniestro(Connection con, int idBrigada, String tipo, LocalD
 
 //---------------------------------------------------------------------------
 //-------------------------recuperar idBrigada desde idCodigo-------------------------
-    public int obtenerIdBrigadaPorIdSiniestro(Connection con, int idSiniestro) {
+    public int obtenerIdBrigadaPorIdSiniestro(int idSiniestro) {
         int idBrigada = -1;
 
         String sql = "SELECT idBrigada FROM siniestro WHERE idCodigo = ?";
@@ -423,7 +422,7 @@ public void insertarSiniestro(Connection con, int idBrigada, String tipo, LocalD
 
 //------------------------------------------------------------------------------------
 //------------------eliminar siniestro-------------------------------------------------
-    public void eliminarSiniestro(Connection con, int idCodigo) {
+    public void eliminarSiniestro(int idCodigo) {
         String sql = "UPDATE siniestro SET estadoS = 0 WHERE idCodigo = ?";
 
         try {
