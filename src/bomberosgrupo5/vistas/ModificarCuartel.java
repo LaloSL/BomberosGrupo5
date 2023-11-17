@@ -51,6 +51,7 @@ public class ModificarCuartel extends javax.swing.JInternalFrame {
         jTCorreo = new javax.swing.JTextField();
         jBGuardar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setText("Seleccione el Cuartel");
 
@@ -91,6 +92,13 @@ public class ModificarCuartel extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Limpiar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,7 +115,9 @@ public class ModificarCuartel extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jBGuardar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                                .addGap(29, 29, 29)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jBSalir))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +174,8 @@ public class ModificarCuartel extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBGuardar)
-                    .addComponent(jBSalir))
+                    .addComponent(jBSalir)
+                    .addComponent(jButton1))
                 .addGap(40, 40, 40))
         );
 
@@ -239,6 +250,15 @@ public class ModificarCuartel extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTNombre.setText("");
+                jTDireccion.setText("");
+                jTlongitud.setText("");
+                jTLatitud.setText("");
+                jTTelefono.setText("");
+                jTCorreo.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     
 
     
@@ -261,6 +281,7 @@ public class ModificarCuartel extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBSalir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCCuartel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -58,6 +58,7 @@ public class ModificarBombero extends javax.swing.JInternalFrame {
         jTDni = new javax.swing.JTextField();
         jTTelefono = new javax.swing.JTextField();
         jTGrupoSanguineo = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setMaximizable(true);
 
@@ -98,6 +99,13 @@ public class ModificarBombero extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Limpiar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,9 +130,11 @@ public class ModificarBombero extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(60, 60, 60)
                                 .addComponent(jBGuardar)
-                                .addGap(249, 249, 249)
+                                .addGap(63, 63, 63)
+                                .addComponent(jButton1)
+                                .addGap(113, 113, 113)
                                 .addComponent(jBSalir)))
-                        .addGap(0, 1, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,9 +144,7 @@ public class ModificarBombero extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel3))
                                 .addGap(70, 70, 70)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTDni, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jTDni, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTNombre)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
@@ -146,7 +154,7 @@ public class ModificarBombero extends javax.swing.JInternalFrame {
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(115, Short.MAX_VALUE)
+                    .addContainerGap(116, Short.MAX_VALUE)
                     .addComponent(jTGrupoSanguineo, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(10, 10, 10)))
         );
@@ -185,7 +193,9 @@ public class ModificarBombero extends javax.swing.JInternalFrame {
                     .addComponent(jTTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBGuardar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBGuardar)
+                        .addComponent(jButton1))
                     .addComponent(jBSalir))
                 .addContainerGap(36, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,6 +259,14 @@ public class ModificarBombero extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jCBomberoActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTDni.setText("");
+        jTNombre.setText("");
+        jTGrupoSanguineo.setText("");
+        jtFechaNac.setText("");
+        jTTelefono.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 //        private void llenarComboBrigada() {
 //        List<String> nombresBrigada = briga.mostrarOpciones();
 //
@@ -280,6 +298,7 @@ public class ModificarBombero extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBSalir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCBombero;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

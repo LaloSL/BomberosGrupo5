@@ -382,7 +382,30 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
     return siniestros;
 }
     
-       
+public List<String> mostrarSiniestros1() {
+        
+       List<String> siniestro = new ArrayList<>();
+
+    String sql = "SELECT idCodigo,tipo FROM siniestro WHERE estadoS = 1";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int idCodigo = rs.getInt("idCodigo");
+            String tipo = rs.getString("tipo");
+
+            siniestro.add(idCodigo + ". " + tipo);
+        }
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener nombres de brigadas: " + ex.getMessage());
+    }
+
+    return siniestro;
+}
+           
 //        int idSiniestroSeleccionado = -1;
 //        List<String> siniestros = new ArrayList<>();
 //

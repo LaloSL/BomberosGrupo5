@@ -44,6 +44,7 @@ public class ModificarBrigada extends javax.swing.JInternalFrame {
         jBSalir = new javax.swing.JButton();
         jCEspecialidad = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setText("Seleccione la brigada");
 
@@ -87,6 +88,13 @@ public class ModificarBrigada extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Seleccione especialidad");
 
+        jButton1.setText("Limpiar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,6 +116,8 @@ public class ModificarBrigada extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jBGuardar)
+                                .addGap(48, 48, 48)
+                                .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jBSalir))
                             .addGroup(layout.createSequentialGroup()
@@ -134,7 +144,8 @@ public class ModificarBrigada extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBGuardar)
-                    .addComponent(jBSalir))
+                    .addComponent(jBSalir)
+                    .addComponent(jButton1))
                 .addGap(40, 40, 40))
         );
 
@@ -216,6 +227,10 @@ public class ModificarBrigada extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCEspecialidadActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTNombre.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     
 
     private void llenarComboEspecialidades() {
@@ -243,6 +258,7 @@ public class ModificarBrigada extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBSalir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCBrigada;
     private javax.swing.JComboBox<String> jCEspecialidad;
     private javax.swing.JLabel jLabel1;

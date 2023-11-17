@@ -114,7 +114,7 @@ public class EliminarSiniestro extends javax.swing.JInternalFrame {
 //------------------------METODOS----------------------
 
     private void llenarComboSiniestro() {
-        List<String> nombresSiniestro = sin.mostrarSiniestros();
+        List<String> nombresSiniestro = sin.mostrarSiniestros1();
 
         if (!nombresSiniestro.isEmpty()) {
             // Limpiamos el JComboBox antes de agregar los nuevos elementos
