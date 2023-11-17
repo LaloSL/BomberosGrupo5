@@ -109,6 +109,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu2.add(jMenuItem2);
 
         jMenuItem4.setText("Modificar Brigada");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuItem6.setText("Eliminar Brigada");
@@ -137,6 +142,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu3.add(jMenuItem3);
 
         jMenuItem7.setText("Modificar Bombero");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem7);
 
         jMenuItem8.setText("Eliminar Bombero");
@@ -262,6 +272,7 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(eliB); 
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
          
     }//GEN-LAST:event_jMenu3ActionPerformed
@@ -283,6 +294,25 @@ public class Menu extends javax.swing.JFrame {
         esin.getContentPane().setBackground(new Color(86, 167, 132));
         escritorio.add(esin);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+         escritorio.removeAll();
+        escritorio.repaint();        
+        ModificarBrigada eliB = new ModificarBrigada();
+        eliB.setVisible(true);
+        eliB.getContentPane().setBackground(new Color(86, 167, 132));
+        escritorio.add(eliB);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+          escritorio.removeAll();
+        escritorio.repaint();        
+        ModificarBombero eliB = new ModificarBombero();
+        eliB.setVisible(true);
+        eliB.getContentPane().setBackground(new Color(86, 167, 132));
+        escritorio.add(eliB);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
 
     /**
      * @param args the command line arguments
