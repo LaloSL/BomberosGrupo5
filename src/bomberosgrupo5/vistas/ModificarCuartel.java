@@ -6,6 +6,7 @@
 package bomberosgrupo5.vistas;
 
 import bomberosgrupo5.accesoADatos.CuartelData;
+import bomberosgrupo5.entidades.Cuartel;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -14,13 +15,15 @@ import javax.swing.JOptionPane;
  * @author Joaco
  */
 public class ModificarCuartel extends javax.swing.JInternalFrame {
-private CuartelData cua = new CuartelData();
+
+    private CuartelData cua = new CuartelData();
+
     /**
      * Creates new form ModificarCuartel
      */
     public ModificarCuartel() {
         initComponents();
-         llenarComboCuartel();
+        llenarComboCuartel();
     }
 
     /**
@@ -51,6 +54,11 @@ private CuartelData cua = new CuartelData();
 
         jLabel1.setText("Seleccione el Cuartel");
 
+        jCCuartel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCCuartelMouseClicked(evt);
+            }
+        });
         jCCuartel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCCuartelActionPerformed(evt);
@@ -70,26 +78,36 @@ private CuartelData cua = new CuartelData();
         jLabel7.setText("Correo:");
 
         jBGuardar.setText("Guardar Cambios");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
 
         jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jCCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jBGuardar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                                 .addComponent(jBSalir))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,15 +118,15 @@ private CuartelData cua = new CuartelData();
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                                     .addComponent(jTTelefono)
                                     .addComponent(jTLatitud)
-                                    .addComponent(jTNombre)
                                     .addComponent(jTDireccion)
-                                    .addComponent(jTlongitud, javax.swing.GroupLayout.Alignment.TRAILING))))))
-                .addContainerGap(66, Short.MAX_VALUE))
+                                    .addComponent(jTlongitud, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTNombre))))))
+                .addGap(99, 99, 99))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +161,7 @@ private CuartelData cua = new CuartelData();
                             .addComponent(jLabel6))
                         .addGap(18, 18, 18)
                         .addComponent(jTCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBGuardar)
                     .addComponent(jBSalir))
@@ -153,15 +171,83 @@ private CuartelData cua = new CuartelData();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jCCuartelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCCuartelMouseClicked
+
+//        String cuartelSeleccionado = (String) jCCuartel.getSelectedItem();
+//
+//        if (cuartelSeleccionado != null) {
+//
+//            int idCuartel = Integer.parseInt(cuartelSeleccionado.split("\\. ")[0]);
+//            Cuartel cuartel = cua.buscarCuartelPorId(idCuartel);
+//
+//            if (cuartel != null) {
+//                jTNombre.setText(cuartel.getNombreCuartel());
+//                jTDireccion.setText(cuartel.getDireccion());
+////                int coordX = Integer.parseInt(title)
+//                jTlongitud.setText(Integer.toString(cuartel.getCoordX()));
+//                jTLatitud.setText(Integer.toString(cuartel.getCoordY()));
+//                jTTelefono.setText(cuartel.getTelefono());
+//                jTCorreo.setText(cuartel.getCorreo());
+//
+//            }
+
+    }//GEN-LAST:event_jCCuartelMouseClicked
+
     private void jCCuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCCuartelActionPerformed
-        
+        String cuartelSeleccionado = (String) jCCuartel.getSelectedItem();
+
+        if (cuartelSeleccionado != null) {
+
+            int idCuartel = Integer.parseInt(cuartelSeleccionado.split("\\. ")[0]);
+            Cuartel cuartel = cua.buscarCuartelPorId(idCuartel);
+
+            if (cuartel != null) {
+                jTNombre.setText(cuartel.getNombreCuartel());
+                jTDireccion.setText(cuartel.getDireccion());
+//                int coordX = Integer.parseInt(title)
+                jTlongitud.setText(Integer.toString(cuartel.getCoordX()));
+                jTLatitud.setText(Integer.toString(cuartel.getCoordY()));
+                jTTelefono.setText(cuartel.getTelefono());
+                jTCorreo.setText(cuartel.getCorreo());
+
+            }
+        }
     }//GEN-LAST:event_jCCuartelActionPerformed
+
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+
+        String cuartelSeleccionado = (String) jCCuartel.getSelectedItem();
+
+        if (cuartelSeleccionado != null) {
+
+            int idCuartel = Integer.parseInt(cuartelSeleccionado.split("\\. ")[0]);
+
+            String nuevoNombre = jTNombre.getText();
+            String nuevaDireccion = jTDireccion.getText();
+            int nuevaCoordX = Integer.parseInt(jTlongitud.getText());
+            int nuevaCoordY = Integer.parseInt(jTLatitud.getText());
+            String nuevoTelefono = jTTelefono.getText();
+            String nuevoCorreo = jTCorreo.getText();
+            
+            Cuartel cuartelActualizado = new Cuartel (idCuartel, nuevoNombre, nuevaDireccion, nuevaCoordX, nuevaCoordY, nuevoTelefono, nuevoCorreo, true);
+            cua.modificarCuartel(cuartelActualizado);
+
+
+    }//GEN-LAST:event_jBGuardarActionPerformed
+    }
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jBSalirActionPerformed
+
+    
+
+    
 
     private void llenarComboCuartel() {
         List<String> nombresCuartel = cua.mostrarOpcionesYObtenerSeleccion();
 
         if (!nombresCuartel.isEmpty()) {
-            
+
             jCCuartel.removeAllItems();
             for (String nombre : nombresCuartel) {
                 jCCuartel.addItem(nombre);
