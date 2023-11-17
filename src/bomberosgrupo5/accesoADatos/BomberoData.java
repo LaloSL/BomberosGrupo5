@@ -638,4 +638,74 @@ public class BomberoData {
 //-------------------------------------------------------------------------
  
 //---------------------------------------------------------------------------
+ 
+// //-----------------Bomberos por brigada ViewConsultar-------------------------------
+// 
+// public List<Integer> IDsBomberosPorBrigada(int idBrigada) {
+//    List<Integer> idsBomberos = new ArrayList<>();
+//
+//    String sql = "SELECT idBombero FROM bombero WHERE idBrigada = ? AND estadoB = 1";
+//
+//    try {
+//        PreparedStatement ps = con.prepareStatement(sql);
+//        ps.setInt(1, idBrigada);
+//        ResultSet rs = ps.executeQuery();
+//
+//        while (rs.next()) {
+//            int idBombero = rs.getInt("idBombero");
+//            idsBomberos.add(idBombero);
+//        }
+//        ps.close();
+//        
+////        // Verificar si la lista tiene solo un elemento
+////        if (idsBomberos.size() == 1) {
+////            // Mostrar JOptionPane indicando que la brigada tiene un solo bombero
+////            JOptionPane.showMessageDialog(null, "La brigada seleccionada contiene un solo bombero");
+////        }
+//
+//    } catch (SQLException ex) {
+//        JOptionPane.showMessageDialog(null, "Error al obtener los IDs de los bomberos de la brigada: " + ex.getMessage());
+//        
+//    }
+//
+//    return idsBomberos;
+//}
+//
+// 
+// //----------------- Fin Bomberos por brigada-------------------------------
+ 
+ 
+ //---------------------- Muestra nombre de bomberos de la misma brigada-----------------------
+ 
+ public List<String> mostrarOpcionesBomberosPorBrigada(int idBrigada) {
+    List<String> nombresBomberos = new ArrayList<>();
+
+    String sql = "SELECT idBombero, nombreApellido FROM bombero WHERE idBrigada = ? AND estadoB = 1";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idBrigada);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int idBombero = rs.getInt("idBombero");
+            String nombreBombero = rs.getString("nombreApellido");
+
+            nombresBomberos.add(idBombero + ". " + nombreBombero);
+        }
+        ps.close();
+        
+        if (nombresBomberos.size() == 1) {
+            JOptionPane.showMessageDialog(null, "La brigada seleccionada contiene un solo bombero");
+        }
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener nombres de bomberos: " + ex.getMessage());
+    }
+
+    return nombresBomberos;
+}
+
+ 
+ //----------------------Fin Muestra nombre de bomberos de la misma brigada-----------------------
 }
