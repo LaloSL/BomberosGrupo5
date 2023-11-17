@@ -593,4 +593,35 @@ public void marcarBrigadaComoLibre(int idBrigada) {
 
 //------------------------------------------------------------------------------------  
 //--------------------------------------FIN OPCION ELIMINAR SINIESTRO-------------------------------------------------------
+
+//-----------------------------------------Brigadas Ocupadas---------------------------------------------------------------
+
+public List<String> brigadasOcupadas() {
+    List<String> nombresBrigadas = new ArrayList<>();
+
+    String sql = "SELECT idBrigada, nombreBrig FROM brigada WHERE estadoBr = 1 AND libre = 0";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int idBrigada = rs.getInt("idBrigada");
+            String nombreBrig = rs.getString("nombreBrig");
+
+            nombresBrigadas.add(idBrigada + ". " + nombreBrig);
+        }
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener nombres de brigadas: " + ex.getMessage());
+    }
+
+    return nombresBrigadas;
+}
+
+
+//-----------------------------------------Fin Brigadas Ocupadas---------------------------------------------------------------
+
+
+
 }
