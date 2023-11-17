@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -25,9 +26,10 @@ import java.util.List;
 
 public class SiniestroData {
 
-   private Connection con = null;
+    private Connection con = null;
+
     public SiniestroData() {
-       con=Conexion.getConexion();
+        con = Conexion.getConexion();
     }
 
 //------------------------------------------------------------------------------    
@@ -43,32 +45,32 @@ public class SiniestroData {
 
 //-----------------------------------------------------------------------------
 //---------------------------insertar siniestro-------------------------------
-public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHoraSiniestro, int coordx, int coordy, String detalles, LocalDateTime fechaHoraResol, int puntuacion) throws SQLException {
-    String consulta = "INSERT INTO siniestro (idBrigada, tipo, fechaSiniestro, coordx, coordy, detalles, fechaResol, puntuacion, estadoS) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)"; 
+    public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHoraSiniestro, int coordx, int coordy, String detalles, LocalDateTime fechaHoraResol, int puntuacion) throws SQLException {
+        String consulta = "INSERT INTO siniestro (idBrigada, tipo, fechaSiniestro, coordx, coordy, detalles, fechaResol, puntuacion, estadoS) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)";
 
-    try (PreparedStatement statement = con.prepareStatement(consulta)) {
-        statement.setInt(1, idBrigada);
-        statement.setString(2, tipo);
-        statement.setTimestamp(3, Timestamp.valueOf(fechaHoraSiniestro));
-        statement.setInt(4, coordx);
-        statement.setInt(5, coordy);
-        statement.setString(6, detalles);
-        statement.setTimestamp(7, (fechaHoraResol != null) ? Timestamp.valueOf(fechaHoraResol) : null);
-        statement.setInt(8, puntuacion);
+        try (PreparedStatement statement = con.prepareStatement(consulta)) {
+            statement.setInt(1, idBrigada);
+            statement.setString(2, tipo);
+            statement.setTimestamp(3, Timestamp.valueOf(fechaHoraSiniestro));
+            statement.setInt(4, coordx);
+            statement.setInt(5, coordy);
+            statement.setString(6, detalles);
+            statement.setTimestamp(7, (fechaHoraResol != null) ? Timestamp.valueOf(fechaHoraResol) : null);
+            statement.setInt(8, puntuacion);
 
-        int filasAfectadas = statement.executeUpdate();
+            int filasAfectadas = statement.executeUpdate();
 
-        if (filasAfectadas > 0) {
-            System.out.println("Siniestro registrado con éxito.");
-        } else {
-            System.out.println("No se registró ningún siniestro.");
+            if (filasAfectadas > 0) {
+                System.out.println("Siniestro registrado con éxito.");
+            } else {
+                System.out.println("No se registró ningún siniestro.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error al insertar el siniestro en la base de datos.");
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        System.out.println("Error al insertar el siniestro en la base de datos.");
     }
-}
 
 //----------------------------------------------------------------------------
 //--------------------------------MODIFICAR SINIESTRO------------------------
@@ -145,36 +147,36 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
 //-------------------------------------------------------------------------
 //----------------------- modificar fecha----------------------------------
     public void modificarFechaSiniestro(int idSiniestro) {
-    try {
-        String nuevaFechaSiniestro = JOptionPane.showInputDialog("Ingrese la nueva fecha de siniestro (dd/MM/yyyy HH:mm):");
-
-        // de String a LocalDateTime
-        LocalDateTime fechaSiniestroLocalDateTime = null;
         try {
-            fechaSiniestroLocalDateTime = convertirAFechaHora(nuevaFechaSiniestro);
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null, "Error al convertir la fecha de siniestro: " + e.getMessage());
-            return;
-        }
+            String nuevaFechaSiniestro = JOptionPane.showInputDialog("Ingrese la nueva fecha de siniestro (dd/MM/yyyy HH:mm):");
 
-        String sql = "UPDATE siniestro SET fechaSiniestro=? WHERE idCodigo=?";
-
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            // Asegura que se pase un valor null si fechaSiniestroLocalDateTime es null
-            ps.setObject(1, (fechaSiniestroLocalDateTime != null) ? Timestamp.valueOf(fechaSiniestroLocalDateTime) : null);
-            ps.setInt(2, idSiniestro);
-
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Fecha de siniestro actualizada exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo actualizar la fecha de siniestro. Asegúrate de que el siniestro sea válido.");
+            // de String a LocalDateTime
+            LocalDateTime fechaSiniestroLocalDateTime = null;
+            try {
+                fechaSiniestroLocalDateTime = convertirAFechaHora(nuevaFechaSiniestro);
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(null, "Error al convertir la fecha de siniestro: " + e.getMessage());
+                return;
             }
+
+            String sql = "UPDATE siniestro SET fechaSiniestro=? WHERE idCodigo=?";
+
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                // Asegura que se pase un valor null si fechaSiniestroLocalDateTime es null
+                ps.setObject(1, (fechaSiniestroLocalDateTime != null) ? Timestamp.valueOf(fechaSiniestroLocalDateTime) : null);
+                ps.setInt(2, idSiniestro);
+
+                int exito = ps.executeUpdate();
+                if (exito == 1) {
+                    JOptionPane.showMessageDialog(null, "Fecha de siniestro actualizada exitosamente.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo actualizar la fecha de siniestro. Asegúrate de que el siniestro sea válido.");
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar la fecha de siniestro: " + ex.getMessage());
         }
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al actualizar la fecha de siniestro: " + ex.getMessage());
     }
-}
 
 //    public void modificarFechaSiniestro(int idSiniestro, Connection con) {
 //    try {
@@ -206,7 +208,6 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
 //        JOptionPane.showMessageDialog(null, "Error al actualizar la fecha de siniestro: " + ex.getMessage());
 //    }
 //}
-
 //-------------------------------------------------------------------------
 //----------------------modificar coordenada X----------------------------
     public void modificarCoordenadaX(int idSiniestro) {
@@ -288,36 +289,35 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
 //------------------------------------------------------------------------
 //-------------------- modoficar fecha de resolucion ---------------------
     public void modificarFechaResolucion(int idSiniestro) {
-    try {
-        String nuevaFechaResolucionStr = JOptionPane.showInputDialog("Ingrese la nueva fecha de resolución (dd/MM/yyyy HH:mm):");
-
-        // de String a LocalDateTime
-        LocalDateTime nuevaFechaResolucion = null;
         try {
-            nuevaFechaResolucion = convertirAFechaHora(nuevaFechaResolucionStr);
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null, "Error al convertir la fecha de resolución: " + e.getMessage());
-            return;
-        }
+            String nuevaFechaResolucionStr = JOptionPane.showInputDialog("Ingrese la nueva fecha de resolución (dd/MM/yyyy HH:mm):");
 
-        String sql = "UPDATE siniestro SET fechaResol=? WHERE idCodigo=?";
-
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setObject(1, Timestamp.valueOf(nuevaFechaResolucion));
-            ps.setInt(2, idSiniestro);
-
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Fecha de resolución del siniestro actualizada exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo actualizar la fecha de resolución del siniestro. Asegúrate de que el siniestro sea válido.");
+            // de String a LocalDateTime
+            LocalDateTime nuevaFechaResolucion = null;
+            try {
+                nuevaFechaResolucion = convertirAFechaHora(nuevaFechaResolucionStr);
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(null, "Error al convertir la fecha de resolución: " + e.getMessage());
+                return;
             }
-        }
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al actualizar la fecha de resolución del siniestro: " + ex.getMessage());
-    }
-}
 
+            String sql = "UPDATE siniestro SET fechaResol=? WHERE idCodigo=?";
+
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setObject(1, Timestamp.valueOf(nuevaFechaResolucion));
+                ps.setInt(2, idSiniestro);
+
+                int exito = ps.executeUpdate();
+                if (exito == 1) {
+                    JOptionPane.showMessageDialog(null, "Fecha de resolución del siniestro actualizada exitosamente.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo actualizar la fecha de resolución del siniestro. Asegúrate de que el siniestro sea válido.");
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar la fecha de resolución del siniestro: " + ex.getMessage());
+        }
+    }
 
 //------------------------------------------------------------------------
 //------------------------- modificar puntuacion -------------------------
@@ -350,29 +350,32 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
 //--------------------------------FIN MODIFICAR SINIESTRO--------------------
 //-----------------------------ELIMINAR SINIESTRO------------------
 //--------------------------listar siniestro para devuelve idCodigo-------------
-    public List<String> mostrarSiniestros() {
-        
-        List<String> nombreSin = new ArrayList<>();
+    public List<Siniestro> mostrarSiniestros() {
+        List<Siniestro> listaSiniestros = new ArrayList<>();
 
-    String sql = "SELECT idCodigo, tipo FROM siniestro WHERE estadoS = 1";
+        String sql = "SELECT idCodigo, tipo, fechaSiniestro, detalles FROM siniestro WHERE estadoS = 1";
 
-    try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
 
-        while (rs.next()) {
-            int idCodigo = rs.getInt("idCodigo");
-            String tipo = rs.getString("tipo");
+            while (rs.next()) {
+                int idCodigo = rs.getInt("idCodigo");
+                String tipo = rs.getString("tipo");
+                LocalDate fechaSiniestro = rs.getDate("fechaSiniestro").toLocalDate();
+                String detalles = rs.getString("detalles");
 
-            nombreSin.add(idCodigo + ". " + tipo);
-        }
-        ps.close();
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al obtener nombres de siniestro: " + ex.getMessage());
+                Siniestro siniestro = new Siniestro(idCodigo, tipo, fechaSiniestro, detalles);
+                listaSiniestros.add(siniestro);
+            }
+            ps.close();
+        }catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener siniestros: " + ex.getMessage());
     }
 
-    return nombreSin; 
-        
+        return listaSiniestros;
+    }
+
 //        int idSiniestroSeleccionado = -1;
 //        List<String> siniestros = new ArrayList<>();
 //
@@ -412,8 +415,6 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
 //        }
 //
 //        return idSiniestroSeleccionado;
-    }
-
 //---------------------------------------------------------------------------
 //-------------------------recuperar idBrigada desde idCodigo-------------------------
     public int obtenerIdBrigadaPorIdSiniestro(int idSiniestro) {
