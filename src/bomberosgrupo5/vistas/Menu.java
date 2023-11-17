@@ -55,6 +55,9 @@ public class Menu extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -231,6 +234,21 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu6);
 
+        jMenu7.setText("Distancia");
+
+        jMenuItem7.setText("Distancia entre dos puntos");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem7);
+
+        jMenuItem8.setText("Distancia cuarteles");
+        jMenu7.add(jMenuItem8);
+
+        jMenuBar1.add(jMenu7);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -405,6 +423,15 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(sin);
     }//GEN-LAST:event_jMModificarSiniestroActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        DistanciaDosPuntos ddp = new DistanciaDosPuntos();
+        ddp.setVisible(true);
+       ddp.getContentPane().setBackground(new Color(86, 167, 132));
+        escritorio.add(ddp);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -458,6 +485,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -465,5 +493,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
 }

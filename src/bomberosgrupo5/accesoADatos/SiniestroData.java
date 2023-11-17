@@ -351,7 +351,7 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
 //--------------------------------FIN MODIFICAR SINIESTRO--------------------
 //-----------------------------ELIMINAR SINIESTRO------------------
 //--------------------------listar siniestro para devuelve idCodigo-------------
-    public List<Siniestro> mostrarSiniestros() {
+    public List<String> mostrarSiniestros() {
         
         List<Siniestro> siniestros = new ArrayList<>();
 
@@ -477,7 +477,7 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
 
     
     public Siniestro buscarSiniestroPorId(int idSiniestro) {
-        String sql = "SELECT tipo, frchaSiniestro, coordX, coordY, detalles FROM siniestro WHERE idCodigo = ?";
+        String sql = "SELECT tipo, fechaSiniestro, coordX, coordY, detalles FROM siniestro WHERE idCodigo = ?";
         
         Siniestro siniestro = null;
 
@@ -525,4 +525,17 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
    
 //-------------------------------------------------------------------------------------
 //-----------------------------FIN ELIMINAR SINIESTRO-----------------------------
+//----------------------calculadora--------------------------------------------
+
+public double calcularDistancia(double x1, double y1, double x2, double y2) {
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    }
+
+
+
+//----------------------fin calculadora--------------------------------------------  
+   
+
+
+
 }
