@@ -38,19 +38,19 @@ public class Menu extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMModificarCuartel = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMEliminarCuartel = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMModificarBrigada = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        jMEliminarBrigada = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        jMAgregarBombero = new javax.swing.JMenuItem();
+        jMModificarBombero = new javax.swing.JMenuItem();
+        jMEliminarBombero = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMAgregarSiniestro = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        jMModificarSiniestro = new javax.swing.JMenuItem();
+        jMEliminarSiniestro = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,13 +83,13 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu1.add(jMModificarCuartel);
 
-        jMenuItem5.setText("Eliminar Cuartel");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        jMEliminarCuartel.setText("Eliminar Cuartel");
+        jMEliminarCuartel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                jMEliminarCuartelActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem5);
+        jMenu1.add(jMEliminarCuartel);
 
         jMenuBar1.add(jMenu1);
 
@@ -100,13 +100,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem2.setText("Agregar Brigada");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMModificarBrigada.setText("Agregar Brigada");
+        jMModificarBrigada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMAgregarBrigada(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        jMenu2.add(jMModificarBrigada);
 
         jMenuItem4.setText("Modificar Brigada");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -116,13 +116,13 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem4);
 
-        jMenuItem6.setText("Eliminar Brigada");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        jMEliminarBrigada.setText("Eliminar Brigada");
+        jMEliminarBrigada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                jMEliminarBrigadaActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem6);
+        jMenu2.add(jMEliminarBrigada);
 
         jMenuBar1.add(jMenu2);
 
@@ -133,29 +133,29 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem3.setText("Agregar Bombero");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMAgregarBombero.setText("Agregar Bombero");
+        jMAgregarBombero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jMAgregarBomberoActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem3);
+        jMenu3.add(jMAgregarBombero);
 
-        jMenuItem7.setText("Modificar Bombero");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        jMModificarBombero.setText("Modificar Bombero");
+        jMModificarBombero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                jMModificarBomberoActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem7);
+        jMenu3.add(jMModificarBombero);
 
-        jMenuItem8.setText("Eliminar Bombero");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        jMEliminarBombero.setText("Eliminar Bombero");
+        jMEliminarBombero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                jMEliminarBomberoActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem8);
+        jMenu3.add(jMEliminarBombero);
 
         jMenuBar1.add(jMenu3);
 
@@ -169,16 +169,16 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu4.add(jMAgregarSiniestro);
 
-        jMenuItem9.setText("Modificar Siniestro");
-        jMenu4.add(jMenuItem9);
+        jMModificarSiniestro.setText("Modificar Siniestro");
+        jMenu4.add(jMModificarSiniestro);
 
-        jMenuItem10.setText("Eliminar Siniestro");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+        jMEliminarSiniestro.setText("Eliminar Siniestro");
+        jMEliminarSiniestro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                jMEliminarSiniestroActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem10);
+        jMenu4.add(jMEliminarSiniestro);
 
         jMenuBar1.add(jMenu4);
 
@@ -212,23 +212,23 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenu2ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMAgregarBrigada(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMAgregarBrigada
         escritorio.removeAll();
         escritorio.repaint();
         AgregarBrigada bri = new AgregarBrigada();
         bri.setVisible(true);
         bri.getContentPane().setBackground(new Color(86, 167, 132));
         escritorio.add(bri);   
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jMAgregarBrigada
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMAgregarBomberoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMAgregarBomberoActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
         AgregarBombero bomb = new AgregarBombero();
         bomb.setVisible(true);
         bomb.getContentPane().setBackground(new Color(86, 167, 132));
         escritorio.add(bomb);    
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMAgregarBomberoActionPerformed
 
     private void jMModificarCuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMModificarCuartelActionPerformed
         escritorio.removeAll();
@@ -254,46 +254,37 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(sin);    
     }//GEN-LAST:event_jMAgregarSiniestroActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        escritorio.removeAll();
-        escritorio.repaint();        
-        EliminarCuartel eli = new EliminarCuartel();
-        eli.setVisible(true);
-        eli.getContentPane().setBackground(new Color(86, 167, 132));
-        escritorio.add(eli);  
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void jMEliminarBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMEliminarBrigadaActionPerformed
        escritorio.removeAll();
         escritorio.repaint();        
         EliminarBrigada eliB = new EliminarBrigada();
         eliB.setVisible(true);
         eliB.getContentPane().setBackground(new Color(86, 167, 132));
         escritorio.add(eliB); 
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_jMEliminarBrigadaActionPerformed
 
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
          
     }//GEN-LAST:event_jMenu3ActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void jMEliminarBomberoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMEliminarBomberoActionPerformed
         escritorio.removeAll();
         escritorio.repaint();        
         EliminarBombero eliBo = new EliminarBombero();
         eliBo.setVisible(true);
         eliBo.getContentPane().setBackground(new Color(86, 167, 132));
         escritorio.add(eliBo);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_jMEliminarBomberoActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+    private void jMEliminarSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMEliminarSiniestroActionPerformed
         escritorio.removeAll();
         escritorio.repaint();        
         EliminarSiniestro esin = new EliminarSiniestro();
         esin.setVisible(true);
         esin.getContentPane().setBackground(new Color(86, 167, 132));
         escritorio.add(esin);
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    }//GEN-LAST:event_jMEliminarSiniestroActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
          escritorio.removeAll();
@@ -304,14 +295,24 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(eliB);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void jMModificarBomberoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMModificarBomberoActionPerformed
         escritorio.removeAll();
         escritorio.repaint();        
         ModificarBombero eliB = new ModificarBombero();
         eliB.setVisible(true);
         eliB.getContentPane().setBackground(new Color(86, 167, 132));
         escritorio.add(eliB);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_jMModificarBomberoActionPerformed
+
+    private void jMEliminarCuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMEliminarCuartelActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();        
+        EliminarCuartel cua = new EliminarCuartel();
+        cua.setVisible(true);
+        cua.getContentPane().setBackground(new Color(86, 167, 132));
+        escritorio.add(cua);
+        
+    }//GEN-LAST:event_jMEliminarCuartelActionPerformed
 
 
     /**
@@ -351,22 +352,22 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenuItem jMAgregarBombero;
     private javax.swing.JMenuItem jMAgregarSiniestro;
+    private javax.swing.JMenuItem jMEliminarBombero;
+    private javax.swing.JMenuItem jMEliminarBrigada;
+    private javax.swing.JMenuItem jMEliminarCuartel;
+    private javax.swing.JMenuItem jMEliminarSiniestro;
+    private javax.swing.JMenuItem jMModificarBombero;
+    private javax.swing.JMenuItem jMModificarBrigada;
     private javax.swing.JMenuItem jMModificarCuartel;
+    private javax.swing.JMenuItem jMModificarSiniestro;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

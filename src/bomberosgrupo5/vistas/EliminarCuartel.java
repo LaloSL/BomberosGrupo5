@@ -100,7 +100,7 @@ public class EliminarCuartel extends javax.swing.JInternalFrame {
         // Obtener el ID del cuartel a partir de la cadena seleccionada
         int idCuartel = Integer.parseInt(cuartelSeleccionado.split("\\. ")[0]);
         List<Integer> idsBrigadas = briga.obtenerIdsBrigadasPorIdCuartel(idCuartel);
-        bomb.cambiarEstadoBomberosPorBrigadas(idsBrigadas);
+        bomb.cambiarEstadoBomberosPorBrigada(idCuartel);//cambiarEstadoBomberosPorBrigadas(idsBrigadas);
         briga.cambiarEstadoBrigadas(idsBrigadas);
         cua.cambiarEstadoCuartel(idCuartel);
 

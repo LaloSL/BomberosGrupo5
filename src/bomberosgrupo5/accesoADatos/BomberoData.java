@@ -407,31 +407,31 @@ public class BomberoData {
         cambiarEstadoBombero(idBombero);
     }
 }
-
-    public void cambiarEstadoBomberosPorBrigada(int idBrigada) {
-        // Obtener la lista de IDs de bomberos que pertenecen a la brigada
-        List<Integer> idsBomberosAEliminar = obtenerBomberosPorBrigada(idBrigada);
-
-        for (Integer idBombero : idsBomberosAEliminar) {
-            cambiarEstadoBombero(idBombero);
-        }
-
-        //JOptionPane.showMessageDialog(null, "Bomberos eliminados exitosamente.");
-    }
+//
+//    public void cambiarEstadoBomberosPorBrigada(int idBrigada) {
+//        // Obtener la lista de IDs de bomberos que pertenecen a la brigada
+//        List<Integer> idsBomberosAEliminar = obtenerBomberosPorBrigada(idBrigada);
+//
+//        for (Integer idBombero : idsBomberosAEliminar) {
+//            cambiarEstadoBombero(idBombero);
+//        }
+//
+//        //JOptionPane.showMessageDialog(null, "Bomberos eliminados exitosamente.");
+//    }
 
 //-------------------------------------
 //---------------------cambiar estados de bomberos en brigadas--------------
-    public void cambiarEstadoBomberosPorBrigadas(List<Integer> idsBrigadas) {
-        for (Integer idBrigada : idsBrigadas) {
-            List<Integer> idsBomberosAEliminar = obtenerBomberosPorBrigada(idBrigada);
-
-            for (Integer idBombero : idsBomberosAEliminar) {
-                cambiarEstadoBombero(idBombero);
-            }
-        }
-
-        //JOptionPane.showMessageDialog(null, "Bomberos eliminados exitosamente.");
-    }
+//    public void cambiarEstadoBomberosPorBrigadas(List<Integer> idsBrigadas) {
+//        for (Integer idBrigada : idsBrigadas) {
+//            List<Integer> idsBomberosAEliminar = obtenerBomberosPorBrigada(idBrigada);
+//
+//            for (Integer idBombero : idsBomberosAEliminar) {
+//                cambiarEstadoBombero(idBombero);
+//            }
+//        }
+//
+//        //JOptionPane.showMessageDialog(null, "Bomberos eliminados exitosamente.");
+//    }
 
 //------------------------------------------------------------------------
 //-------------------------------MODIFICAR BOMBEROS----------------------------
