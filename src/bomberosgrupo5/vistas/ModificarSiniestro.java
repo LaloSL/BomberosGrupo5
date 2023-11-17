@@ -10,6 +10,7 @@ import bomberosgrupo5.accesoADatos.SiniestroData;
 import bomberosgrupo5.entidades.Siniestro;
 import java.awt.event.MouseAdapter;
 import java.sql.ResultSet;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -65,7 +66,7 @@ public class ModificarSiniestro extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jTCoordY1 = new javax.swing.JTextField();
-        jTCoordY2 = new javax.swing.JTextField();
+        jTdetalles = new javax.swing.JTextField();
         jTCoordY3 = new javax.swing.JTextField();
 
         jLabel1.setText("Seleccione el Siniestro");
@@ -91,6 +92,11 @@ public class ModificarSiniestro extends javax.swing.JInternalFrame {
         jButton2.setText("Salir");
 
         jCSiniestro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCSiniestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCSiniestroActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Detalles");
 
@@ -147,7 +153,7 @@ public class ModificarSiniestro extends javax.swing.JInternalFrame {
                                     .addComponent(jTCoordX)
                                     .addComponent(jTFechaSiniestro)
                                     .addComponent(jTTipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                                    .addComponent(jTCoordY2))))
+                                    .addComponent(jTdetalles))))
                         .addGap(179, 179, 179))))
         );
         layout.setVerticalGroup(
@@ -180,7 +186,7 @@ public class ModificarSiniestro extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
-                    .addComponent(jTCoordY2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTdetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
@@ -227,18 +233,31 @@ public class ModificarSiniestro extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTCoordXActionPerformed
 
-    public void cargarDatosSiniestro(int idSiniestro) {
-        Siniestro siniestro = sin.obtenerSiniestroPorId(idSiniestro);
+    private void jCSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCSiniestroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCSiniestroActionPerformed
 
-        if (siniestro != null) {
-           
-            jTTipo.setText(siniestro.getTipo());
-            jTFechaSiniestro.setText(siniestro.getFechaSiniestro().toString()); // Ajusta según el formato deseado
-            int coordX = siniestro.getCoordX();
-            jTCoordX.setText(String.valueOf(coordX));
-            int coordY = siniestro.getCoordY();
-            jTCoordY.setText(String.valueOf(coordY));
-        }
+    public void cargarDatosSiniestro(int idSiniestro) {
+        String siniestroSelec = (String) jCSiniestro.getSelectedItem();
+        
+        if (siniestroSelec != null) {
+
+            int idCodigo = Integer.parseInt(siniestroSelec.split("\\. ")[0]);
+            Siniestro siniestro = sin.buscarSiniestroPorId(idCodigo);
+
+            if (siniestro != null) {
+                jTTipo.setText(siniestro.getTipo());
+                DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                jTFechaSiniestro.setText(siniestro.getFechaSiniestro().format(formato));
+                jTCoordX.setText(String.valueOf(siniestro.getCoordX()));
+                jTCoordY.setText(String.valueOf(siniestro.getCoordY()));
+                jTdetalles.setText(siniestro.getDetalles());
+                
+                
+                
+                
+            }
+    }
     }
 
     private void llenarComboSiniestros() {
@@ -274,10 +293,10 @@ public class ModificarSiniestro extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTCoordX;
     private javax.swing.JTextField jTCoordY;
     private javax.swing.JTextField jTCoordY1;
-    private javax.swing.JTextField jTCoordY2;
     private javax.swing.JTextField jTCoordY3;
     private javax.swing.JTextField jTFechaSiniestro;
     private javax.swing.JTextField jTTipo;
+    private javax.swing.JTextField jTdetalles;
     // End of variables declaration//GEN-END:variables
 
 }

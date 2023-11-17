@@ -3,6 +3,7 @@
 package bomberosgrupo5.entidades;
 
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -16,13 +17,13 @@ public class Siniestro {
     private String detalles;
     private int puntuacion;
     private Brigada idBrigada;
-    private LocalDateTime fechaSiniestro;
+    private LocalDate fechaSiniestro;
     private LocalDateTime fechaResol;
 
     public Siniestro() {
     }
 
-    public Siniestro(int idCodigo, String tipo, int coordX, int coordY, String detalles, int puntuacion, Brigada idBrigada, LocalDateTime fechaSiniestro, LocalDateTime fechaResol) {
+    public Siniestro(int idCodigo, String tipo, int coordX, int coordY, String detalles, int puntuacion, Brigada idBrigada, LocalDate fechaSiniestro, LocalDateTime fechaResol) {
         this.idCodigo = idCodigo;
         this.tipo = tipo;
         this.coordX = coordX;
@@ -34,7 +35,7 @@ public class Siniestro {
         this.fechaResol = fechaResol;
     }
 
-    public Siniestro(String tipo, int coordX, int coordY, String detalles, int puntuacion, Brigada idBrigada, LocalDateTime fechaSiniestro, LocalDateTime fechaResol) {
+    public Siniestro(String tipo, int coordX, int coordY, String detalles, int puntuacion, Brigada idBrigada, LocalDate fechaSiniestro, LocalDateTime fechaResol) {
         this.tipo = tipo;
         this.coordX = coordX;
         this.coordY = coordY;
@@ -45,18 +46,25 @@ public class Siniestro {
         this.fechaResol = fechaResol;
     }
 
-    public Siniestro(String tipo, LocalDateTime fechaSiniestro, int coordX, int coordY, String detalles) {
-        
-    }
+//    public Siniestro(int idSiniestro, String tipo, int coordX, int coordY, String detalles, LocalDateTime fechaSiniestro) {
+//        this.idCodigo = idCodigo;
+//        this.tipo = tipo;
+//        this.detalles = detalles;
+//        this.fechaSiniestro = fechaSiniestro;
+//    }
 
-    public Siniestro(String tipo, int coordX, int coordY, String detalles) {
+    public Siniestro(int idCodigo, String tipo, int coordX, int coordY, String detalles, LocalDate fechaSiniestro) {
+        this.idCodigo = idCodigo;
         this.tipo = tipo;
         this.coordX = coordX;
         this.coordY = coordY;
         this.detalles = detalles;
+        this.fechaSiniestro = fechaSiniestro;
     }
 
-   
+
+
+    
 
    
 
@@ -126,11 +134,11 @@ public class Siniestro {
         this.idBrigada = idBrigada;
     }
 
-    public LocalDateTime getFechaSiniestro() {
+    public LocalDate getFechaSiniestro() {
         return fechaSiniestro;
     }
 
-    public void setFechaSiniestro(LocalDateTime fechaSiniestro) {
+    public void setFechaSiniestro(LocalDate fechaSiniestro) {
         this.fechaSiniestro = fechaSiniestro;
     }
 

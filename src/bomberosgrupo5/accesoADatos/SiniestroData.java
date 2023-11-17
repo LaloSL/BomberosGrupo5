@@ -364,7 +364,7 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
         while (rs.next()) {
             int idCodigo = rs.getInt("idCodigo");
             String tipo = rs.getString("tipo");
-            LocalDateTime fechaSiniestro = rs.getTimestamp("fechaSiniestro").toLocalDateTime();
+            Timestamp fechaSiniestro = rs.getTimestamp("fechaSiniestro");
             String detalles = rs.getString("detalles");
             
             Siniestro siniestro = new Siniestro(idCodigo, tipo, fechaSiniestro, detalles);
@@ -377,7 +377,8 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
 
     return siniestros;
 }
-        
+    
+       
 //        int idSiniestroSeleccionado = -1;
 //        List<String> siniestros = new ArrayList<>();
 //
@@ -471,9 +472,35 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
     }
 
     
+    public Siniestro buscarSiniestroPorId(int idSiniestro) {
+        String sql = "SELECT tipo, frchaSiniestro, coordX, coordY, detalles FROM siniestro WHERE idCodigo = ?";
+        
+        Siniestro siniestro = null;
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idSiniestro); 
+        ResultSet rs = ps.executeQuery();
+        
+            String tipo = rs.getString("tipo");
+            LocalDate fechaSiniestro = rs.getDate("fechaSiniestro").toLocalDate();  // Convierne la fecha a LocalDate
+            int coordX = rs.getInt("coordX");
+            int coordY = rs.getInt("coordY");
+            String detalles = rs.getString("detalles");
+            
+            siniestro = new Siniestro(idSiniestro, tipo, coordX, coordY, detalles, fechaSiniestro);
+
+            
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro: " + ex.getMessage());
+        }
+
+        return siniestro;
+    }
     
    public void cargarDatosSiniestro(int idSiniestro) {
-    Siniestro siniestro = obtenerSiniestroPorId(idSiniestro);
+    Siniestro siniestro = buscarSiniestroPorId(idSiniestro);
 
     if (siniestro != null) {
         // Cargar los datos en los JTextField
@@ -483,15 +510,15 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
     }
    }
    
-   public Siniestro obtenerSiniestroPorId(int idSiniestro) {
-    for (Siniestro siniestro : Siniestros) {
-        if (siniestro.getIdSiniestro() == idSiniestro) {
-            return siniestro;
-        }
-    }
-    return null;
+//   public Siniestro obtenerSiniestroPorId(int idSiniestro) {
+//    for (Siniestro siniestro : si) {
+//        if (siniestro.getIdSiniestro() == idSiniestro) {
+//            return siniestro;
+//        }
+//    }
+//    return null;
     
-   }
+   
 //-------------------------------------------------------------------------------------
 //-----------------------------FIN ELIMINAR SINIESTRO-----------------------------
 }
