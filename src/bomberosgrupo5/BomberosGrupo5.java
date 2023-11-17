@@ -135,40 +135,40 @@ public class BomberosGrupo5 {
 //                                        //-------------------------------AGREGAR BOMBERO-------------------------------------    
 //                                    
 
-                            case 3:
-
-                                JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Bombero");
-                                int idBrigadaElegido = brig.mostrarOpciones();
-
-                                Brigada idBrigada = brig.buscarBrigadaPorId(idBrigadaElegido);
-
-                                if (idBrigada != null) {
-
-                                    if (bom.hayCupoParaNuevoBombero(idBrigadaElegido)) {
-
-                                        int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del Bombero: "));
-                                        String nombreApellido = JOptionPane.showInputDialog("Ingrese nombre y apellido del Bombero");
-
-                                        //Verificar si el nombre del bombero ya existe en ese cuartel
-                                        if (bom.existeBomberoConNombre(nombreApellido, dni)) {
-                                            JOptionPane.showMessageDialog(null, "Ya existe un bombero con el mismo nombre en esta brigada. No se puede agregar.");
-                                        } else {
-                                            String grupoSanguineo = JOptionPane.showInputDialog("Ingrese el grupo Sanguineo: ");
-                                            LocalDate fechaNac = LocalDate.parse(JOptionPane.showInputDialog("Ingrese la fecha de nacimiento del Bombero (AAAA-MM-DD):"));
-                                            String celular = JOptionPane.showInputDialog("Ingrese el número de celular del Bombero:");
-
-                                            Bombero bom1 = new Bombero(dni, nombreApellido, grupoSanguineo, fechaNac, celular, idBrigada, true);
-                                            bom.guardarBombero(bom1);
-
-                                        }
-                                    } else {
-                                        JOptionPane.showMessageDialog(null, "Brigada Completa. No se puede agregar más bomberos.");
-                                    }
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "No se pudo obtener la brigada. Asegúrate de que la brigada seleccionada sea válida.");
-                                }
-
-                                break;
+//                            case 3:
+//
+//                                JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Bombero");
+//                                int idBrigadaElegido = brig.mostrarOpciones();
+//
+//                                Brigada idBrigada = brig.buscarBrigadaPorId(idBrigadaElegido);
+//
+//                                if (idBrigada != null) {
+//
+//                                    if (bom.hayCupoParaNuevoBombero(idBrigadaElegido)) {
+//
+//                                        int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del Bombero: "));
+//                                        String nombreApellido = JOptionPane.showInputDialog("Ingrese nombre y apellido del Bombero");
+//
+//                                        //Verificar si el nombre del bombero ya existe en ese cuartel
+//                                        if (bom.existeBomberoConNombre(nombreApellido, dni)) {
+//                                            JOptionPane.showMessageDialog(null, "Ya existe un bombero con el mismo nombre en esta brigada. No se puede agregar.");
+//                                        } else {
+//                                            String grupoSanguineo = JOptionPane.showInputDialog("Ingrese el grupo Sanguineo: ");
+//                                            LocalDate fechaNac = LocalDate.parse(JOptionPane.showInputDialog("Ingrese la fecha de nacimiento del Bombero (AAAA-MM-DD):"));
+//                                            String celular = JOptionPane.showInputDialog("Ingrese el número de celular del Bombero:");
+//
+//                                            Bombero bom1 = new Bombero(dni, nombreApellido, grupoSanguineo, fechaNac, celular, idBrigada, true);
+//                                            bom.guardarBombero(bom1);
+//
+//                                        }
+//                                    } else {
+//                                        JOptionPane.showMessageDialog(null, "Brigada Completa. No se puede agregar más bomberos.");
+//                                    }
+//                                } else {
+//                                    JOptionPane.showMessageDialog(null, "No se pudo obtener la brigada. Asegúrate de que la brigada seleccionada sea válida.");
+//                                }
+//
+//                                break;
 
                             case 4:
                                 JOptionPane.showMessageDialog(null, "¡Hasta luego!");

@@ -26,6 +26,7 @@ public class AgregarBombero extends javax.swing.JInternalFrame {
 
     public AgregarBombero() {
         initComponents();
+        llenarComboBrigada();
     }
 
     /**

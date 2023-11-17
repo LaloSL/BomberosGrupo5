@@ -167,7 +167,7 @@ public class BrigadaData {
 
         while (rs.next()) {
             int idBrigada = rs.getInt("idBrigada");
-            String nombreBrig = rs.getString("nombreBrigada");
+            String nombreBrig = rs.getString("nombreBrig");
 
             nombresBrigadas.add(idBrigada + ". " + nombreBrig);
         }
@@ -471,49 +471,77 @@ public String[] Especialidades() {
 
 //---------------------------------------------------- SINIESTRO ----------------------------------------------------
 //--------------------------------- AGREGAR SINIESTRO: listar brigadas libre---------------------------------------
-    public int brigadasLibres() {
-        int idBrigadaElegida = -1; // Valor predeterminado para indicar que no se ha seleccionado ninguna brigada
-        List<String> nombresBrigadas = new ArrayList<>();
+    public List<String> brigadasLibres() {
+        
+        List<String> brigadasLibres = new ArrayList<>();
 
-        String sql = "SELECT idBrigada, nombreBrig FROM brigada WHERE estadoBr = 1 and libre = 1";
+    String sql = "SELECT idBrigada, nombreBrig FROM brigada WHERE estadoBr = 1 and libre = 1 ";
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                int idBrigada = rs.getInt("idBrigada");
-                String nombreBrigada = rs.getString("nombreBrig");
+        while (rs.next()) {
+            int idBrigada = rs.getInt("idBrigada");
+            String nombreBrig = rs.getString("nombreBrig");
 
-                nombresBrigadas.add(idBrigada + ". " + nombreBrigada);
-            }
-            ps.close();
-
-            if (!nombresBrigadas.isEmpty()) {
-                String seleccion = (String) JOptionPane.showInputDialog(null,
-                        "Elija una brigada:\n" + String.join("\n", nombresBrigadas),
-                        "Selección de Brigada",
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        nombresBrigadas.toArray(),
-                        nombresBrigadas.get(0));
-
-                if (seleccion != null) {
-                    String[] parts = seleccion.split("\\. ");
-                    if (parts.length == 2) {
-                        idBrigadaElegida = Integer.parseInt(parts[0]);
-                        System.out.println(" id " + idBrigadaElegida);
-                    }
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "No hay brigadas disponibles para asignar un siniestro. El programa se cerrará.");
-                System.exit(0);
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener nombres de brigadas: " + ex.getMessage());
+           brigadasLibres.add(idBrigada + ". " + nombreBrig);
         }
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener nombres de brigadas: " + ex.getMessage());
+    }
 
-        return idBrigadaElegida;
+    return brigadasLibres;
+        
+        
+        
+        
+        
+        
+        
+//        int idBrigadaElegida = -1; // Valor predeterminado para indicar que no se ha seleccionado ninguna brigada
+//        List<String> nombresBrigadas = new ArrayList<>();
+//
+//        String sql = "SELECT idBrigada, nombreBrig FROM brigada WHERE estadoBr = 1 and libre = 1";
+//
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ResultSet rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                int idBrigada = rs.getInt("idBrigada");
+//                String nombreBrigada = rs.getString("nombreBrig");
+//
+//                nombresBrigadas.add(idBrigada + ". " + nombreBrigada);
+//            }
+//            ps.close();
+//
+//            if (!nombresBrigadas.isEmpty()) {
+//                String seleccion = (String) JOptionPane.showInputDialog(null,
+//                        "Elija una brigada:\n" + String.join("\n", nombresBrigadas),
+//                        "Selección de Brigada",
+//                        JOptionPane.PLAIN_MESSAGE,
+//                        null,
+//                        nombresBrigadas.toArray(),
+//                        nombresBrigadas.get(0));
+//
+//                if (seleccion != null) {
+//                    String[] parts = seleccion.split("\\. ");
+//                    if (parts.length == 2) {
+//                        idBrigadaElegida = Integer.parseInt(parts[0]);
+//                        System.out.println(" id " + idBrigadaElegida);
+//                    }
+//                }
+//            } else {
+//                JOptionPane.showMessageDialog(null, "No hay brigadas disponibles para asignar un siniestro. El programa se cerrará.");
+//                System.exit(0);
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al obtener nombres de brigadas: " + ex.getMessage());
+//        }
+//
+//        return idBrigadaElegida;
     }
 
 //----------------------------------------------------------------------------------------------------------------   
