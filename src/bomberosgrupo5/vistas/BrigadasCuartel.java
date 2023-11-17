@@ -5,17 +5,25 @@
  */
 package bomberosgrupo5.vistas;
 
+import bomberosgrupo5.accesoADatos.BomberoData;
+import bomberosgrupo5.accesoADatos.BrigadaData;
+import bomberosgrupo5.accesoADatos.CuartelData;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Asus
  */
 public class BrigadasCuartel extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form BrigadasCuartel
-     */
+    private BrigadaData briga = new BrigadaData();
+    private BomberoData bomb = new BomberoData();
+    private CuartelData cua = new CuartelData();
+
     public BrigadasCuartel() {
         initComponents();
+        llenarComboCuarteles();
     }
 
     /**
@@ -33,14 +41,13 @@ public class BrigadasCuartel extends javax.swing.JInternalFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jLabel1.setText("Selecciones el cuartel");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setText("Despliegue para ver las brigadas del cuartel seleccionado");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -50,6 +57,18 @@ public class BrigadasCuartel extends javax.swing.JInternalFrame {
         });
 
         jButton2.setText("Consultar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Limpiar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,6 +91,8 @@ public class BrigadasCuartel extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3)
+                                .addGap(34, 34, 34)
                                 .addComponent(jButton1)))))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
@@ -89,7 +110,8 @@ public class BrigadasCuartel extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton3))
                 .addGap(66, 66, 66))
         );
 
@@ -100,10 +122,55 @@ public class BrigadasCuartel extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+   String cuartelSeleccionado = (String) jComboBox1.getSelectedItem();
+
+        // Obtener el ID del cuartel a partir de la cadena seleccionada
+        int idCuartel = Integer.parseInt(cuartelSeleccionado.split("\\. ")[0]);
+        
+        List<String> nombresBrigadas = briga.obtenerNombresBrigadasPorCuartel(idCuartel);
+
+        if (!nombresBrigadas.isEmpty()) {
+            // Limpiamos el JComboBox antes de agregar los nuevos elementos
+            jComboBox2.removeAllItems();
+            for (String nombre : nombresBrigadas) {
+                jComboBox2.addItem(nombre);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontraron brigadas");
+        }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    jComboBox2.removeAllItems();
+    }//GEN-LAST:event_jButton3ActionPerformed
+//------------------------METODOS----------------------
+
+    private void llenarComboCuarteles() {
+        List<String> nombresCuartele = cua.mostrarOpcionesYObtenerSeleccion();
+
+        if (!nombresCuartele.isEmpty()) {
+            // Limpiamos el JComboBox antes de agregar los nuevos elementos
+           jComboBox1.removeAllItems();
+            for (String nombre :nombresCuartele) {
+                jComboBox1.addItem(nombre);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontraron brigadas");
+        }
+    }
+
+//-------------------------------------------------------------------------
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;

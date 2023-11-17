@@ -53,8 +53,6 @@ public class BomberosBrigada extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Despliege para ver los bomberos de la brigada seleccionada");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jButton2.setText("Consultar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

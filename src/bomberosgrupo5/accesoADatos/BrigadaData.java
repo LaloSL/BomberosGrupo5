@@ -622,6 +622,42 @@ public List<String> brigadasOcupadas() {
 
 //-----------------------------------------Fin Brigadas Ocupadas---------------------------------------------------------------
 
+//---------------------- Muestra nombre de las brigadas de un mismo cuartel-----------------------
+ 
+public List<String> obtenerNombresBrigadasPorCuartel(int idCuartel) {
+    List<String> nombresBrigadas = new ArrayList<>();
 
+    String sql = "SELECT idBrigada, nombreBrig FROM brigada WHERE idCuartel = ? AND estadoBr = 1";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idCuartel);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int idBrigada = rs.getInt("idBrigada");
+            String nombreBrigada = rs.getString("nombreBrig");
+
+            nombresBrigadas.add(idBrigada + ". " + nombreBrigada);
+        }
+        ps.close();
+
+        if (nombresBrigadas.size() == 1) {
+            JOptionPane.showMessageDialog(null, "El cuartel seleccionado contiene una sola brigada. Por favor, seleccione otro cuartel.");
+            nombresBrigadas.clear();
+        } else if (nombresBrigadas.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El cuartel seleccionado no tiene brigadas. Por favor, seleccione otro cuartel.");
+        }
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener nombres de brigadas: " + ex.getMessage());
+    }
+
+    return nombresBrigadas;
+}
+
+
+ 
+ //----------------------Fin Muestra nombre de las brigadas de un mismo cuartel-----------------------
 
 }
