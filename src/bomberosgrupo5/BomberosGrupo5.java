@@ -377,14 +377,14 @@ public class BomberosGrupo5 {
                         subOpcionEliminar = Integer.parseInt(subInputEliminar);
 
                         switch (subOpcionEliminar) {
-                            //--------------------Eliminar Cuartel-----------------------
-                            case 1: // ELIMINAR CUARTEL
-                                int idCuartelAEliminar = cua1.mostrarCuartelesAEliminar();
-                                List<Integer> idsBrigadas = brig.obtenerIdsBrigadasPorIdCuartel(idCuartelAEliminar);
-                                bom.cambiarEstadoBomberosPorBrigadas(idsBrigadas);
-                                brig.cambiarEstadoBrigadas(idsBrigadas);
-                                cua1.cambiarEstadoCuartel(idCuartelAEliminar);
-                                break;
+//                            //--------------------Eliminar Cuartel-----------------------
+//                            case 1: // ELIMINAR CUARTEL
+//                                int idCuartelAEliminar = cua1.mostrarCuartelesAEliminar();
+//                                List<Integer> idsBrigadas = brig.obtenerIdsBrigadasPorIdCuartel(idCuartelAEliminar);
+//                                bom.cambiarEstadoBomberosPorBrigadas(idsBrigadas);
+//                                brig.cambiarEstadoBrigadas(idsBrigadas);
+//                                cua1.cambiarEstadoCuartel(idCuartelAEliminar);
+//                                break;
 
                             //-----------------Eliminar Brigada---------------------
                             case 2: // ELIMINAR BRIGADA
@@ -431,81 +431,81 @@ public class BomberosGrupo5 {
                         }
 
                         switch (subOpcionSiniestro) {
-                            //--------------------Agregar Siniestro-----------------------
-                            case 1:
-                                JOptionPane.showMessageDialog(null, "Selecciona a qué brigada vas a cargar este siniestro");
-                                int idBrigadaElegido = brig.brigadasLibres();
-                                brig.brigadaOcupada(idBrigadaElegido);
-                                String tipo = JOptionPane.showInputDialog("Ingrese el tipo de siniestro:");
-                                String fechaHoraSiniestroI = JOptionPane.showInputDialog("Ingrese la fecha y hora del siniestro (dd/MM/yyyy HH:mm):");
-
-                                try {
-                                    LocalDateTime fechaHoraSiniestro = sin.convertirAFechaHora(fechaHoraSiniestroI);
-
-                                    int coordx;
-                                    while (true) {
-                                        String coordXInput = JOptionPane.showInputDialog("Ingrese la coordenada x:");
-                                        if (coordXInput.isEmpty()) {
-                                            JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico para la coordenada x.");
-                                        } else {
-                                            try {
-                                                coordx = Integer.parseInt(coordXInput);
-                                                break; // Salir del bucle si la conversión fue exitosa
-                                            } catch (NumberFormatException e) {
-                                                JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico válido para la coordenada x.");
-                                            }
-                                        }
-                                    }
-
-                                    int coordy;
-                                    while (true) {
-                                        String coordYInput = JOptionPane.showInputDialog("Ingrese la coordenada y:");
-                                        if (coordYInput.isEmpty()) {
-                                            JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico para la coordenada y.");
-                                        } else {
-                                            try {
-                                                coordy = Integer.parseInt(coordYInput);
-                                                break; // Salir del bucle si la conversión fue exitosa
-                                            } catch (NumberFormatException e) {
-                                                JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico válido para la coordenada y.");
-                                            }
-                                        }
-                                    }
-
-                                    String detalles = JOptionPane.showInputDialog("Ingrese los detalles del siniestro:");
-
-                                    int puntuacion;
-                                    while (true) {
-                                        String puntuacionInput = JOptionPane.showInputDialog("Ingrese la puntuación si finalizo siniestro o un cero si lo carga por primera vez:");
-                                        if (puntuacionInput.isEmpty()) {
-                                            JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico para la puntuación.");
-                                        } else {
-                                            try {
-                                                puntuacion = Integer.parseInt(puntuacionInput);
-                                                break; // Salir del bucle si la conversión fue exitosa
-                                            } catch (NumberFormatException e) {
-                                                JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico válido para la puntuación.");
-                                            }
-                                        }
-                                    }
-
-                                    try {
-                                        String fechaHoraResolI = JOptionPane.showInputDialog("Ingrese la fecha de resolución en caso de tener o deje el campo en blanco:");
-                                        LocalDateTime fechaHoraResol = (fechaHoraResolI.isEmpty()) ? null : sin.convertirAFechaHora(fechaHoraResolI);
-
-                                        sin.insertarSiniestro(idBrigadaElegido, tipo, fechaHoraSiniestro, coordx, coordy, detalles, fechaHoraResol, puntuacion);
-
-                                        JOptionPane.showMessageDialog(null, "Siniestro registrado con éxito.");
-                                    } catch (SQLException | ParseException e) {
-                                        e.printStackTrace();
-                                        JOptionPane.showMessageDialog(null, "Error al insertar el siniestro en la base de datos.");
-                                    }
-
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                    JOptionPane.showMessageDialog(null, "Error al convertir la fecha y hora.");
-                                }
-                                break;
+//                            //--------------------Agregar Siniestro-----------------------
+//                            case 1:
+//                                JOptionPane.showMessageDialog(null, "Selecciona a qué brigada vas a cargar este siniestro");
+//                                int idBrigadaElegido = brig.brigadasLibres();
+//                                brig.brigadaOcupada(idBrigadaElegido);
+//                                String tipo = JOptionPane.showInputDialog("Ingrese el tipo de siniestro:");
+//                                String fechaHoraSiniestroI = JOptionPane.showInputDialog("Ingrese la fecha y hora del siniestro (dd/MM/yyyy HH:mm):");
+//
+//                                try {
+//                                    LocalDateTime fechaHoraSiniestro = sin.convertirAFechaHora(fechaHoraSiniestroI);
+//
+//                                    int coordx;
+//                                    while (true) {
+//                                        String coordXInput = JOptionPane.showInputDialog("Ingrese la coordenada x:");
+//                                        if (coordXInput.isEmpty()) {
+//                                            JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico para la coordenada x.");
+//                                        } else {
+//                                            try {
+//                                                coordx = Integer.parseInt(coordXInput);
+//                                                break; // Salir del bucle si la conversión fue exitosa
+//                                            } catch (NumberFormatException e) {
+//                                                JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico válido para la coordenada x.");
+//                                            }
+//                                        }
+//                                    }
+//
+//                                    int coordy;
+//                                    while (true) {
+//                                        String coordYInput = JOptionPane.showInputDialog("Ingrese la coordenada y:");
+//                                        if (coordYInput.isEmpty()) {
+//                                            JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico para la coordenada y.");
+//                                        } else {
+//                                            try {
+//                                                coordy = Integer.parseInt(coordYInput);
+//                                                break; // Salir del bucle si la conversión fue exitosa
+//                                            } catch (NumberFormatException e) {
+//                                                JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico válido para la coordenada y.");
+//                                            }
+//                                        }
+//                                    }
+//
+//                                    String detalles = JOptionPane.showInputDialog("Ingrese los detalles del siniestro:");
+//
+//                                    int puntuacion;
+//                                    while (true) {
+//                                        String puntuacionInput = JOptionPane.showInputDialog("Ingrese la puntuación si finalizo siniestro o un cero si lo carga por primera vez:");
+//                                        if (puntuacionInput.isEmpty()) {
+//                                            JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico para la puntuación.");
+//                                        } else {
+//                                            try {
+//                                                puntuacion = Integer.parseInt(puntuacionInput);
+//                                                break; // Salir del bucle si la conversión fue exitosa
+//                                            } catch (NumberFormatException e) {
+//                                                JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico válido para la puntuación.");
+//                                            }
+//                                        }
+//                                    }
+//
+//                                    try {
+//                                        String fechaHoraResolI = JOptionPane.showInputDialog("Ingrese la fecha de resolución en caso de tener o deje el campo en blanco:");
+//                                        LocalDateTime fechaHoraResol = (fechaHoraResolI.isEmpty()) ? null : sin.convertirAFechaHora(fechaHoraResolI);
+//
+//                                        sin.insertarSiniestro(idBrigadaElegido, tipo, fechaHoraSiniestro, coordx, coordy, detalles, fechaHoraResol, puntuacion);
+//
+//                                        JOptionPane.showMessageDialog(null, "Siniestro registrado con éxito.");
+//                                    } catch (SQLException | ParseException e) {
+//                                        e.printStackTrace();
+//                                        JOptionPane.showMessageDialog(null, "Error al insertar el siniestro en la base de datos.");
+//                                    }
+//
+//                                } catch (ParseException e) {
+//                                    e.printStackTrace();
+//                                    JOptionPane.showMessageDialog(null, "Error al convertir la fecha y hora.");
+//                                }
+//                                break;
 
                             //-----------------Modificar Siniestro---------------------
                             case 2:

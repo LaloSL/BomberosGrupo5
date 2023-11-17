@@ -41,6 +41,8 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -78,6 +80,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu1.add(jMModificarCuartel);
 
         jMenuItem5.setText("Eliminar Cuartel");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
 
         jMenuBar1.add(jMenu1);
@@ -96,6 +103,17 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem2);
+
+        jMenuItem4.setText("Modificar Brigada");
+        jMenu2.add(jMenuItem4);
+
+        jMenuItem6.setText("Eliminar Brigada");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem6);
 
         jMenuBar1.add(jMenu2);
 
@@ -195,6 +213,24 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(sin);    
     }//GEN-LAST:event_jMAgregarSiniestroActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();        
+        EliminarCuartel eli = new EliminarCuartel();
+        eli.setVisible(true);
+        eli.getContentPane().setBackground(new Color(86, 167, 132));
+        escritorio.add(eli);  
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+       escritorio.removeAll();
+        escritorio.repaint();        
+        EliminarBrigada eliB = new EliminarBrigada();
+        eliB.setVisible(true);
+        eliB.getContentPane().setBackground(new Color(86, 167, 132));
+        escritorio.add(eliB); 
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -242,6 +278,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     // End of variables declaration//GEN-END:variables
 }
