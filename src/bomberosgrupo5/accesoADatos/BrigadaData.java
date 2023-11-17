@@ -199,21 +199,30 @@ public class BrigadaData {
     }
     //------------------------------Listar Especialidades------------------------
 
-    public String elegirEspecialidad() {
+//    public String elegirEspecialidad() {
+//
+//        String[] especialidades = {"Incendios viviendas e Industrias", "Salvamento en derrumbes", "Rescates de montaña", "Rescate en accidente de transito", "Rerscate en inundaciones", "Operativos prevencion"};
+//
+//        return (String) JOptionPane.showInputDialog(null,
+//                "Seleccione una especialidad:",
+//                "Selección de especialidad",
+//                JOptionPane.PLAIN_MESSAGE,
+//                null,
+//                especialidades,
+//                especialidades[0]);
+//
+//    }
 
-        String[] especialidades = {"Incendios viviendas e Industrias", "Salvamento en derrumbes", "Rescates de montaña", "Rescate en accidente de transito", "Rerscate en inundaciones", "Operativos prevencion"};
-
-        return (String) JOptionPane.showInputDialog(null,
-                "Seleccione una especialidad:",
-                "Selección de especialidad",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                especialidades,
-                especialidades[0]);
-
+public String[] Especialidades() {
+        return new String[] {
+            "Incendios viviendas e Industrias",
+            "Salvamento en derrumbes",
+            "Rescates de montaña",
+            "Rescate en accidente de tránsito",
+            "Rescate en inundaciones",
+            "Operativos prevención"
+        };
     }
-
-
 //-----------------------------------------------------------------------------------------
 //-------------------buscar brigada por id-----------------
     public Brigada buscarBrigadaPorId(int idBrigada) {

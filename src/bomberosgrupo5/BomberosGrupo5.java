@@ -79,63 +79,63 @@ public class BomberosGrupo5 {
                                 }
                                 break;
                             //--------------------------------------AGREGAR BRIGADA------------------
-                            case 2:
-                                JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Brigada");
-
-                                // Obtener el cuartel por su ID
-                                int idCuartelElegido = cua1.mostrarOpcionesYObtenerSeleccion();
-
-                                // Verificar si hay lugar para una nueva brigada en el cuartel
-                                if (brig.hayCupoParaNuevaBrigada(idCuartelElegido)) {
-                                    String nombreBrigada = JOptionPane.showInputDialog("Ingrese el nombre de la brigada:");
-
-                                    // Verificar si el nombre de la brigada es válido
-                                    if (nombreBrigada != null && !nombreBrigada.isEmpty()) {
-                                        // Verificar si el nombre de la brigada ya existe en ese cuartel
-                                        if (brig.existeBrigadaConNombreEnCuartel(nombreBrigada, idCuartelElegido)) {
-                                            JOptionPane.showMessageDialog(null, "Ya existe una brigada con el mismo nombre en este cuartel. No se puede agregar.");
-                                        } else {
-                                            String especialidad = brig.elegirEspecialidad();
-
-                                            // Crear y guardar la brigada
-                                            Brigada briga = new Brigada(nombreBrigada, especialidad, true, idCuartelElegido, true);
-                                            brig.guardarBrigada(briga);
-                                            System.out.println("" + briga);
-
-//                                        }else {
-//                                    JOptionPane.showMessageDialog(null, "El cuartel está completo. No se puede agregar más brigadas.");
-                                }
-                                    }
-                                }
-                                        break;
 //                            case 2:
-                                        //                                JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Brigada");
-                                        //                                int idCuartelElegido = cua1.mostrarOpcionesYObtenerSeleccion(connection);
-                                        //                                Cuartel cuartel1 = cua1.buscarCuartelPorId(idCuartelElegido); // Obtiene el cuartel por su ID
-                                        //                                if (cuartel1 != null) {
-                                        //                                    // Verificar si hay lugar para una nueva brigada en el cuartel
-                                        //                                    if (brig.hayCupoParaNuevaBrigada(idCuartelElegido)) {
-                                        //                                        String nombreBrigada = JOptionPane.showInputDialog("Ingrese el nombre de la brigada:");
-                                        //
-                                        //                                        // Verificar si el nombre de la brigada ya existe en ese cuartel
-                                        //                                        if (brig.existeBrigadaConNombreEnCuartel(nombreBrigada, idCuartelElegido)) {
-                                        //                                            JOptionPane.showMessageDialog(null, "Ya existe una brigada con el mismo nombre en este cuartel. No se puede agregar.");
-                                        //                                        } else {
-                                        //                                           String especialidad = brig.elegirEspecialidad(connection);
-                                        //
-                                        //                                            Brigada briga = new Brigada(nombreBrigada, especialidad, true, cuartel1, true);
-                                        //                                            brig.guardarBrigada(briga);
-                                        //                                            JOptionPane.showMessageDialog(null, "Brigada agregada exitosamente.");
-                                        //                                        }
-                                        //                                    } else {
-                                        //                                        JOptionPane.showMessageDialog(null, "El cuartel está completo. No se puede agregar más brigadas.");
-                                        //                                    }
-                                        //                                } else {
-                                        //                                    JOptionPane.showMessageDialog(null, "No se pudo obtener el cuartel. Asegúrate de que el cuartel seleccionado sea válido.");
-                                        //                                }
-                                        //                                break;
-                                        //-------------------------------AGREGAR BOMBERO-------------------------------------    
-                                    
+//                                JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Brigada");
+//
+//                                // Obtener el cuartel por su ID
+//                                //int idCuartelElegido = cua1.mostrarOpcionesYObtenerSeleccion();
+//
+//                                // Verificar si hay lugar para una nueva brigada en el cuartel
+//                                if (brig.hayCupoParaNuevaBrigada(idCuartelElegido)) {
+//                                    String nombreBrigada = JOptionPane.showInputDialog("Ingrese el nombre de la brigada:");
+//
+//                                    // Verificar si el nombre de la brigada es válido
+//                                    if (nombreBrigada != null && !nombreBrigada.isEmpty()) {
+//                                        // Verificar si el nombre de la brigada ya existe en ese cuartel
+//                                        if (brig.existeBrigadaConNombreEnCuartel(nombreBrigada, idCuartelElegido)) {
+//                                            JOptionPane.showMessageDialog(null, "Ya existe una brigada con el mismo nombre en este cuartel. No se puede agregar.");
+//                                        } else {
+//                                            String especialidad = brig.elegirEspecialidad();
+//
+//                                            // Crear y guardar la brigada
+//                                            Brigada briga = new Brigada(nombreBrigada, especialidad, true, idCuartelElegido, true);
+//                                            brig.guardarBrigada(briga);
+//                                            System.out.println("" + briga);
+//
+////                                        }else {
+////                                    JOptionPane.showMessageDialog(null, "El cuartel está completo. No se puede agregar más brigadas.");
+//                                }
+//                                    }
+//                                }
+//                                        break;
+////                            case 2:
+//                                        //                                JOptionPane.showMessageDialog(null, "Ha seleccionado Agregar Brigada");
+//                                        //                                int idCuartelElegido = cua1.mostrarOpcionesYObtenerSeleccion(connection);
+//                                        //                                Cuartel cuartel1 = cua1.buscarCuartelPorId(idCuartelElegido); // Obtiene el cuartel por su ID
+//                                        //                                if (cuartel1 != null) {
+//                                        //                                    // Verificar si hay lugar para una nueva brigada en el cuartel
+//                                        //                                    if (brig.hayCupoParaNuevaBrigada(idCuartelElegido)) {
+//                                        //                                        String nombreBrigada = JOptionPane.showInputDialog("Ingrese el nombre de la brigada:");
+//                                        //
+//                                        //                                        // Verificar si el nombre de la brigada ya existe en ese cuartel
+//                                        //                                        if (brig.existeBrigadaConNombreEnCuartel(nombreBrigada, idCuartelElegido)) {
+//                                        //                                            JOptionPane.showMessageDialog(null, "Ya existe una brigada con el mismo nombre en este cuartel. No se puede agregar.");
+//                                        //                                        } else {
+//                                        //                                           String especialidad = brig.elegirEspecialidad(connection);
+//                                        //
+//                                        //                                            Brigada briga = new Brigada(nombreBrigada, especialidad, true, cuartel1, true);
+//                                        //                                            brig.guardarBrigada(briga);
+//                                        //                                            JOptionPane.showMessageDialog(null, "Brigada agregada exitosamente.");
+//                                        //                                        }
+//                                        //                                    } else {
+//                                        //                                        JOptionPane.showMessageDialog(null, "El cuartel está completo. No se puede agregar más brigadas.");
+//                                        //                                    }
+//                                        //                                } else {
+//                                        //                                    JOptionPane.showMessageDialog(null, "No se pudo obtener el cuartel. Asegúrate de que el cuartel seleccionado sea válido.");
+//                                        //                                }
+//                                        //                                break;
+//                                        //-------------------------------AGREGAR BOMBERO-------------------------------------    
+//                                    
                                 
                                 case 3:
 

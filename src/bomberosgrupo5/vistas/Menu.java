@@ -19,7 +19,7 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setSize(700,700);
+        this.setSize(700, 700);
     }
 
     /**
@@ -38,6 +38,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,6 +84,15 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Bombero");
+
+        jMenuItem3.setText("Agregar Bombero");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Siniestro");
@@ -105,12 +115,12 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-escritorio.removeAll();
-escritorio.repaint();
-AgregarCuartel cua=new AgregarCuartel();
-cua.setVisible(true);
-cua.getContentPane().setBackground(new Color(86,167,132));
-escritorio.add(cua);
+        escritorio.removeAll();
+        escritorio.repaint();
+        AgregarCuartel cua = new AgregarCuartel();
+        cua.setVisible(true);
+        cua.getContentPane().setBackground(new Color(86, 167, 132));
+        escritorio.add(cua);
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -119,13 +129,22 @@ escritorio.add(cua);
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-             escritorio.removeAll();
-escritorio.repaint();
-AgregarBrigada bri=new AgregarBrigada();
-bri.setVisible(true);
-bri.getContentPane().setBackground(new Color(86,167,132));
-escritorio.add(bri);   // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        AgregarBrigada bri = new AgregarBrigada();
+        bri.setVisible(true);
+        bri.getContentPane().setBackground(new Color(86, 167, 132));
+        escritorio.add(bri);   // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        AgregarBombero bomb = new AgregarBombero();
+        bomb.setVisible(true);
+        bomb.getContentPane().setBackground(new Color(86, 167, 132));
+        escritorio.add(bomb);    // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,5 +190,6 @@ escritorio.add(bri);   // TODO add your handling code here:
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 }
