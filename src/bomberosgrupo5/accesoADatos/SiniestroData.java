@@ -362,12 +362,16 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            int idCodigo = rs.getInt("idCodigo");
+            int idSiniestro = rs.getInt("idCodigo");
             String tipo = rs.getString("tipo");
-            Timestamp fechaSiniestro = rs.getTimestamp("fechaSiniestro");
+            int coordX =rs.getInt("coordX");
+            int coordY =rs.getInt("coordY");
+            LocalDateTime fechaSiniestro = ((Timestamp) rs.getObject("fechaSiniestro")).toLocalDateTime();
+
             String detalles = rs.getString("detalles");
             
-            Siniestro siniestro = new Siniestro(idCodigo, tipo, fechaSiniestro, detalles);
+            Siniestro siniestro = new Siniestro(idSiniestro, tipo, coordX, coordY, fechaSiniestro, detalles);
+            //(int idSiniestro, String tipo, int coordX, int coordY, String detalles, LocalDateTime fechaSiniestro) {
             siniestros.add(siniestro);
         }
         ps.close();
