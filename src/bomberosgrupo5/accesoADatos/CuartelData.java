@@ -55,7 +55,7 @@ public class CuartelData {
         String sql = "UPDATE cuartel SET nombreCuartel = ?"
                 +", direccion = ?, coordX = ?, coordY = ?, telefono = ?, correo = ? "
                 + "WHERE idCuartel = ?";
-        System.out.println("" + cuartel);
+        //System.out.println("" + cuartel);
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 

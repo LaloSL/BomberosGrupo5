@@ -305,7 +305,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-          escritorio.removeAll();
+        escritorio.removeAll();
         escritorio.repaint();        
         ModificarBombero eliB = new ModificarBombero();
         eliB.setVisible(true);

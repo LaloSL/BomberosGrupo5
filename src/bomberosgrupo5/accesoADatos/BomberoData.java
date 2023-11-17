@@ -7,6 +7,7 @@ import bomberosgrupo5.entidades.Brigada;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -99,12 +100,12 @@ public class BomberoData {
                 bombero.setGrupoSanguineo(rs.getString("grupoSanguineo"));
                 bombero.setFechaNac(rs.getDate("fechaNac").toLocalDate());
                 bombero.setCelular(rs.getString("celular"));
-                bombero.setBrigada((Brigada) rs.getObject("idBrigada"));
+                bombero.setIdBrigada(rs.getInt("idBrigada"));
                 bombero.setEstadoB(rs.getBoolean("estadoB"));
 
                 // Imprimir el bombero recuperado antes del return
-                System.out.println("Bombero recuperado:");
-                System.out.println(bombero);
+//                System.out.println("Bombero recuperado:");
+//                System.out.println(bombero);
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el bombero con el ID indicado");
             }
@@ -345,10 +346,10 @@ public class BomberoData {
 
 //---------------------------------------------------------------------------------------------------
 //-------------averiguo bomberos que pertenecen a una misma brigada -----------------------
-    public List<Integer> obtenerBomberosPorBrigada(int idBrigada) {
-        List<Integer> idsBomberos = new ArrayList<>();
+    public List<Bombero> obtenerBomberosPorBrigada(int idBrigada) {
+        List<Bombero> bomberos = new ArrayList<>();
 
-        String sql = "SELECT idBombero FROM bombero WHERE idBrigada = ? AND estadoB = 1";
+        String sql = "SELECT * FROM bombero WHERE idBrigada = ? AND estadoB = 1";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -356,15 +357,23 @@ public class BomberoData {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                int idBombero = rs.getInt("idBombero");
-                idsBomberos.add(idBombero);
+                Bombero bombero = new Bombero();
+            bombero.setIdBombero(rs.getInt("idBombero"));
+            bombero.setDni(rs.getInt("dni"));
+            bombero.setNombreApellido(rs.getString("nombreApellido"));
+            bombero.setGrupoSanguineo(rs.getString("grupoSanguineo"));
+            bombero.setFechaNac(rs.getDate("fechaNac").toLocalDate());
+            bombero.setCelular(rs.getString("celular"));
+            bombero.setEstadoB(rs.getBoolean("estadoB"));
+
+            bomberos.add(bombero);
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al obtener los IDs de los bomberos de la brigada: " + ex.getMessage());
         }
 
-        return idsBomberos;
+        return bomberos;
     }
 //------------Borrado logico de bomberos que pertenecen a un brigada--------------
 
@@ -396,8 +405,8 @@ public class BomberoData {
 //------------------------------------------------------------------------
 //-------------------------------MODIFICAR BOMBEROS----------------------------
 //-----------------------opciones de bomberos a modificar-----------------
-    public int mostrarOpcionesBomberos() {
-        int idBomberoElegido = -1; // Valor predeterminado para indicar que no se ha seleccionado ningún bombero
+    public List<String> mostrarOpcionesBomberos() {
+       // int idBomberoElegido = -1; // Valor predeterminado para indicar que no se ha seleccionado ningún bombero
         List<String> nombresBomberos = new ArrayList<>();
 
         String sql = "SELECT idBombero, nombreApellido FROM bombero WHERE estadoB = 1";
@@ -414,28 +423,28 @@ public class BomberoData {
             }
             ps.close();
 
-            if (!nombresBomberos.isEmpty()) {
-                String seleccion = (String) JOptionPane.showInputDialog(null,
-                        "Elija un bombero:\n" + String.join("\n", nombresBomberos),
-                        "Selección de Bombero",
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        nombresBomberos.toArray(),
-                        nombresBomberos.get(0));
-
-                if (seleccion != null) {
-                    String[] parts = seleccion.split("\\. ");
-                    if (parts.length == 2) {
-                        idBomberoElegido = Integer.parseInt(parts[0]);
-                        System.out.println(" id " + idBomberoElegido);
-                    }
-                }
-            }
+//            if (!nombresBomberos.isEmpty()) {
+//                String seleccion = (String) JOptionPane.showInputDialog(null,
+//                        "Elija un bombero:\n" + String.join("\n", nombresBomberos),
+//                        "Selección de Bombero",
+//                        JOptionPane.PLAIN_MESSAGE,
+//                        null,
+//                        nombresBomberos.toArray(),
+//                        nombresBomberos.get(0));
+//
+//                if (seleccion != null) {
+//                    String[] parts = seleccion.split("\\. ");
+//                    if (parts.length == 2) {
+//                        idBomberoElegido = Integer.parseInt(parts[0]);
+//                        System.out.println(" id " + idBomberoElegido);
+//                    }
+//                }
+//            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al obtener nombres de bomberos: " + ex.getMessage());
         }
 
-        return idBomberoElegido;
+        return nombresBomberos;
     }
 
 //------------------------------------------------------------------------
@@ -489,18 +498,22 @@ public class BomberoData {
 //-------------------------------------------------------------------------
     
 //---------------------modificar nombre y apellido de bomberos--------------
- public void modificarNombreBombero(int idBombero) {
-    String nuevoNombreBombero = JOptionPane.showInputDialog("Ingrese el nuevo nombre del bombero:");
+ public void modificarBombero(int idBombero, int dni, String nombreApellido, String grupoSanguineo, LocalDate fechaNac, String celular) {
+    
 
-    String sql = "UPDATE bombero SET nombreApellido=? WHERE idBombero=?";
+    String sql = "UPDATE bombero SET dni=?, nombreApellido=?, grupoSanguineo=?, fechaNac=?, celular=?  WHERE idBombero=?";
 
     try (PreparedStatement ps = con.prepareStatement(sql)) {
-        ps.setString(1, nuevoNombreBombero);
-        ps.setInt(2, idBombero);
-
+        ps.setInt(1, dni);
+        ps.setString(2, nombreApellido);
+        ps.setString(3, grupoSanguineo);
+        ps.setDate(4, Date.valueOf(fechaNac));
+        ps.setString(5, celular);
+        ps.setInt(6, idBombero);
+        
         int exito = ps.executeUpdate();
         if (exito == 1) {
-            JOptionPane.showMessageDialog(null, "Nombre y Apellido del bombero actualizado exitosamente.");
+            JOptionPane.showMessageDialog(null, "Bombero actualizado exitosamente.");
         } else {
             JOptionPane.showMessageDialog(null, "No se pudo actualizar el nombre del bombero. Asegúrate de que el bombero sea válido.");
         }
@@ -513,82 +526,82 @@ public class BomberoData {
 //--------------------------------------------------------------------------
  
 //--------------------------modificar grupo sanguineo-----------------------
-public void modificarGrupoSanguineoBombero(int idBombero) {
-    String nuevoGrupoSanguineo = JOptionPane.showInputDialog("Ingrese el nuevo grupo sanguíneo del bombero:");
-
-    String sql = "UPDATE bombero SET grupoSanguineo=? WHERE idBombero=?";
-
-    try (PreparedStatement ps = con.prepareStatement(sql)) {
-        ps.setString(1, nuevoGrupoSanguineo);
-        ps.setInt(2, idBombero);
-
-        int exito = ps.executeUpdate();
-        if (exito == 1) {
-            JOptionPane.showMessageDialog(null, "Grupo sanguíneo del bombero actualizado exitosamente.");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar el grupo sanguíneo del bombero. Asegúrate de que el bombero sea válido.");
-        }
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al actualizar el grupo sanguíneo del bombero: " + ex.getMessage());
-    }
-}
+//public void modificarGrupoSanguineoBombero(int idBombero) {
+//    String nuevoGrupoSanguineo = JOptionPane.showInputDialog("Ingrese el nuevo grupo sanguíneo del bombero:");
+//
+//    String sql = "UPDATE bombero SET grupoSanguineo=? WHERE idBombero=?";
+//
+//    try (PreparedStatement ps = con.prepareStatement(sql)) {
+//        ps.setString(1, nuevoGrupoSanguineo);
+//        ps.setInt(2, idBombero);
+//
+//        int exito = ps.executeUpdate();
+//        if (exito == 1) {
+//            JOptionPane.showMessageDialog(null, "Grupo sanguíneo del bombero actualizado exitosamente.");
+//        } else {
+//            JOptionPane.showMessageDialog(null, "No se pudo actualizar el grupo sanguíneo del bombero. Asegúrate de que el bombero sea válido.");
+//        }
+//    } catch (SQLException ex) {
+//        JOptionPane.showMessageDialog(null, "Error al actualizar el grupo sanguíneo del bombero: " + ex.getMessage());
+//    }
+//}
 
 
 //------------------------------------------------------------------------- 
 
 //--------------------modificar fecha de nacimiento------------------------
-public void modificarFechaNacimientoBombero(int idBombero) {
-    try {
-        String nuevaFechaNacimientoStr = JOptionPane.showInputDialog("Ingrese la nueva fecha de nacimiento del bombero (formato: yyyy-MM-dd):");
-
-        // de String a un objeto LocalDate
-        LocalDate nuevaFechaNacimiento = LocalDate.parse(nuevaFechaNacimientoStr);
-
-        String sql = "UPDATE bombero SET fechaNac=? WHERE idBombero=?";
-
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setDate(1, java.sql.Date.valueOf(nuevaFechaNacimiento));
-            ps.setInt(2, idBombero);
-
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Fecha de nacimiento del bombero actualizada exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo actualizar la fecha de nacimiento del bombero. Asegúrate de que el bombero sea válido.");
-            }
-        }
-    } catch (DateTimeParseException ex) {
-        JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto. Utiliza el formato yyyy-MM-dd.");
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al actualizar la fecha de nacimiento del bombero: " + ex.getMessage());
-    }
-}
+//public void modificarFechaNacimientoBombero(int idBombero) {
+//    try {
+//        String nuevaFechaNacimientoStr = JOptionPane.showInputDialog("Ingrese la nueva fecha de nacimiento del bombero (formato: yyyy-MM-dd):");
+//
+//        // de String a un objeto LocalDate
+//        LocalDate nuevaFechaNacimiento = LocalDate.parse(nuevaFechaNacimientoStr);
+//
+//        String sql = "UPDATE bombero SET fechaNac=? WHERE idBombero=?";
+//
+//        try (PreparedStatement ps = con.prepareStatement(sql)) {
+//            ps.setDate(1, java.sql.Date.valueOf(nuevaFechaNacimiento));
+//            ps.setInt(2, idBombero);
+//
+//            int exito = ps.executeUpdate();
+//            if (exito == 1) {
+//                JOptionPane.showMessageDialog(null, "Fecha de nacimiento del bombero actualizada exitosamente.");
+//            } else {
+//                JOptionPane.showMessageDialog(null, "No se pudo actualizar la fecha de nacimiento del bombero. Asegúrate de que el bombero sea válido.");
+//            }
+//        }
+//    } catch (DateTimeParseException ex) {
+//        JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto. Utiliza el formato yyyy-MM-dd.");
+//    } catch (SQLException ex) {
+//        JOptionPane.showMessageDialog(null, "Error al actualizar la fecha de nacimiento del bombero: " + ex.getMessage());
+//    }
+//}
 
 
 //-------------------------------------------------------------------------
 
-//-----------------------modificar numero celular--------------------------
-public void modificarNumeroCelularBombero(int idBombero) {
-    try {
-        String nuevoNumeroCelular = JOptionPane.showInputDialog("Ingrese el nuevo número de celular del bombero:");
-        String sql = "UPDATE bombero SET celular=? WHERE idBombero=?";
-
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, nuevoNumeroCelular);
-            ps.setInt(2, idBombero);
-
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Número de celular del bombero actualizado exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo actualizar el número de celular del bombero. Asegúrate de que el bombero sea válido.");
-            }
-        }
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al actualizar el número de celular del bombero: " + ex.getMessage());
-    }
-}
-
+////-----------------------modificar numero celular--------------------------
+//public void modificarNumeroCelularBombero(int idBombero) {
+//    try {
+//        String nuevoNumeroCelular = JOptionPane.showInputDialog("Ingrese el nuevo número de celular del bombero:");
+//        String sql = "UPDATE bombero SET celular=? WHERE idBombero=?";
+//
+//        try (PreparedStatement ps = con.prepareStatement(sql)) {
+//            ps.setString(1, nuevoNumeroCelular);
+//            ps.setInt(2, idBombero);
+//
+//            int exito = ps.executeUpdate();
+//            if (exito == 1) {
+//                JOptionPane.showMessageDialog(null, "Número de celular del bombero actualizado exitosamente.");
+//            } else {
+//                JOptionPane.showMessageDialog(null, "No se pudo actualizar el número de celular del bombero. Asegúrate de que el bombero sea válido.");
+//            }
+//        }
+//    } catch (SQLException ex) {
+//        JOptionPane.showMessageDialog(null, "Error al actualizar el número de celular del bombero: " + ex.getMessage());
+//    }
+//}
+//
 
 
 //-------------------------------------------------------------------------
