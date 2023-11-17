@@ -156,47 +156,69 @@ public class BrigadaData {
     }
 
 //-----------------------metodo listar brigadas-----------------------------------------
-    public int mostrarOpciones() {
-        int idBrigadaElegida = -1; // Valor predeterminado para indicar que no se ha seleccionado ninguna brigada
-        List<String> nombresBrigadas = new ArrayList<>();
+ public List<String> mostrarOpciones() {
+    List<String> nombresBrigadas = new ArrayList<>();
 
-        String sql = "SELECT idBrigada, nombreBrig FROM brigada WHERE estadoBr = 1";
+    String sql = "SELECT idBrigada, nombreBrig FROM brigada WHERE estadoBr = 1";
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                int idBrigada = rs.getInt("idBrigada");
-                String nombreBrigada = rs.getString("nombreBrig");
+        while (rs.next()) {
+            int idBrigada = rs.getInt("idBrigada");
+            String nombreBrig = rs.getString("nombreBrigada");
 
-                nombresBrigadas.add(idBrigada + ". " + nombreBrigada);
-            }
-            ps.close();
-
-            if (!nombresBrigadas.isEmpty()) {
-                String seleccion = (String) JOptionPane.showInputDialog(null,
-                        "Elija una brigada:\n" + String.join("\n", nombresBrigadas),
-                        "Selección de Brigada",
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        nombresBrigadas.toArray(),
-                        nombresBrigadas.get(0));
-
-                if (seleccion != null) {
-                    String[] parts = seleccion.split("\\. ");
-                    if (parts.length == 2) {
-                        idBrigadaElegida = Integer.parseInt(parts[0]);
-                        System.out.println(" id " + idBrigadaElegida);
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener nombres de brigadas: " + ex.getMessage());
+            nombresBrigadas.add(idBrigada + ". " + nombreBrig);
         }
-
-        return idBrigadaElegida;
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener nombres de brigadas: " + ex.getMessage());
     }
+
+    return nombresBrigadas;
+}
+
+//        int idBrigadaElegida = -1; // Valor predeterminado para indicar que no se ha seleccionado ninguna brigada
+//        List<String> nombresBrigadas = new ArrayList<>();
+//
+//        String sql = "SELECT idBrigada, nombreBrig FROM brigada WHERE estadoBr = 1";
+//
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ResultSet rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                int idBrigada = rs.getInt("idBrigada");
+//                String nombreBrigada = rs.getString("nombreBrig");
+//
+//                nombresBrigadas.add(idBrigada + ". " + nombreBrigada);
+//            }
+//            ps.close();
+//
+//            if (!nombresBrigadas.isEmpty()) {
+//                String seleccion = (String) JOptionPane.showInputDialog(null,
+//                        "Elija una brigada:\n" + String.join("\n", nombresBrigadas),
+//                        "Selección de Brigada",
+//                        JOptionPane.PLAIN_MESSAGE,
+//                        null,
+//                        nombresBrigadas.toArray(),
+//                        nombresBrigadas.get(0));
+//
+//                if (seleccion != null) {
+//                    String[] parts = seleccion.split("\\. ");
+//                    if (parts.length == 2) {
+//                        idBrigadaElegida = Integer.parseInt(parts[0]);
+//                        System.out.println(" id " + idBrigadaElegida);
+//                    }
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al obtener nombres de brigadas: " + ex.getMessage());
+//        }
+//
+//        return idBrigadaElegida;
+//    }
     //------------------------------Listar Especialidades------------------------
 
 //    public String elegirEspecialidad() {

@@ -32,7 +32,7 @@ public class BomberoData {
             ps.setString(3, bombero.getGrupoSanguineo());
             ps.setDate(4, Date.valueOf(bombero.getFechaNac()));
             ps.setString(5, bombero.getCelular());
-            ps.setInt(6, bombero.getBrigada().getIdBrigada());
+            ps.setInt(6, bombero.getIdBrigada());
 
             ps.setBoolean(7, bombero.isEstadoB());
 
@@ -50,7 +50,35 @@ public class BomberoData {
         }
 
     }
-
+// public void guardarBombero(int dni, String nombreApellido, String grupoSanguineo, LocalDate fechaNac, String celular,boolean estadoB,int idBrigada) {
+//
+//    String sql = "INSERT INTO bombero (dni, nombreApellido, grupoSanguineo, fechaNac, celular, idBrigada, estadoB)"
+//            + " VALUES (?, ?, ?, ?, ?, ?, ?)";
+//
+//    try {
+//        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//
+//        ps.setInt(1, dni);
+//        ps.setString(2, nombreApellido);
+//        ps.setString(3, grupoSanguineo);
+//        ps.setDate(4, Date.valueOf(fechaNac));
+//        ps.setString(5, celular);
+//        ps.setInt(6, idBrigada);
+//        ps.setBoolean(7, estadoB);
+//
+//        ps.executeUpdate();
+//
+//        ResultSet rs = ps.getGeneratedKeys();
+//
+//        if (rs.next()) {
+//            int idBombero = rs.getInt(1);
+//            JOptionPane.showMessageDialog(null, "Bombero Agregado Exitosamente con ID: " + idBombero);
+//        }
+//        ps.close();
+//    } catch (SQLException ex) {
+//        JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla bombero: " + ex.getMessage());
+//    }
+//}
 //------------------------------------------------------------------------------------------------------
 //    
 //-------------------------------------------------------------------------------------------------
@@ -139,7 +167,7 @@ public class BomberoData {
                         rs.getString("grupoSanguineo"),
                         rs.getDate("fechaNac").toLocalDate(),
                         rs.getString("celular"),
-                        null, // Aquí deberías obtener la brigada asociada, si la tienes en la base de datos
+                        //null, // Aquí deberías obtener la brigada asociada, si la tienes en la base de datos
                         rs.getBoolean("estadoBom")
                 );
 

@@ -14,15 +14,12 @@ import javax.swing.table.DefaultTableModel;
 public class AgregarBrigada extends javax.swing.JInternalFrame {
 
     private BrigadaData briga = new BrigadaData();
-    ;
+    
 private CuartelData cua = new CuartelData();
-    ;
-private DefaultTableModel modelo;
-    private List<Cuartel> listaCuartel;
+    
 
     public AgregarBrigada() {
         initComponents();
-        modelo = new DefaultTableModel();
         llenarComboEspecialidades();
         llenarComboCuartel();
     }

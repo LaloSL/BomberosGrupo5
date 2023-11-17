@@ -5,15 +5,25 @@
  */
 package bomberosgrupo5.vistas;
 
+import bomberosgrupo5.accesoADatos.BomberoData;
+import bomberosgrupo5.accesoADatos.BrigadaData;
+import bomberosgrupo5.accesoADatos.CuartelData;
+import bomberosgrupo5.entidades.Bombero;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Asus
  */
 public class AgregarBombero extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AgregarBombero
-     */
+    private BrigadaData briga = new BrigadaData();
+    private BomberoData bomb = new BomberoData();
+    private CuartelData cua = new CuartelData();
+
     public AgregarBombero() {
         initComponents();
     }
@@ -27,21 +37,209 @@ public class AgregarBombero extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton2 = new javax.swing.JButton();
+        jTNombre = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jCBBrigada = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jTCelular = new javax.swing.JTextField();
+        jTDNI = new javax.swing.JTextField();
+        jTGrupo = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jdFechaNacimiento = new com.toedter.calendar.JDateChooser();
+
+        jButton2.setText("Guardar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jTNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTNombreActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Seleccione la brigada a la cual quiere pretenecer");
+
+        jCBBrigada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel1.setText("DNI");
+
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Nombre y Apellido");
+
+        jLabel4.setText("Grupo Sanguineo");
+
+        jLabel5.setText("Fecha Nacimiento");
+
+        jLabel6.setText("Celular");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2)
+                            .addComponent(jLabel6))
+                        .addGap(130, 130, 130)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jCBBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(13, 13, 13))
+                            .addComponent(jdFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jCBBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jdFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(100, 100, 100)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(226, 226, 226)
+                        .addComponent(jButton2)))
+                .addGap(204, 204, 204))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+//------------------------------Boton Guardar------------------
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String brigadaSeleccionado = (String) jCBBrigada.getSelectedItem();
+
+        // Obtener el ID del cuartel a partir de la cadena seleccionada
+        int idBrigada = Integer.parseInt(brigadaSeleccionado.split("\\. ")[0]);
+
+//        String telefono = jTextField5.getText();
+        if (bomb.hayCupoParaNuevoBombero(idBrigada)) {
+
+            int dni = Integer.parseInt(jTDNI.getText());
+            String nombreApellido = jTNombre.getText();
+            String grupoSanguineo=jTGrupo.getText();
+            //Verificar si el nombre del bombero ya existe en ese cuartel
+            if (bomb.existeBomberoConNombre(nombreApellido, dni)) {
+                JOptionPane.showMessageDialog(null, "Ya existe un bombero con el mismo nombre en esta brigada. No se puede agregar.");
+            } else {
+                java.util.Date sfecha = jdFechaNacimiento.getDate();
+                LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+          
+                String celular = jTCelular.getText();
+                Bombero bombero=new Bombero();
+                bombero.setDni(dni);
+                bombero.setNombreApellido(nombreApellido);
+                bombero.setGrupoSanguineo(grupoSanguineo);
+                bombero.setFechaNac(fechaNac);
+                bombero.setCelular(celular);
+                bombero.setEstadoB(true);
+                bombero.setIdBrigada(idBrigada);
+                bomb.guardarBombero(bombero);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Brigada Completa. No se puede agregar más bomberos.");
+        }
+
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+//------------------------METODOS----------------------
+
+    private void llenarComboBrigada() {
+        List<String> nombresBrigada = briga.mostrarOpciones();
+
+        if (!nombresBrigada.isEmpty()) {
+            // Limpiamos el JComboBox antes de agregar los nuevos elementos
+            jCBBrigada.removeAllItems();
+            for (String nombre : nombresBrigada) {
+                jCBBrigada.addItem(nombre);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontraron brigadas");
+        }
+    }
+
+//-------------------------------------------------------------------------
+    private void jTNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTNombreActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jCBBrigada;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField jTCelular;
+    private javax.swing.JTextField jTDNI;
+    private javax.swing.JTextField jTGrupo;
+    private javax.swing.JTextField jTNombre;
+    private com.toedter.calendar.JDateChooser jdFechaNacimiento;
     // End of variables declaration//GEN-END:variables
 }
