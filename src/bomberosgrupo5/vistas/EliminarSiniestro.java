@@ -17,10 +17,12 @@ import javax.swing.JOptionPane;
  * @author Asus
  */
 public class EliminarSiniestro extends javax.swing.JInternalFrame {
- private BrigadaData briga = new BrigadaData();
+
+    private BrigadaData briga = new BrigadaData();
     private BomberoData bomb = new BomberoData();
     private CuartelData cua = new CuartelData();
-    private SiniestroData sin=new SiniestroData();
+    private SiniestroData sin = new SiniestroData();
+
     public EliminarSiniestro() {
         initComponents();
         llenarComboSiniestro();
@@ -45,6 +47,11 @@ public class EliminarSiniestro extends javax.swing.JInternalFrame {
         jCBSin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -91,10 +98,23 @@ public class EliminarSiniestro extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        String sinie = (String) jCBSin.getSelectedItem();
+        // Obtener el ID del cuartel a partir de la cadena seleccionada
+        int idSini = Integer.parseInt(sinie.split("\\. ")[0]);
+        
+        
+        
+        int idBrigadaAsociada = sin.obtenerIdBrigadaPorIdSiniestro(idSini);
+        briga.marcarBrigadaComoLibre(idBrigadaAsociada);
+        sin.eliminarSiniestro(idSini);
+    }//GEN-LAST:event_jButton1ActionPerformed
 //------------------------METODOS----------------------
 
     private void llenarComboSiniestro() {
-        List<String> nombresSiniestro = sin.mostrarBomberosAEliminar();
+        List<String> nombresSiniestro = sin.mostrarSiniestros();
 
         if (!nombresSiniestro.isEmpty()) {
             // Limpiamos el JComboBox antes de agregar los nuevos elementos

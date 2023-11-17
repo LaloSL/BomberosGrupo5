@@ -350,7 +350,7 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
 //--------------------------------FIN MODIFICAR SINIESTRO--------------------
 //-----------------------------ELIMINAR SINIESTRO------------------
 //--------------------------listar siniestro para devuelve idCodigo-------------
-    public int mostrarSiniestros() {
+    public List<String> mostrarSiniestros() {
         
         List<String> nombreSin = new ArrayList<>();
 
@@ -364,14 +364,14 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
             int idCodigo = rs.getInt("idCodigo");
             String tipo = rs.getString("tipo");
 
-            nombreBombero.add(idCodigo + ". " + tipo);
+            nombreSin.add(idCodigo + ". " + tipo);
         }
         ps.close();
     } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al obtener nombres de bomberos: " + ex.getMessage());
+        JOptionPane.showMessageDialog(null, "Error al obtener nombres de siniestro: " + ex.getMessage());
     }
 
-    return nombreBombero; 
+    return nombreSin; 
         
 //        int idSiniestroSeleccionado = -1;
 //        List<String> siniestros = new ArrayList<>();
