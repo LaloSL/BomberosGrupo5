@@ -54,6 +54,10 @@ public class Bombero {
         this.idBrigada = idBrigada;
     }
 
+    public Bombero(int aInt, String string, String string0, LocalDate toLocalDate, String string1, boolean aBoolean) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getIdBombero() {
         return idBombero;
     }

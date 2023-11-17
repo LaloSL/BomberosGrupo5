@@ -346,36 +346,67 @@ public class BomberoData {
 
 //---------------------------------------------------------------------------------------------------
 //-------------averiguo bomberos que pertenecen a una misma brigada -----------------------
-    public List<Bombero> obtenerBomberosPorBrigada(int idBrigada) {
-        List<Bombero> bomberos = new ArrayList<>();
+    
+    public List<Integer> obtenerIDsBomberosPorBrigada(int idBrigada) {
+    List<Integer> idsBomberos = new ArrayList<>();
 
-        String sql = "SELECT * FROM bombero WHERE idBrigada = ? AND estadoB = 1";
+    String sql = "SELECT idBombero FROM bombero WHERE idBrigada = ? AND estadoB = 1";
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idBrigada);
-            ResultSet rs = ps.executeQuery();
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idBrigada);
+        ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                Bombero bombero = new Bombero();
-            bombero.setIdBombero(rs.getInt("idBombero"));
-            bombero.setDni(rs.getInt("dni"));
-            bombero.setNombreApellido(rs.getString("nombreApellido"));
-            bombero.setGrupoSanguineo(rs.getString("grupoSanguineo"));
-            bombero.setFechaNac(rs.getDate("fechaNac").toLocalDate());
-            bombero.setCelular(rs.getString("celular"));
-            bombero.setEstadoB(rs.getBoolean("estadoB"));
-
-            bomberos.add(bombero);
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener los IDs de los bomberos de la brigada: " + ex.getMessage());
+        while (rs.next()) {
+            int idBombero = rs.getInt("idBombero");
+            idsBomberos.add(idBombero);
         }
-
-        return bomberos;
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener los IDs de los bomberos de la brigada: " + ex.getMessage());
     }
+
+    return idsBomberos;
+}
+//    public List<Bombero> obtenerBomberosPorBrigada(int idBrigada) {
+//        List<Bombero> bomberos = new ArrayList<>();
+//
+//        String sql = "SELECT * FROM bombero WHERE idBrigada = ? AND estadoB = 1";
+//
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1, idBrigada);
+//            ResultSet rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                Bombero bombero = new Bombero();
+//            bombero.setIdBombero(rs.getInt("idBombero"));
+//            bombero.setDni(rs.getInt("dni"));
+//            bombero.setNombreApellido(rs.getString("nombreApellido"));
+//            bombero.setGrupoSanguineo(rs.getString("grupoSanguineo"));
+//            bombero.setFechaNac(rs.getDate("fechaNac").toLocalDate());
+//            bombero.setCelular(rs.getString("celular"));
+//            bombero.setEstadoB(rs.getBoolean("estadoB"));
+//
+//            bomberos.add(bombero);
+//            }
+//            ps.close();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al obtener los IDs de los bomberos de la brigada: " + ex.getMessage());
+//        }
+//
+//        return bomberos;
+//    }
 //------------Borrado logico de bomberos que pertenecen a un brigada--------------
+    
+    public void cambiarEstadoBomberosPorBrigada(int idBrigada) {
+    // Obtener la lista de IDs de bomberos que pertenecen a la brigada
+    List<Integer> idsBomberosAEliminar = obtenerIDsBomberosPorBrigada(idBrigada);
+
+    for (Integer idBombero : idsBomberosAEliminar) {
+        cambiarEstadoBombero(idBombero);
+    }
+}
 
     public void cambiarEstadoBomberosPorBrigada(int idBrigada) {
         // Obtener la lista de IDs de bomberos que pertenecen a la brigada
