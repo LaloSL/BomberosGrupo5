@@ -24,24 +24,20 @@ import javax.swing.table.DefaultTableModel;
 public class ModificarSiniestro extends javax.swing.JInternalFrame {
 
     private SiniestroData sin = new SiniestroData();
-    private DefaultTableModel modelo;
+//    private DefaultTableModel modelo;
 
     public List<Siniestro> obtenerListaSiniestros() {
         return sin.mostrarSiniestros();
     }
+
     /**
      * Creates new form ModificarCuartel
      */
     public ModificarSiniestro() {
         initComponents();
-        
-       armarCabeceraTabla();
-        mostrarSiniestrosEnTabla();
-        
-       
-        
+        llenarComboSiniestros();
+
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,10 +49,6 @@ public class ModificarSiniestro extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jBGuardar = new javax.swing.JButton();
-        jBSalir = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableSiniestros = new javax.swing.JTable();
         jTTipo = new javax.swing.JTextField();
         jTFechaSiniestro = new javax.swing.JTextField();
         jTCoordX = new javax.swing.JTextField();
@@ -68,48 +60,15 @@ public class ModificarSiniestro extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jCSiniestro = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jTCoordY1 = new javax.swing.JTextField();
+        jTCoordY2 = new javax.swing.JTextField();
+        jTCoordY3 = new javax.swing.JTextField();
 
         jLabel1.setText("Seleccione el Siniestro");
-
-        jBGuardar.setText("Guardar Cambios");
-        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBGuardarActionPerformed(evt);
-            }
-        });
-
-        jBSalir.setText("Salir");
-        jBSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBSalirActionPerformed(evt);
-            }
-        });
-
-        jTableSiniestros.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTableSiniestros.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableSiniestrosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTableSiniestros);
 
         jTCoordX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,21 +90,24 @@ public class ModificarSiniestro extends javax.swing.JInternalFrame {
 
         jButton2.setText("Salir");
 
+        jCSiniestro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel7.setText("Detalles");
+
+        jLabel8.setText("Fecha Resolución");
+
+        jLabel9.setText("Puntuación");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jBGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
-                .addComponent(jBSalir)
-                .addGap(99, 99, 99))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jCSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(123, 123, 123))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(187, 187, 187)
                         .addComponent(jLabel1))
@@ -157,30 +119,44 @@ public class ModificarSiniestro extends javax.swing.JInternalFrame {
                 .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTCoordY)
-                            .addComponent(jTCoordX)
-                            .addComponent(jTFechaSiniestro)
-                            .addComponent(jTTipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
-                .addGap(179, 179, 179))
+                        .addComponent(jLabel7)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(40, 40, 40)
+                                .addComponent(jTCoordY1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(76, 76, 76)
+                                .addComponent(jTCoordY3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                                .addComponent(jButton2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTCoordY)
+                                    .addComponent(jTCoordX)
+                                    .addComponent(jTFechaSiniestro)
+                                    .addComponent(jTTipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                                    .addComponent(jTCoordY2))))
+                        .addGap(179, 179, 179))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jCSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel2)
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -201,97 +177,61 @@ public class ModificarSiniestro extends javax.swing.JInternalFrame {
                         .addGap(27, 27, 27)
                         .addComponent(jTCoordY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7)
+                    .addComponent(jTCoordY2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel8))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTCoordY1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addComponent(jTCoordY3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addGap(131, 131, 131)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBGuardar)
-                    .addComponent(jBSalir))
-                .addGap(40, 40, 40))
+                .addGap(53, 53, 53))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    private void armarCabeceraTabla() {
-        ArrayList<Object> filaCabecera = new ArrayList<>();
-        filaCabecera.add("ID");
-        filaCabecera.add("Tipo");
-        filaCabecera.add("Fecha");
-        filaCabecera.add("Detalles");
-        modelo = new DefaultTableModel();
-        for (Object it : filaCabecera) {
-            modelo.addColumn(it);
-        }
-        jTableSiniestros.setModel(modelo); 
-    }
-    
-    private void mostrarSiniestrosEnTabla() {
-        //borrarFilasTabla()
-        
-        List<Siniestro> lista = obtenerListaSiniestros();
-    for (Siniestro s : lista) {
-        // Agrega una fila al modelo con los datos del siniestro
-        modelo.addRow(new Object[]{s.getIdSiniestro(), s.getTipo(), s.getFechaSiniestro(), s.getDetalles()});
-    }}
-    
-
-
-    
-    
-    
-    
-            
-    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-
-//        String cuartelSeleccionado = (String) jCSiniestros.getSelectedItem();
-//
-//        if (cuartelSeleccionado != null) {
-//
-//            int idCuartel = Integer.parseInt(cuartelSeleccionado.split("\\. ")[0]);
-//
-//            String nuevoNombre = jTTipo.getText();
-//            String nuevaDireccion = jTHora.getText();
-//            int nuevaCoordX = Integer.parseIntjTFechad.getText());
-//            int nuevaCoordY = Integer.parseInt(jTCoordY.getText());
-//            String nuevoTelefono = jTcoorX.getText();
-//            String nuevoCorreo = jTCorreo.getText();
-//            
-//            Cuartel cuartelActualizado = new Cuartel (idCuartel, nuevoNombre, nuevaDireccion, nuevaCoordX, nuevaCoordY, nuevoTelefono, nuevoCorreo, true);
-//            cua.modificarCuartel(cuartelActualizado);
-//
-//
-    }//GEN-LAST:event_jBGuardarActionPerformed
-    
-    
-    
-    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        dispose();
-    }//GEN-LAST:event_jBSalirActionPerformed
+//    private void armarCabeceraTabla() {
+//        ArrayList<Object> filaCabecera = new ArrayList<>();
+//        filaCabecera.add("ID");
+//        filaCabecera.add("Tipo");
+//        filaCabecera.add("Fecha");
+//        filaCabecera.add("Detalles");
+//        modelo = new DefaultTableModel();
+//        for (Object it : filaCabecera) {
+//            modelo.addColumn(it);
+//        }
+//        jTableSiniestros.setModel(modelo); 
+//    }
+//    private void mostrarSiniestrosEnTabla() {
+//        //borrarFilasTabla()
+//        
+//        List<Siniestro> lista = obtenerListaSiniestros();
+//    for (Siniestro s : lista) {
+//        
+//        modelo.addRow(new Object[]{s.getIdSiniestro(), s.getTipo(), s.getFechaSiniestro(), s.getDetalles()});
+//    }}
 
     private void jTCoordXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCoordXActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTCoordXActionPerformed
 
-    private void jTableSiniestrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSiniestrosMouseClicked
-        int filaSeleccionada = jTableSiniestros.getSelectedRow();
-
-        if (filaSeleccionada != -1) {
-            int idSiniestro = (int) jTableSiniestros.getValueAt(filaSeleccionada, 0); // Asumiendo que la columna 0 contiene el ID
-            cargarDatosSiniestro(idSiniestro);
-        }
-    
-    }//GEN-LAST:event_jTableSiniestrosMouseClicked
-
-    
- public void cargarDatosSiniestro(int idSiniestro) {
+    public void cargarDatosSiniestro(int idSiniestro) {
         Siniestro siniestro = sin.obtenerSiniestroPorId(idSiniestro);
 
         if (siniestro != null) {
-
+           
             jTTipo.setText(siniestro.getTipo());
             jTFechaSiniestro.setText(siniestro.getFechaSiniestro().toString()); // Ajusta según el formato deseado
             int coordX = siniestro.getCoordX();
@@ -299,34 +239,45 @@ public class ModificarSiniestro extends javax.swing.JInternalFrame {
             int coordY = siniestro.getCoordY();
             jTCoordY.setText(String.valueOf(coordY));
         }
+    }
+
+    private void llenarComboSiniestros() {
+        List<Siniestro> tipoSiniestros = sin.mostrarSiniestros();
+
+        if (!tipoSiniestros.isEmpty()) {
+
+            jCSiniestro.removeAllItems();
+            for (Siniestro sin : tipoSiniestros) {
+                jCSiniestro.addItem(sin.getTipo());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontraron cuarteles.");
         }
-    
-    
-
-    
-
-  
-
-
+    }
+        
+        
+        
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBGuardar;
-    private javax.swing.JButton jBSalir;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jCSiniestro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTCoordX;
     private javax.swing.JTextField jTCoordY;
+    private javax.swing.JTextField jTCoordY1;
+    private javax.swing.JTextField jTCoordY2;
+    private javax.swing.JTextField jTCoordY3;
     private javax.swing.JTextField jTFechaSiniestro;
     private javax.swing.JTextField jTTipo;
-    private javax.swing.JTable jTableSiniestros;
     // End of variables declaration//GEN-END:variables
 
-    
-        
 }

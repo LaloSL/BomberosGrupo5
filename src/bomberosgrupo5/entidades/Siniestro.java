@@ -45,12 +45,18 @@ public class Siniestro {
         this.fechaResol = fechaResol;
     }
 
-    public Siniestro(int idCodigo, String tipo, LocalDateTime fechaSiniestro, String detalles) {
-        this.idCodigo = idCodigo;
-        this.tipo = tipo;
-        this.detalles = detalles;
-        this.fechaSiniestro = fechaSiniestro;
+    public Siniestro(String tipo, LocalDateTime fechaSiniestro, int coordX, int coordY, String detalles) {
+        
     }
+
+    public Siniestro(String tipo, int coordX, int coordY, String detalles) {
+        this.tipo = tipo;
+        this.coordX = coordX;
+        this.coordY = coordY;
+        this.detalles = detalles;
+    }
+
+   
 
    
 

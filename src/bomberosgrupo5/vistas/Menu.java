@@ -174,6 +174,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu4.add(jMAgregarSiniestro);
 
         jMModificarSiniestro.setText("Modificar Siniestro");
+        jMModificarSiniestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMModificarSiniestroActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMModificarSiniestro);
 
         jMEliminarSiniestro.setText("Eliminar Siniestro");
@@ -390,6 +395,15 @@ public class Menu extends javax.swing.JFrame {
         bC.getContentPane().setBackground(new Color(86, 167, 132));
         escritorio.add(bC);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMModificarSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMModificarSiniestroActionPerformed
+       escritorio.removeAll();
+        escritorio.repaint();
+        ModificarSiniestro sin = new ModificarSiniestro();
+        sin.setVisible(true);
+        sin.getContentPane().setBackground(new Color(86, 167, 132));
+        escritorio.add(sin);
+    }//GEN-LAST:event_jMModificarSiniestroActionPerformed
 
     /**
      * @param args the command line arguments
