@@ -159,7 +159,7 @@ public class BrigadaData {
  public List<String> mostrarOpciones() {
     List<String> nombresBrigadas = new ArrayList<>();
 
-    String sql = "SELECT idBrigada, nombreBrig FROM brigada WHERE estadoBr = 1";
+    String sql = "SELECT idBrigada, nombreBrig FROM brigada WHERE estadoBr = 1 AND libre = 1";
 
     try {
         PreparedStatement ps = con.prepareStatement(sql);
@@ -380,14 +380,15 @@ public String[] Especialidades() {
 //---------------------------------------------------------------------------------------
 //----------------------MODIFICAR--------------------------------------------
 //----------------------Modificar Nombre.--------------------------------
-    public void modificarNombreBrigada(int idBrigM) {
-        String nuevoNombreBrigada = JOptionPane.showInputDialog("Ingrese el nuevo nombre de la brigada:");
+    public void modificarBrigada(int idBrigM, String nombre, String especialidad) {
+      //  String nuevoNombreBrigada = JOptionPane.showInputDialog("Ingrese el nuevo nombre de la brigada:");
 
-        String sql = "UPDATE brigada SET nombreBrig=? WHERE idBrigada=?";
+        String sql = "UPDATE brigada SET nombreBrig=?, especialidad=? WHERE idBrigada=?";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, nuevoNombreBrigada);
-            ps.setInt(2, idBrigM);
+            ps.setString(1, nombre);
+            ps.setString(2, especialidad);
+            ps.setInt(3, idBrigM);
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
