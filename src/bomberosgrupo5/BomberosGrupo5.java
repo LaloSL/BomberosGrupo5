@@ -386,33 +386,33 @@ public class BomberosGrupo5 {
 //                                cua1.cambiarEstadoCuartel(idCuartelAEliminar);
 //                                break;
 
-                            //-----------------Eliminar Brigada---------------------
-                            case 2: // ELIMINAR BRIGADA
-                                int idBrigadaAEliminar = brig.mostrarBrigadasAEliminar();
-                                List<Integer> idsBomberosAEliminar = bom.obtenerBomberosPorBrigada(idBrigadaAEliminar);
-                                bom.cambiarEstadoBomberosPorBrigada(idBrigadaAEliminar);
-                                brig.cambiarEstadoBrigada(idBrigadaAEliminar);
-                                break;
+//                            //-----------------Eliminar Brigada---------------------
+//                            case 2: // ELIMINAR BRIGADA
+//                                int idBrigadaAEliminar = brig.mostrarBrigadasAEliminar();
+//                                List<Integer> idsBomberosAEliminar = bom.obtenerBomberosPorBrigada(idBrigadaAEliminar);
+//                                bom.cambiarEstadoBomberosPorBrigada(idBrigadaAEliminar);
+//                                brig.cambiarEstadoBrigada(idBrigadaAEliminar);
+//                                break;
 
-                            //---------------ELIMINAR BOMBERO------------------------    
-                            case 3: // ELIMINAR BOMBERO
-                                int idBomberoAEliminar = bom.mostrarBomberosAEliminar();
-                                if (idBomberoAEliminar != -1) {
-                                    bom.cambiarEstadoBombero(idBomberoAEliminar);
-                                }
-                                break;
-
-                            case 4:
-                                // Volver al menú principal
-                                break;
-
-                            default:
-                                JOptionPane.showMessageDialog(null, "Opción no válida");
-                                break;
-                        }
-                    }
-
-                    break;
+//                            //---------------ELIMINAR BOMBERO------------------------    
+//                            case 3: // ELIMINAR BOMBERO
+//                                int idBomberoAEliminar = bom.mostrarBomberosAEliminar();
+//                                if (idBomberoAEliminar != -1) {
+//                                    bom.cambiarEstadoBombero(idBomberoAEliminar);
+//                                }
+//                                break;
+//
+//                            case 4:
+//                                // Volver al menú principal
+//                                break;
+//
+//                            default:
+//                                JOptionPane.showMessageDialog(null, "Opción no válida");
+//                                break;
+//                        }
+//                    }
+//
+//                    break;
 
 //---------------------------------------------- FIN ELIMINAR-----------------------------------------------------------------------                    
 //----------------------------------------------SINIESTRO----------------------------------------------------------------------------                    

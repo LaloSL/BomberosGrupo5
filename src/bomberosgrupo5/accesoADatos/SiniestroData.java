@@ -351,45 +351,67 @@ public void insertarSiniestro(int idBrigada, String tipo, LocalDateTime fechaHor
 //-----------------------------ELIMINAR SINIESTRO------------------
 //--------------------------listar siniestro para devuelve idCodigo-------------
     public int mostrarSiniestros() {
-        int idSiniestroSeleccionado = -1;
-        List<String> siniestros = new ArrayList<>();
+        
+        List<String> nombreSin = new ArrayList<>();
 
-        String sql = "SELECT idCodigo, detalles FROM siniestro WHERE estadoS = 1";
+    String sql = "SELECT idCodigo, tipo FROM siniestro WHERE estadoS = 1";
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                int idSiniestro = rs.getInt("idCodigo");
-                String detalles = rs.getString("detalles");
+        while (rs.next()) {
+            int idCodigo = rs.getInt("idCodigo");
+            String tipo = rs.getString("tipo");
 
-                siniestros.add(idSiniestro + ". Detalles: " + detalles);
-            }
-            ps.close();
-
-            if (!siniestros.isEmpty()) {
-                String seleccion = (String) JOptionPane.showInputDialog(null,
-                        "Elija un siniestro:\n" + String.join("\n", siniestros),
-                        "Selección de Siniestro",
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        siniestros.toArray(),
-                        siniestros.get(0));
-
-                if (seleccion != null) {
-                    String[] parts = seleccion.split("\\. ");
-                    if (parts.length == 2) {
-                        idSiniestroSeleccionado = Integer.parseInt(parts[0]);
-                        System.out.println("ID del Siniestro seleccionado: " + idSiniestroSeleccionado);
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener la lista de siniestros: " + ex.getMessage());
+            nombreBombero.add(idCodigo + ". " + tipo);
         }
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener nombres de bomberos: " + ex.getMessage());
+    }
 
-        return idSiniestroSeleccionado;
+    return nombreBombero; 
+        
+//        int idSiniestroSeleccionado = -1;
+//        List<String> siniestros = new ArrayList<>();
+//
+//        String sql = "SELECT idCodigo, detalles FROM siniestro WHERE estadoS = 1";
+//
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ResultSet rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                int idSiniestro = rs.getInt("idCodigo");
+//                String detalles = rs.getString("detalles");
+//
+//                siniestros.add(idSiniestro + ". Detalles: " + detalles);
+//            }
+//            ps.close();
+//
+//            if (!siniestros.isEmpty()) {
+//                String seleccion = (String) JOptionPane.showInputDialog(null,
+//                        "Elija un siniestro:\n" + String.join("\n", siniestros),
+//                        "Selección de Siniestro",
+//                        JOptionPane.PLAIN_MESSAGE,
+//                        null,
+//                        siniestros.toArray(),
+//                        siniestros.get(0));
+//
+//                if (seleccion != null) {
+//                    String[] parts = seleccion.split("\\. ");
+//                    if (parts.length == 2) {
+//                        idSiniestroSeleccionado = Integer.parseInt(parts[0]);
+//                        System.out.println("ID del Siniestro seleccionado: " + idSiniestroSeleccionado);
+//                    }
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al obtener la lista de siniestros: " + ex.getMessage());
+//        }
+//
+//        return idSiniestroSeleccionado;
     }
 
 //---------------------------------------------------------------------------

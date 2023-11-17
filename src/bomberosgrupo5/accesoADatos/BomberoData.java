@@ -254,47 +254,71 @@ public class BomberoData {
 
 //---------------------------------ELIMINAR--------------------------------
 //-----------------------Listo los bomberos para seleccionar al que van a eliminar
-    public int mostrarBomberosAEliminar() {
-        int idBomberoAEliminar = -1;
-        List<String> bomberosAEliminar = new ArrayList<>();
+    public List<String> mostrarBomberosAEliminar() {
+        
+       List<String> nombreBombero = new ArrayList<>();
 
-        String sql = "SELECT idBombero, dni, nombreApellido FROM bombero WHERE estadoB = 1";
+    String sql = "SELECT idBombero, nombreApellido FROM bombero WHERE estadoB = 1";
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                int idBombero = rs.getInt("idBombero");
-                int dniBombero = rs.getInt("dni");
-                String nombreApellido = rs.getString("nombreApellido");
+        while (rs.next()) {
+            int idBrigada = rs.getInt("idBombero");
+            String nombreBrig = rs.getString("nombreApellido");
 
-                bomberosAEliminar.add(idBombero + ". DNI: " + dniBombero + ", Nombre: " + nombreApellido);
-            }
-            ps.close();
-
-            if (!bomberosAEliminar.isEmpty()) {
-                String seleccion = (String) JOptionPane.showInputDialog(null,
-                        "Elija un bombero a eliminar:\n" + String.join("\n", bomberosAEliminar),
-                        "Selección de Bombero a Eliminar",
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        bomberosAEliminar.toArray(),
-                        bomberosAEliminar.get(0));
-
-                if (seleccion != null) {
-                    String[] parts = seleccion.split("\\. ");
-                    if (parts.length == 2) {
-                        idBomberoAEliminar = Integer.parseInt(parts[0]);
-                        System.out.println("ID del Bombero a eliminar: " + idBomberoAEliminar);
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener la lista de bomberos a eliminar: " + ex.getMessage());
+            nombreBombero.add(idBrigada + ". " + nombreBrig);
         }
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener nombres de bomberos: " + ex.getMessage());
+    }
 
-        return idBomberoAEliminar;
+    return nombreBombero; 
+        
+        
+        
+//        int idBomberoAEliminar = -1;
+//        List<String> bomberosAEliminar = new ArrayList<>();
+//
+//        String sql = "SELECT idBombero, dni, nombreApellido FROM bombero WHERE estadoB = 1";
+//
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ResultSet rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                int idBombero = rs.getInt("idBombero");
+//                int dniBombero = rs.getInt("dni");
+//                String nombreApellido = rs.getString("nombreApellido");
+//
+//                bomberosAEliminar.add(idBombero + ". DNI: " + dniBombero + ", Nombre: " + nombreApellido);
+//            }
+//            ps.close();
+//
+//            if (!bomberosAEliminar.isEmpty()) {
+//                String seleccion = (String) JOptionPane.showInputDialog(null,
+//                        "Elija un bombero a eliminar:\n" + String.join("\n", bomberosAEliminar),
+//                        "Selección de Bombero a Eliminar",
+//                        JOptionPane.PLAIN_MESSAGE,
+//                        null,
+//                        bomberosAEliminar.toArray(),
+//                        bomberosAEliminar.get(0));
+//
+//                if (seleccion != null) {
+//                    String[] parts = seleccion.split("\\. ");
+//                    if (parts.length == 2) {
+//                        idBomberoAEliminar = Integer.parseInt(parts[0]);
+//                        System.out.println("ID del Bombero a eliminar: " + idBomberoAEliminar);
+//                    }
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al obtener la lista de bomberos a eliminar: " + ex.getMessage());
+//        }
+//
+//        return idBomberoAEliminar;
     }
 
 //-------------------------------------------------------------------------------

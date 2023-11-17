@@ -45,8 +45,12 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMAgregarSiniestro = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,6 +122,11 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Bombero");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
 
         jMenuItem3.setText("Agregar Bombero");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +135,17 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuItem3);
+
+        jMenuItem7.setText("Modificar Bombero");
+        jMenu3.add(jMenuItem7);
+
+        jMenuItem8.setText("Eliminar Bombero");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem8);
 
         jMenuBar1.add(jMenu3);
 
@@ -138,6 +158,17 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMAgregarSiniestro);
+
+        jMenuItem9.setText("Modificar Siniestro");
+        jMenu4.add(jMenuItem9);
+
+        jMenuItem10.setText("Eliminar Siniestro");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem10);
 
         jMenuBar1.add(jMenu4);
 
@@ -231,6 +262,28 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(eliB); 
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+         
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();        
+        EliminarBombero eliBo = new EliminarBombero();
+        eliBo.setVisible(true);
+        eliBo.getContentPane().setBackground(new Color(86, 167, 132));
+        escritorio.add(eliBo);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();        
+        EliminarSiniestro esin = new EliminarSiniestro();
+        esin.setVisible(true);
+        esin.getContentPane().setBackground(new Color(86, 167, 132));
+        escritorio.add(esin);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -276,10 +329,14 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
