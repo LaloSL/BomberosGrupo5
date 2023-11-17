@@ -351,7 +351,8 @@ public class SiniestroData {
 //-----------------------------ELIMINAR SINIESTRO------------------
 //--------------------------listar siniestro para devuelve idCodigo-------------
     public List<Siniestro> mostrarSiniestros() {
-        List<Siniestro> listaSiniestros = new ArrayList<>();
+
+        List<Siniestro> siniestros = new ArrayList<>();
 
         String sql = "SELECT idCodigo, tipo, fechaSiniestro, detalles FROM siniestro WHERE estadoS = 1";
 
@@ -362,18 +363,18 @@ public class SiniestroData {
             while (rs.next()) {
                 int idCodigo = rs.getInt("idCodigo");
                 String tipo = rs.getString("tipo");
-                LocalDate fechaSiniestro = rs.getDate("fechaSiniestro").toLocalDate();
+                LocalDateTime fechaSiniestro = rs.getTimestamp("fechaSiniestro").toLocalDateTime();
                 String detalles = rs.getString("detalles");
 
                 Siniestro siniestro = new Siniestro(idCodigo, tipo, fechaSiniestro, detalles);
-                listaSiniestros.add(siniestro);
+                siniestros.add(siniestro);
             }
             ps.close();
-        }catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al obtener siniestros: " + ex.getMessage());
-    }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener siniestros: " + ex.getMessage());
+        }
 
-        return listaSiniestros;
+        return siniestros;
     }
 
 //        int idSiniestroSeleccionado = -1;
@@ -466,6 +467,18 @@ public class SiniestroData {
         }
     }
 
+   
+
+   public Siniestro obtenerSiniestroPorId(int idSiniestro) {
+        for (Siniestro siniestro : mostrarSiniestros()) {
+            if (siniestro.getIdCodigo() == idSiniestro) {
+                return siniestro;
+            }
+        }
+        return null;
+
+    }
+    
 //-------------------------------------------------------------------------------------
 //-----------------------------FIN ELIMINAR SINIESTRO-----------------------------
 }
